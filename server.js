@@ -4,10 +4,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const app = express();
+const dashboardRoutes = require("./routes/dashboard");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
