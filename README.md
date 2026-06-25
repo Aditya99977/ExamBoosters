@@ -1,74 +1,94 @@
 # 🚀 ExamBooster
 
-ExamBooster is a full-stack Government Exam Preparation Platform currently under development.
+ExamBooster is a full-stack Government Exam Preparation Platform currently under active development.
 
-The goal of this project is to help students prepare for competitive examinations such as:
-
-1. IBPS Clerk
-2. IBPS PO
-3. SBI Clerk
-4. SBI PO
-5. SSC CGL
-6. SSC CHSL
-7. RRB Exams
-8. Other Government Recruitment Exams
+The platform is designed to help students prepare for competitive examinations through practice questions, mock tests, performance tracking, and intelligent learning tools.
 
 ---
 
-# 📖 Project Status
+# 🎯 Supported Government Exams
 
-### Current Version
-
-Day 3 Development Completed
+* IBPS Clerk
+* IBPS PO
+* SBI Clerk
+* SBI PO
+* SSC CGL
+* SSC CHSL
+* RRB NTPC
+* RRB Group D
+* Other Government Recruitment Exams
 
 ---
 
-# ✅ Completed Features
+# 📌 Project Status
 
-### Backend Foundation
+**Current Version:** Day 4 Development Completed
 
-* MongoDB Atlas Integration
+**Development Status:** Backend MVP in Progress
+
+ExamBooster is currently under active development. New features are being added incrementally, with frontend development and deployment planned after the backend reaches a stable MVP.
+
+---
+
+# ✨ Features Completed
+
+## Backend Foundation
+
 * Express.js Server Setup
-* Environment Configuration
-* GitHub Version Control Setup
+* MongoDB Atlas Integration
+* Environment Variable Configuration
+* GitHub Version Control
 
-### Authentication System
+## Authentication System
 
-* User Registration API
-* User Login API
+* User Registration
+* User Login
 * Password Hashing using bcryptjs
 * JWT Authentication
-* Protected Dashboard Route
+* Protected Routes
 
-### Question Bank Engine
+## Question Bank Engine
 
 * Question Model
 * Add Question API
-* Get Questions API
+* Get All Questions API
 * Subject Filtering
 * Difficulty Filtering
 * Random Question Generator
+
+## Mock Test Engine
+
+* Test Model
+* Start Mock Test API
+* Submit Mock Test API
+* Automatic Score Calculation
+* Answer Storage
+* Test Result Storage
 
 ---
 
 # 🛠️ Tech Stack
 
-### Backend
+## Backend
 
 * Node.js
 * Express.js
 
-### Database
+## Database
 
 * MongoDB Atlas
 * Mongoose
 
-### Authentication
+## Authentication
 
 * JWT (JSON Web Token)
 * bcryptjs
 
-### Version Control
+## API Testing
+
+* Thunder Client
+
+## Version Control
 
 * Git
 * GitHub
@@ -77,170 +97,179 @@ Day 3 Development Completed
 
 # 📂 Project Structure
 
+```text
 ExamBooster
-
-├── models
-
-│   ├── User.js
-
-│   └── Question.js
-
 │
-
-├── routes
-
-│   ├── auth.js
-
-│   ├── dashboard.js
-
-│   └── question.js
-
-│
-
-├── middleware
-
-│   └── authMiddleware.js
-
-│
-
 ├── docs
-
 │   ├── Day1.md
-
 │   ├── Day2.md
-
 │   ├── Day3.md
-
+│   ├── Day4.md
 │   ├── API_Documentation.md
-
 │   ├── Architecture.md
-
 │   └── ProjectRoadmap.md
-
 │
-
+├── middleware
+│   └── authMiddleware.js
+│
+├── models
+│   ├── User.js
+│   ├── Question.js
+│   └── Test.js
+│
+├── routes
+│   ├── auth.js
+│   ├── dashboard.js
+│   ├── question.js
+│   └── test.js
+│
 ├── .env
-
 ├── .gitignore
-
-├── server.js
-
 ├── package.json
-
-└── README.md
+├── package-lock.json
+├── README.md
+└── server.js
+```
 
 ---
 
-# 🔐 Implemented APIs
+# 🔐 API Endpoints
 
-## Authentication APIs
+## Authentication
 
-### Signup
+### Register User
 
-POST /api/auth/signup
+POST `/api/auth/signup`
 
-Registers a new user.
+### Login User
 
-### Login
-
-POST /api/auth/login
-
-Authenticates user and generates JWT token.
+POST `/api/auth/login`
 
 ### Dashboard
 
-GET /api/dashboard
-
-Protected route accessible only with a valid JWT token.
+GET `/api/dashboard`
 
 ---
 
-## Question APIs
+## Question Management
 
 ### Add Question
 
-POST /api/questions/add
-
-Adds a question to the database.
+POST `/api/questions/add`
 
 ### Get All Questions
 
-GET /api/questions
+GET `/api/questions`
 
-Returns all questions.
+### Filter Questions by Subject
 
-### Filter by Subject
+GET `/api/questions?subject=Computer%20Knowledge`
 
-GET /api/questions?subject=Computer%20Knowledge
+### Filter Questions by Difficulty
 
-Returns questions from a specific subject.
+GET `/api/questions?difficulty=Easy`
 
-### Filter by Difficulty
+### Get Random Questions
 
-GET /api/questions?difficulty=Easy
+GET `/api/questions/random?limit=10`
 
-Returns questions based on difficulty level.
+---
 
-### Random Questions
+## Mock Test
 
-GET /api/questions/random?limit=10
+### Start Mock Test
 
-Returns random questions for mock tests.
+POST `/api/test/start`
+
+### Submit Mock Test
+
+POST `/api/test/submit/:testId`
 
 ---
 
 # 📅 Development Progress
 
-## Day 1
+## ✅ Day 1
 
-* Project Setup
+* Project Initialization
 * Express Server Setup
-* MongoDB Atlas Connection
+* MongoDB Atlas Integration
 * GitHub Repository Setup
 
-## Day 2
+## ✅ Day 2
 
-* User Model Creation
-* Signup API
+* User Model
+* Registration API
 * Login API
 * JWT Authentication
-* Protected Dashboard Route
+* Protected Dashboard
 
-## Day 3
+## ✅ Day 3
 
-* Question Model Creation
+* Question Model
 * Add Question API
 * Get Questions API
 * Subject Filtering
 * Difficulty Filtering
 * Random Question Generator
 
+## ✅ Day 4
+
+* Test Model
+* Start Mock Test API
+* Submit Mock Test API
+* Automatic Score Calculation
+* Save User Answers
+* Save Test Results
+
 ---
 
-# 🎯 Upcoming Features
+# 🚀 Upcoming Features
 
-## Day 4
-
-* Mock Test Engine
-* Start Test API
-* Submit Test API
-* Score Calculation
-
-## Future Features
+## Day 5
 
 * Test History
+* User Performance Dashboard
+* Average Score API
+* Best Score API
+* Recent Tests API
+
+## Day 6
+
+* Admin Dashboard
+* Edit Questions
+* Delete Questions
+* Bulk Question Upload (CSV)
+* Bulk Question Upload (Excel)
+
+## Future Development
+
+* MVC Architecture Refactoring
+* Student Dashboard
+* Admin Dashboard
 * Performance Analytics
-* Progress Tracking
 * Leaderboard
-* Admin Panel
-* AI-Powered Exam Assistance
+* AI Study Assistant
 * Personalized Learning Recommendations
+* Responsive Frontend
+* Live Deployment
+
+---
+
+# 📖 Documentation
+
+Detailed project documentation is available in the **docs/** directory, including:
+
+* Daily Development Logs
+* API Documentation
+* Project Architecture
+* Development Roadmap
 
 ---
 
 # 👨‍💻 Developer
 
-Aditya Thakur
+**Aditya Thakur**
 
 B.Sc. Information Technology Graduate
 
@@ -250,15 +279,21 @@ India
 
 ---
 
-# 📌 Project Goal
+# 🎯 Vision
 
-ExamBooster aims to become a modern government exam preparation platform that provides:
+ExamBooster aims to become a modern, scalable government exam preparation platform that provides:
 
 * High-quality practice questions
 * Full-length mock tests
-* Performance analytics
-* Progress tracking
+* Performance tracking
+* Progress analytics
 * Personalized learning recommendations
 * AI-powered exam assistance
 
-The long-term vision is to help aspirants prepare effectively for competitive examinations such as IBPS, SBI, SSC, RRB, and other government recruitment exams through a scalable and user-friendly learning platform.
+The long-term vision is to build an accessible platform that helps aspirants prepare effectively for competitive examinations such as IBPS, SBI, SSC, RRB, and other government recruitment exams.
+
+---
+
+# ⭐ Project Note
+
+This project is being developed as a long-term portfolio and learning initiative. Features are added incrementally with a focus on clean architecture, scalability, and real-world software development practices.
