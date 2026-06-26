@@ -22,11 +22,9 @@ The platform is designed to help students prepare for competitive examinations t
 
 # 📌 Project Status
 
-**Current Version:** Day 4 Development Completed
+**Current Version:** Day 5 Development Completed
 
 **Development Status:** Backend MVP in Progress
-
-ExamBooster is currently under active development. New features are being added incrementally, with frontend development and deployment planned after the backend reaches a stable MVP.
 
 ---
 
@@ -64,6 +62,16 @@ ExamBooster is currently under active development. New features are being added 
 * Automatic Score Calculation
 * Answer Storage
 * Test Result Storage
+
+## Performance Dashboard
+
+* Test History API
+* Performance Summary API
+* Dashboard API
+* Test Details API
+* Recent Tests
+* Highest Score Tracking
+* Average Score Calculation
 
 ---
 
@@ -105,6 +113,7 @@ ExamBooster
 │   ├── Day2.md
 │   ├── Day3.md
 │   ├── Day4.md
+│   ├── Day5.md
 │   ├── API_Documentation.md
 │   ├── Architecture.md
 │   └── ProjectRoadmap.md
@@ -137,53 +146,27 @@ ExamBooster
 
 ## Authentication
 
-### Register User
+* POST /api/auth/signup
+* POST /api/auth/login
+* GET /api/dashboard
 
-POST `/api/auth/signup`
+## Question Bank
 
-### Login User
-
-POST `/api/auth/login`
-
-### Dashboard
-
-GET `/api/dashboard`
-
----
-
-## Question Management
-
-### Add Question
-
-POST `/api/questions/add`
-
-### Get All Questions
-
-GET `/api/questions`
-
-### Filter Questions by Subject
-
-GET `/api/questions?subject=Computer%20Knowledge`
-
-### Filter Questions by Difficulty
-
-GET `/api/questions?difficulty=Easy`
-
-### Get Random Questions
-
-GET `/api/questions/random?limit=10`
-
----
+* POST /api/questions/add
+* GET /api/questions
+* GET /api/questions/random?limit=10
 
 ## Mock Test
 
-### Start Mock Test
+* POST /api/test/start
+* POST /api/test/submit/:testId
 
-POST `/api/test/start`
+## Analytics
 
-### Submit Mock Test
-
-POST `/api/test/submit/:testId`
+* GET /api/test/history
+* GET /api/test/performance
+* GET /api/test/dashboard
+* GET /api/test/:testId
 
 ---
 
@@ -198,7 +181,7 @@ POST `/api/test/submit/:testId`
 
 ## ✅ Day 2
 
-* User Model
+* User Authentication
 * Registration API
 * Login API
 * JWT Authentication
@@ -206,33 +189,31 @@ POST `/api/test/submit/:testId`
 
 ## ✅ Day 3
 
-* Question Model
-* Add Question API
-* Get Questions API
-* Subject Filtering
-* Difficulty Filtering
+* Question Bank
+* Question APIs
 * Random Question Generator
+* Question Filtering
 
 ## ✅ Day 4
 
-* Test Model
-* Start Mock Test API
-* Submit Mock Test API
+* Mock Test Engine
+* Start Test API
+* Submit Test API
 * Automatic Score Calculation
-* Save User Answers
-* Save Test Results
+* Answer Storage
+* Result Storage
+
+## ✅ Day 5
+
+* Test History API
+* Performance Summary API
+* Dashboard API
+* Test Details API
+* User Analytics
 
 ---
 
 # 🚀 Upcoming Features
-
-## Day 5
-
-* Test History
-* User Performance Dashboard
-* Average Score API
-* Best Score API
-* Recent Tests API
 
 ## Day 6
 
@@ -242,14 +223,21 @@ POST `/api/test/submit/:testId`
 * Bulk Question Upload (CSV)
 * Bulk Question Upload (Excel)
 
-## Future Development
+## Day 7
 
 * MVC Architecture Refactoring
-* Student Dashboard
-* Admin Dashboard
-* Performance Analytics
+* Controllers
+* Services
+* Validation
+* Utility Functions
+
+## Future Development
+
+* Student Dashboard UI
+* Admin Dashboard UI
 * Leaderboard
 * AI Study Assistant
+* Performance Graphs
 * Personalized Learning Recommendations
 * Responsive Frontend
 * Live Deployment
@@ -258,12 +246,14 @@ POST `/api/test/submit/:testId`
 
 # 📖 Documentation
 
-Detailed project documentation is available in the **docs/** directory, including:
+The complete project documentation is available inside the **docs/** directory.
+
+Includes:
 
 * Daily Development Logs
 * API Documentation
-* Project Architecture
-* Development Roadmap
+* Architecture
+* Project Roadmap
 
 ---
 
@@ -285,15 +275,21 @@ ExamBooster aims to become a modern, scalable government exam preparation platfo
 
 * High-quality practice questions
 * Full-length mock tests
-* Performance tracking
-* Progress analytics
+* Performance analytics
+* Progress tracking
 * Personalized learning recommendations
 * AI-powered exam assistance
 
-The long-term vision is to build an accessible platform that helps aspirants prepare effectively for competitive examinations such as IBPS, SBI, SSC, RRB, and other government recruitment exams.
+The long-term vision is to help aspirants prepare effectively for competitive examinations such as IBPS, SBI, SSC, RRB, and other government recruitment exams through a scalable, secure, and user-friendly learning platform.
 
 ---
 
 # ⭐ Project Note
 
-This project is being developed as a long-term portfolio and learning initiative. Features are added incrementally with a focus on clean architecture, scalability, and real-world software development practices.
+ExamBooster is being developed as a long-term portfolio and learning project following professional software engineering practices, including version control, structured documentation, modular architecture, and incremental feature development.
+
+Current Progress:
+
+Backend Development: **~50% Complete**
+
+Overall Project Completion: **~30% Complete**
