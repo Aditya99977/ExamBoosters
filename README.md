@@ -1,8 +1,8 @@
 # 🚀 ExamBooster
 
-ExamBooster is a full-stack Government Exam Preparation Platform currently under active development.
+ExamBooster is a full-stack AI-powered Government Exam Preparation Platform currently under active development.
 
-The platform is designed to help students prepare for competitive examinations through practice questions, mock tests, performance tracking, intelligent learning tools, and AI-powered assistance.
+The platform is designed to help students prepare for competitive examinations through practice questions, mock tests, performance tracking, intelligent analytics, and future AI-powered learning assistance.
 
 ---
 
@@ -22,9 +22,9 @@ The platform is designed to help students prepare for competitive examinations t
 
 # 📌 Project Status
 
-**Current Version:** Day 6 Development Completed
+**Current Version:** Day 7 Development Completed
 
-**Development Status:** Backend MVP in Progress
+**Development Status:** Backend MVP Completed & MVC Architecture Implemented
 
 ---
 
@@ -35,15 +35,22 @@ The platform is designed to help students prepare for competitive examinations t
 * Express.js Server Setup
 * MongoDB Atlas Integration
 * Environment Variable Configuration
+* Professional Folder Structure
 * GitHub Version Control
+
+---
 
 ## Authentication System
 
 * User Registration
 * User Login
-* Password Hashing using bcryptjs
+* Password Hashing (bcryptjs)
 * JWT Authentication
 * Protected Routes
+* Role-Based Authorization
+* JWT Utility Function
+
+---
 
 ## Question Bank
 
@@ -54,26 +61,52 @@ The platform is designed to help students prepare for competitive examinations t
 * Difficulty Filtering
 * Random Question Generator
 
+---
+
 ## Mock Test Engine
 
 * Start Mock Test API
 * Submit Mock Test API
 * Automatic Score Calculation
 * Answer Storage
+* Test Result Storage
+
+---
+
+## Student Dashboard
+
+* User Dashboard
 * Test History
 * Performance Summary
-* Test Details
 * Dashboard Analytics
+* Test Details
+* Highest Score
+* Average Score
+* Recent Tests
+
+---
 
 ## Admin Panel
 
-* Admin Role
+* Admin Authentication
 * Admin Middleware
-* Protected Admin Routes
 * Admin Dashboard
-* Edit Question API
-* Delete Question API
-* Bulk CSV Question Upload
+* Edit Question
+* Delete Question
+* Bulk CSV Upload
+* Subject-wise Analytics
+
+---
+
+## MVC Architecture
+
+* Controllers
+* Routes
+* Middleware
+* Models
+* Utilities
+* Clean Project Structure
+* Business Logic Separation
 
 ---
 
@@ -91,7 +124,7 @@ The platform is designed to help students prepare for competitive examinations t
 
 ## Authentication
 
-* JWT (JSON Web Token)
+* JWT
 * bcryptjs
 
 ## File Upload
@@ -99,8 +132,9 @@ The platform is designed to help students prepare for competitive examinations t
 * Multer
 * csv-parser
 
-## API Testing
+## Development Tools
 
+* VS Code
 * Thunder Client
 * curl
 
@@ -119,6 +153,11 @@ ExamBooster
 ├── config
 │
 ├── controllers
+│   ├── adminController.js
+│   ├── authController.js
+│   ├── dashboardController.js
+│   ├── questionController.js
+│   └── testController.js
 │
 ├── docs
 │   ├── Day1.md
@@ -127,19 +166,20 @@ ExamBooster
 │   ├── Day4.md
 │   ├── Day5.md
 │   ├── Day6.md
+│   ├── Day7.md
 │   ├── API_Documentation.md
 │   ├── Architecture.md
 │   └── ProjectRoadmap.md
 │
 ├── middleware
-│   ├── authMiddleware.js
 │   ├── adminMiddleware.js
+│   ├── authMiddleware.js
 │   └── uploadMiddleware.js
 │
 ├── models
-│   ├── User.js
 │   ├── Question.js
-│   └── Test.js
+│   ├── Test.js
+│   └── User.js
 │
 ├── routes
 │   ├── admin.js
@@ -150,32 +190,43 @@ ExamBooster
 │
 ├── uploads
 │
+├── utils
+│   ├── generateToken.js
+│   └── responseHandler.js
+│
 ├── public
 ├── views
 │
-├── .env
-├── .gitignore
+├── server.js
 ├── package.json
 ├── package-lock.json
-├── README.md
-└── server.js
+└── README.md
 ```
 
 ---
 
-# 🔐 API Endpoints
+# 🔐 REST API Endpoints
 
 ## Authentication
 
 * POST /api/auth/signup
 * POST /api/auth/login
+
+---
+
+## Student Dashboard
+
 * GET /api/dashboard
+
+---
 
 ## Question Bank
 
 * POST /api/questions/add
 * GET /api/questions
 * GET /api/questions/random?limit=10
+
+---
 
 ## Mock Test
 
@@ -185,6 +236,8 @@ ExamBooster
 * GET /api/test/performance
 * GET /api/test/dashboard
 * GET /api/test/:testId
+
+---
 
 ## Admin
 
@@ -196,81 +249,84 @@ ExamBooster
 
 ---
 
-# 📅 Development Progress
+# 📅 Development Timeline
 
 ## ✅ Day 1
 
 * Project Initialization
-* Express Server Setup
-* MongoDB Atlas Integration
-* GitHub Repository Setup
+* MongoDB Connection
+* Express Server
+* GitHub Repository
 
 ## ✅ Day 2
 
-* Authentication System
+* User Authentication
 * JWT
 * Protected Routes
 
 ## ✅ Day 3
 
 * Question Bank
-* Random Questions
-* Question Filtering
+* Random Question Generator
+* Filtering APIs
 
 ## ✅ Day 4
 
 * Mock Test Engine
 * Automatic Evaluation
-* Result Storage
+* Score Calculation
 
 ## ✅ Day 5
 
-* Test History
 * Performance Dashboard
-* User Analytics
+* Test History
+* Analytics APIs
 
 ## ✅ Day 6
 
 * Admin Panel
-* Role-Based Access Control
+* Role-Based Authentication
+* CSV Bulk Upload
 * Admin Dashboard
-* Edit Question API
-* Delete Question API
-* Bulk CSV Upload
-* CSV Import Testing
+
+## ✅ Day 7
+
+* Complete MVC Refactoring
+* Controller Layer
+* Utility Functions
+* Clean Backend Architecture
 
 ---
 
 # 🚀 Upcoming Features
 
-## Day 7
+## Day 8
 
-* Student Frontend
-* Landing Page
-* Login Page
-* Registration Page
-* Dashboard UI
-* Bootstrap Integration
-* Backend API Integration
+* React Frontend
+* Vite Setup
+* Bootstrap 5
+* React Router
+* Axios Integration
 
 ## Future Versions
 
-* MVC Architecture Refactoring
-* Excel Upload
+* Student Dashboard UI
+* Admin Dashboard UI
+* Mock Test Interface
+* Leaderboard
 * AI Study Assistant
-* Leaderboards
-* Performance Charts
-* Study Planner
+* AI Question Generator
+* Personalized Learning
+* Performance Graphs
 * Notifications
-* Personalized Recommendations
-* Responsive UI
+* Responsive Design
 * Live Deployment
 
 ---
 
 # 📖 Documentation
 
-The complete project documentation is available inside the **docs/** directory.
+Project documentation is available inside the **docs/** directory.
 
 Includes:
 
@@ -289,54 +345,61 @@ B.Sc. Information Technology Graduate
 
 Graphic Era Deemed to be University
 
-India
+Future MBA (AI & Data Science) Student
 
-Future Student of **MBA (AI & Data Science)**
+India
 
 ---
 
 # 🎯 Vision
 
-ExamBooster aims to become a scalable AI-powered Government Exam Preparation Platform providing:
+ExamBooster aims to become a modern AI-powered education platform offering:
 
-* High-quality Practice Questions
-* Full-Length Mock Tests
+* Practice Questions
+* Mock Tests
 * Performance Analytics
-* Progress Tracking
 * Personalized Learning
-* AI-powered Study Assistance
+* AI Study Assistant
+* AI Question Generation
 * Intelligent Exam Recommendations
+
+The long-term vision is to build a scalable EdTech platform capable of serving thousands of students preparing for government examinations.
 
 ---
 
-# 📈 Project Progress
+# 📈 Development Progress
 
+```text
+Backend Development        ████████████████████████░░░░░ 80%
 
-Backend Development      ████████████████████░░░░░░░░ 65%
+Frontend Development       ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
 
-Frontend Development     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
+AI Features                ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
 
-AI Integration           ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
+Testing                    ███████░░░░░░░░░░░░░░░░░░░░ 20%
 
-Testing                  █████░░░░░░░░░░░░░░░░░░░░░░ 15%
+Deployment                 ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
 
-Deployment               ░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
-
-Overall Project          ████████████░░░░░░░░░░░░░░░ 30%
+Overall Project            ███████████████░░░░░░░░░░░░ 35%
 ```
 
 ---
 
-# ⭐ Project Note
+# ⭐ Project Highlights
 
-ExamBooster is being developed as a long-term portfolio and product following professional software engineering practices, including:
-
-* Git Version Control
-* Modular Backend Development
-* Secure Authentication
+* Professional MVC Architecture
 * RESTful API Design
+* Secure JWT Authentication
+* Role-Based Authorization
+* Bulk CSV Import
+* Performance Analytics
+* Modular & Scalable Backend
 * Documentation-Driven Development
-* Incremental Feature Releases
-* Scalable Architecture
+* Incremental Feature Development
+* Production-Oriented Folder Structure
 
-The long-term goal is to build a production-ready educational platform capable of serving thousands of students preparing for competitive examinations.
+---
+
+# 📄 License
+
+This project is currently being developed for educational purposes and as a long-term portfolio project. Future licensing may be updated as the platform evolves.
