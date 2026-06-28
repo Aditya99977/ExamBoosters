@@ -1,64 +1,33 @@
 const express = require("express");
-const Question = require("../models/Question");
 
 const router = express.Router();
 
-// Add Question
-router.post("/add", async (req, res) => {
-    try {
-        const question = new Question(req.body);
+const {
 
-        await question.save();
+    addQuestion,
 
-        res.status(201).json({
-            message: "Question added successfully",
-            question
-        });
-    } catch (err) {
-        res.status(500).json({
-            message: err.message
-        });
-    }
-});
+    getQuestions,
 
-// Get All Questions
-router.get("/", async (req, res) => {
-    try {
-        const filter = {};
+    getRandomQuestions
 
-        if (req.query.subject) {
-            filter.subject = req.query.subject;
-        }
+} = require("../controllers/questionController");
 
-        if (req.query.difficulty) {
-            filter.difficulty = req.query.difficulty;
-        }
+/*
+Add Question
+*/
 
-        const questions = await Question.find(filter);
+router.post("/add", addQuestion);
 
-        res.json(questions);
-    } catch (err) {
-        res.status(500).json({
-            message: err.message
-        });
-    }
-});
+/*
+Get All Questions
+*/
 
-// Get Random Questions
-router.get("/random", async (req, res) => {
-    try {
-        const limit = parseInt(req.query.limit) || 10;
+router.get("/", getQuestions);
 
-        const questions = await Question.aggregate([
-            { $sample: { size: limit } }
-        ]);
+/*
+Get Random Questions
+*/
 
-        res.json(questions);
-    } catch (err) {
-        res.status(500).json({
-            message: err.message
-        });
-    }
-});
+router.get("/random", getRandomQuestions);
 
 module.exports = router;
