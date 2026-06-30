@@ -2,13 +2,20 @@ const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
 
-    const token = req.header("Authorization");
+    const authHeader = req.header("Authorization");
 
-    if (!token) {
+    if (!authHeader) {
+
         return res.status(401).json({
-            message: "Access Denied"
+            message: "Access Denied. No token provided."
         });
+
     }
+
+    // Remove "Bearer " prefix
+    const token = authHeader.startsWith("Bearer ")
+        ? authHeader.split(" ")[1]
+        : authHeader;
 
     try {
 
@@ -21,10 +28,14 @@ module.exports = (req, res, next) => {
 
         next();
 
-    } catch (err) {
+    }
 
-        res.status(400).json({
+    catch (err) {
+
+        return res.status(401).json({
+
             message: "Invalid Token"
+
         });
 
     }

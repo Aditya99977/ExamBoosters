@@ -1,18 +1,187 @@
-import MainLayout from "../layouts/MainLayout";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import AuthLayout from "../layouts/AuthLayout";
+import AuthCard from "../components/AuthCard";
+import FormInput from "../components/FormInput";
+import PasswordInput from "../components/PasswordInput";
+import AuthButton from "../components/AuthButton";
+
+import { loginUser } from "../services/authService";
+import { useAuth } from "../context/AuthContext";
+
+const loginSchema = z.object({
+
+    email: z
+        .string()
+        .email("Please enter a valid email"),
+
+    password: z
+        .string()
+        .min(6, "Password must be at least 6 characters")
+
+});
 
 function Login() {
 
+    const navigate = useNavigate();
+
+    const { login } = useAuth();
+
+    const [loading, setLoading] = useState(false);
+
+    const {
+
+        register,
+
+        handleSubmit,
+
+        formState: { errors }
+
+    } = useForm({
+
+        resolver: zodResolver(loginSchema)
+
+    });
+
+    const onSubmit = async (data) => {
+
+        try {
+
+            setLoading(true);
+
+            const response = await loginUser(data);
+
+            login(response.token);
+
+            toast.success("Login Successful!");
+
+            setTimeout(() => {
+
+                navigate("/dashboard");
+
+            }, 1200);
+
+        }
+
+        catch (error) {
+
+            toast.error(
+
+                error.response?.data?.message ||
+
+                "Login Failed"
+
+            );
+
+        }
+
+        finally {
+
+            setLoading(false);
+
+        }
+
+    };
+
     return (
 
-        <MainLayout>
+        <AuthLayout>
 
-            <h1 className="text-center">
+            <ToastContainer position="top-right" />
 
-                Login
+            <AuthCard
 
-            </h1>
+                title="Welcome Back 👋"
 
-        </MainLayout>
+                subtitle="Login to continue your ExamBooster journey"
+
+            >
+
+                <form onSubmit={handleSubmit(onSubmit)}>
+
+                    <FormInput
+
+                        label="Email"
+
+                        type="email"
+
+                        placeholder="Enter your email"
+
+                        error={errors.email?.message}
+
+                        {...register("email")}
+
+                    />
+
+                    <PasswordInput
+
+                        label="Password"
+
+                        placeholder="Enter your password"
+
+                        error={errors.password?.message}
+
+                        {...register("password")}
+
+                    />
+
+                    <div className="text-end mb-3">
+
+                        <Link
+
+                            to="/forgot-password"
+
+                            className="text-decoration-none"
+
+                        >
+
+                            Forgot Password?
+
+                        </Link>
+
+                    </div>
+
+                    <AuthButton
+
+                        text="Login"
+
+                        loading={loading}
+
+                    />
+
+                </form>
+
+                <hr />
+
+                <p className="text-center mb-0">
+
+                    Don't have an account?
+
+                    <Link
+
+                        to="/register"
+
+                        className="ms-2"
+
+                    >
+
+                        Register
+
+                    </Link>
+
+                </p>
+
+            </AuthCard>
+
+        </AuthLayout>
 
     );
 

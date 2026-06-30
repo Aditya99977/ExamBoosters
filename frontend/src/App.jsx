@@ -1,35 +1,68 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
 
     return (
 
-        <BrowserRouter>
+        <Routes>
 
-            <Routes>
+            {/* Public Routes */}
 
-                <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home />} />
 
-                <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
 
-                <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<Register />} />
 
-                <Route path="/dashboard" element={<Dashboard />} />
+            {/* Protected Student Routes */}
 
-                <Route path="/admin" element={<AdminDashboard />} />
+            <Route
+                path="/dashboard"
+                element={
+                    <ProtectedRoute>
+                        <Dashboard />
+                    </ProtectedRoute>
+                }
+            />
 
-                <Route path="*" element={<NotFound />} />
+            <Route
+                path="/profile"
+                element={
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                }
+            />
 
-            </Routes>
+            {/* Protected Admin Route */}
 
-        </BrowserRouter>
+            <Route
+                path="/admin"
+                element={
+                    <ProtectedRoute>
+                        <AdminDashboard />
+                    </ProtectedRoute>
+                }
+            />
+
+            {/* 404 Page */}
+
+            <Route
+                path="*"
+                element={<NotFound />}
+            />
+
+        </Routes>
 
     );
 

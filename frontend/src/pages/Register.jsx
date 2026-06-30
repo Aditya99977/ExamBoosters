@@ -1,28 +1,273 @@
-import MainLayout from "../layouts/MainLayout";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import AuthLayout from "../layouts/AuthLayout";
+import AuthCard from "../components/AuthCard";
+import FormInput from "../components/FormInput";
+import PasswordInput from "../components/PasswordInput";
+import AuthButton from "../components/AuthButton";
+
+import { registerUser } from "../services/authService";
+
+const registerSchema = z.object({
+
+    name: z
+        .string()
+        .min(3, "Name must be at least 3 characters"),
+
+    email: z
+        .string()
+        .email("Please enter a valid email"),
+
+    password: z
+        .string()
+        .min(6, "Password must be at least 6 characters"),
+
+    confirmPassword: z
+        .string(),
+
+    examTarget: z
+        .string()
+        .min(1, "Please select your target exam")
+
+}).refine(
+
+    (data) => data.password === data.confirmPassword,
+
+    {
+
+        message: "Passwords do not match",
+
+        path: ["confirmPassword"]
+
+    }
+
+);
 
 function Register() {
 
+    const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
+
+    const {
+
+        register,
+
+        handleSubmit,
+
+        formState: { errors }
+
+    } = useForm({
+
+        resolver: zodResolver(registerSchema)
+
+    });
+
+    const onSubmit = async (data) => {
+
+        try {
+
+            setLoading(true);
+
+            await registerUser({
+
+                name: data.name,
+
+                email: data.email,
+
+                password: data.password,
+
+                examTarget: data.examTarget
+
+            });
+
+            toast.success("Registration Successful!");
+
+            setTimeout(() => {
+
+                navigate("/login");
+
+            }, 1500);
+
+        }
+
+        catch (error) {
+
+            toast.error(
+
+                error.response?.data?.message ||
+
+                "Registration Failed"
+
+            );
+
+        }
+
+        finally {
+
+            setLoading(false);
+
+        }
+
+    };
+
     return (
 
-        <MainLayout>
+        <AuthLayout>
 
-            <div className="text-center mt-5">
+            <ToastContainer position="top-right" />
 
-                <h1 className="display-5 fw-bold">
+            <AuthCard
 
-                    Register
+                title="Create Account"
 
-                </h1>
+                subtitle="Start your ExamBooster journey today"
 
-                <p className="lead">
+            >
 
-                    Create your ExamBooster account and begin your exam preparation journey.
+                <form onSubmit={handleSubmit(onSubmit)}>
+
+                    <FormInput
+
+                        label="Full Name"
+
+                        placeholder="Enter your full name"
+
+                        error={errors.name?.message}
+
+                        {...register("name")}
+
+                    />
+
+                    <FormInput
+
+                        label="Email"
+
+                        type="email"
+
+                        placeholder="Enter your email"
+
+                        error={errors.email?.message}
+
+                        {...register("email")}
+
+                    />
+
+                    <PasswordInput
+
+                        label="Password"
+
+                        placeholder="Create password"
+
+                        error={errors.password?.message}
+
+                        {...register("password")}
+
+                    />
+
+                    <PasswordInput
+
+                        label="Confirm Password"
+
+                        placeholder="Confirm password"
+
+                        error={errors.confirmPassword?.message}
+
+                        {...register("confirmPassword")}
+
+                    />
+
+                    <div className="mb-4">
+
+                        <label className="form-label fw-semibold">
+
+                            Target Exam
+
+                        </label>
+
+                        <select
+
+                            className="form-select form-select-lg"
+
+                            {...register("examTarget")}
+
+                        >
+
+                            <option value="">Select Exam</option>
+
+                            <option>IBPS Clerk</option>
+
+                            <option>IBPS PO</option>
+
+                            <option>SBI Clerk</option>
+
+                            <option>SBI PO</option>
+
+                            <option>SSC CGL</option>
+
+                            <option>SSC CHSL</option>
+
+                            <option>RRB NTPC</option>
+
+                            <option>RRB Group D</option>
+
+                        </select>
+
+                        {
+
+                            errors.examTarget &&
+
+                            <div className="text-danger mt-1">
+
+                                {errors.examTarget.message}
+
+                            </div>
+
+                        }
+
+                    </div>
+
+                    <AuthButton
+
+                        text="Create Account"
+
+                        loading={loading}
+
+                    />
+
+                </form>
+
+                <hr />
+
+                <p className="text-center mb-0">
+
+                    Already have an account?
+
+                    <Link
+
+                        to="/login"
+
+                        className="ms-2"
+
+                    >
+
+                        Login
+
+                    </Link>
 
                 </p>
 
-            </div>
+            </AuthCard>
 
-        </MainLayout>
+        </AuthLayout>
 
     );
 
