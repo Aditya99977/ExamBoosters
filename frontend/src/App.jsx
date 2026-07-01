@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
+import StudentDashboard from "./pages/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import NotFound from "./pages/NotFound";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -30,7 +31,7 @@ function App() {
                 path="/dashboard"
                 element={
                     <ProtectedRoute>
-                        <Dashboard />
+                        <StudentDashboard />
                     </ProtectedRoute>
                 }
             />
@@ -40,6 +41,17 @@ function App() {
                 element={
                     <ProtectedRoute>
                         <Profile />
+                    </ProtectedRoute>
+                }
+            />
+
+            {/* NEW Edit Profile Route */}
+
+            <Route
+                path="/edit-profile"
+                element={
+                    <ProtectedRoute>
+                        <EditProfile />
                     </ProtectedRoute>
                 }
             />

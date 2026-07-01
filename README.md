@@ -1,167 +1,94 @@
 # 🚀 ExamBooster
 
-> **AI-Powered Government Exam Preparation Platform**
+> **A Modern MERN-Based Government Exam Preparation Platform**
 
-ExamBooster is a full-stack MERN application designed to help aspirants prepare for competitive government examinations through practice questions, mock tests, performance analytics, personalized learning, and future AI-powered study assistance.
+ExamBooster is a full-stack MERN application designed to help students prepare for competitive government examinations through practice questions, mock tests, performance analytics, and personalized learning.
 
-The platform is being developed as a **long-term startup initiative** following modern software engineering practices, scalable architecture, clean code principles, and production-ready development standards.
-
----
-
-# 🌟 Vision
-
-ExamBooster aims to become a modern AI-powered EdTech platform that enables students to prepare smarter, track their performance, identify weak areas, and receive personalized learning guidance.
-
-The long-term vision is to build a complete digital learning ecosystem for government examinations including:
-
-- IBPS Clerk
-- IBPS PO
-- SBI Clerk
-- SBI PO
-- SSC CGL
-- SSC CHSL
-- RRB NTPC
-- RRB Group D
-- Other Government Recruitment Exams
+The project is being developed using modern software engineering practices with a scalable architecture, secure authentication, modular components, and production-ready development standards.
 
 ---
 
-# 📌 Current Status
+## 🌟 Project Vision
 
-| Item | Status |
-|------|--------|
-| **Current Version** | **Day 9** |
-| Backend Development | ✅ Completed |
-| MVC Architecture | ✅ Completed |
-| Authentication Backend | ✅ Completed |
-| React Frontend | ✅ Completed |
-| Landing Page | ✅ Completed |
-| Authentication Module | ✅ Completed |
-| Profile Module | ✅ Completed |
-| Student Dashboard | 🚧 In Development |
-| Mock Test UI | ⏳ Planned |
-| AI Features | ⏳ Planned |
-| Production Deployment | ⏳ Planned |
+The goal of ExamBooster is to build a centralized learning platform where aspirants can:
+
+- Practice exam-specific questions
+- Take full-length mock tests
+- Analyze their performance
+- Track study progress
+- Receive AI-powered study recommendations (planned)
+
+The long-term vision is to evolve ExamBooster into a complete EdTech platform for government exam preparation.
 
 ---
 
-# ✨ Features Completed
-
-## 🔧 Backend
-
-- Express.js Server
-- MongoDB Atlas Integration
-- Environment Variables
-- Professional MVC Architecture
-- RESTful APIs
-- Git Version Control
-- Error Handling
-- Modular Folder Structure
-
----
+# ✨ Features
 
 ## 🔐 Authentication
 
-### Backend
-
-- User Registration API
-- User Login API
-- Password Hashing (bcryptjs)
+- User Registration
+- User Login
 - JWT Authentication
+- Password Hashing using bcryptjs
 - Protected Routes
 - Role-Based Authorization
-- Admin Middleware
-- JWT Verification Middleware
-
-### Frontend
-
-- Professional Login Page
-- Professional Registration Page
-- Authentication Layout
-- Authentication Card
-- React Hook Form
-- Zod Validation
-- React Toastify Notifications
-- JWT Token Storage
-- React Context Authentication
-- Protected Routes
+- Persistent Login Session
 - Logout Functionality
-- Dynamic Navbar
-- Dynamic User Profile
-- Axios API Integration
-- Session Management
+
+---
+
+## 👤 User Profile
+
+- View Profile
+- Edit Profile
+- Update Target Exam
+- Protected Profile Routes
 
 ---
 
 ## 📚 Question Bank
 
-- Add Question API
-- Get Questions API
+- Add Questions
+- View Questions
 - Subject Filtering
 - Difficulty Filtering
 - Random Question Generator
-- Bulk CSV Upload
-- Admin Question Management
+- Bulk CSV Upload (Admin)
 
 ---
 
-## 📝 Mock Test Engine
+## 📝 Mock Test System
 
 - Start Mock Test
-- Submit Mock Test
-- Automatic Evaluation
-- Score Calculation
-- Answer Storage
+- Submit Test
+- Automatic Score Calculation
+- Accuracy Calculation
 - Test History
 - Performance Summary
 
 ---
 
-## 📊 Student Analytics
+## 📊 Dashboard
 
-- User Dashboard API
-- Performance Summary
-- Highest Score
-- Average Score
-- Recent Tests
-- Test Details
-- User Profile
+- Student Dashboard
+- Welcome Section
+- Statistics Cards
+- Subject Progress
+- Performance Chart
+- Recent Mock Tests
+- Quick Actions
+- Backend Dashboard API
 
 ---
 
-## 👨‍💼 Admin Panel
+## 👨‍💼 Admin Module
 
-- Admin Authentication
 - Admin Dashboard
+- Manage Questions
 - Edit Questions
 - Delete Questions
 - Bulk CSV Upload
-- Subject-wise Analytics
-- User Statistics
-
----
-
-## 🎨 Frontend
-
-### Landing Page
-
-- Responsive Navbar
-- Hero Section
-- Statistics Section
-- Features Section
-- Supported Exams
-- Why Choose Us
-- Call-to-Action Section
-- Professional Footer
-
-### Authentication
-
-- Login Page
-- Registration Page
-- Profile Page
-- Protected Routing
-- Loading Spinner
-- Dynamic Navigation
+- Analytics APIs
 
 ---
 
@@ -178,6 +105,7 @@ The long-term vision is to build a complete digital learning ecosystem for gover
 - React Hook Form
 - Zod
 - React Toastify
+- Chart.js
 - Context API
 
 ---
@@ -186,6 +114,8 @@ The long-term vision is to build a complete digital learning ecosystem for gover
 
 - Node.js
 - Express.js
+- MVC Architecture
+- REST APIs
 
 ---
 
@@ -198,266 +128,126 @@ The long-term vision is to build a complete digital learning ecosystem for gover
 
 ## Authentication
 
-- JWT (JSON Web Token)
+- JWT
 - bcryptjs
-
----
-
-## File Upload
-
-- Multer
-- csv-parser
 
 ---
 
 ## Development Tools
 
-- VS Code
-- Thunder Client
-- curl
 - Git
 - GitHub
+- VS Code
 - Postman
+- Thunder Client
+
 ---
 
-# 📂 Project Structure
+# 📈 Current Development Status
+
+| Module | Status |
+|---------|--------|
+| Authentication | ✅ Completed |
+| Landing Page | ✅ Completed |
+| Student Dashboard UI | 🚧 In Progress |
+| Admin Dashboard | 🚧 In Progress |
+| Profile Management | 🚧 In Progress |
+| Mock Test Engine | ✅ Completed |
+| Performance Analytics | 🚧 In Progress |
+| AI Features | ⏳ Planned |
+| Deployment | ⏳ Planned |
+
+---
+
+# 🚀 Key Highlights
+
+- Full Stack MERN Application
+- Professional MVC Backend
+- JWT Authentication
+- Role-Based Access Control
+- Responsive User Interface
+- Dashboard Analytics
+- RESTful APIs
+- Modular Architecture
+- Clean Folder Structure
+- Scalable Project Design
+
+---
+# 📂 Project Architecture
+
+ExamBooster follows a scalable full-stack architecture based on the **MERN Stack**.
+
+```
+                React + Vite
+                      │
+                      ▼
+             Express REST APIs
+                      │
+                      ▼
+             Business Logic (MVC)
+                      │
+                      ▼
+             MongoDB Atlas Database
+```
+
+### Architecture Highlights
+
+- Modular MVC Backend
+- RESTful API Design
+- JWT Authentication
+- Protected Routes
+- Role-Based Authorization
+- Reusable React Components
+- Context API for Authentication
+- Axios Interceptors
+- Scalable Folder Structure
+
+---
+
+# 📁 Project Structure
 
 ```text
 ExamBooster
 │
-├── config
+├── backend
+│   ├── config
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   ├── uploads
+│   ├── utils
+│   ├── server.js
+│   └── package.json
 │
-├── controllers
-│   ├── adminController.js
-│   ├── authController.js
-│   ├── dashboardController.js
-│   ├── questionController.js
-│   └── testController.js
-│
-├── middleware
-│   ├── adminMiddleware.js
-│   ├── authMiddleware.js
-│   └── uploadMiddleware.js
-│
-├── models
-│   ├── User.js
-│   ├── Question.js
-│   └── Test.js
-│
-├── routes
-│   ├── admin.js
-│   ├── auth.js
-│   ├── dashboard.js
-│   ├── question.js
-│   └── test.js
-│
-├── utils
-│   ├── generateToken.js
-│   └── responseHandler.js
-│
-├── uploads
+├── frontend
+│   ├── public
+│   ├── src
+│   │   ├── assets
+│   │   ├── components
+│   │   ├── context
+│   │   ├── layouts
+│   │   ├── pages
+│   │   ├── services
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   └── package.json
 │
 ├── docs
 │   ├── Day1.md
 │   ├── Day2.md
-│   ├── Day3.md
-│   ├── Day4.md
-│   ├── Day5.md
-│   ├── Day6.md
-│   ├── Day7.md
-│   ├── Day8.md
-│   ├── Day9.md
+│   ├── ...
 │   ├── API_Documentation.md
 │   ├── Architecture.md
 │   └── ProjectRoadmap.md
 │
-├── frontend
-│   │
-│   ├── public
-│   │
-│   ├── src
-│   │
-│   ├── assets
-│   │
-│   ├── components
-│   │   ├── AuthButton.jsx
-│   │   ├── AuthCard.jsx
-│   │   ├── FeatureCard.jsx
-│   │   ├── Footer.jsx
-│   │   ├── FormInput.jsx
-│   │   ├── Hero.jsx
-│   │   ├── Loader.jsx
-│   │   ├── Navbar.jsx
-│   │   ├── PasswordInput.jsx
-│   │   ├── ProtectedRoute.jsx
-│   │   ├── Stats.jsx
-│   │   └── WhyChooseUs.jsx
-│   │
-│   ├── context
-│   │   └── AuthContext.jsx
-│   │
-│   ├── layouts
-│   │   ├── AuthLayout.jsx
-│   │   └── MainLayout.jsx
-│   │
-│   ├── pages
-│   │   ├── Home.jsx
-│   │   ├── Login.jsx
-│   │   ├── Register.jsx
-│   │   ├── Dashboard.jsx
-│   │   ├── Profile.jsx
-│   │   ├── AdminDashboard.jsx
-│   │   ├── ForgotPassword.jsx
-│   │   └── NotFound.jsx
-│   │
-│   ├── services
-│   │   ├── api.js
-│   │   ├── authService.js
-│   │   └── dashboardService.js
-│   │
-│   ├── App.jsx
-│   └── main.jsx
-│
-├── server.js
-├── package.json
-├── package-lock.json
 ├── README.md
 └── .gitignore
 ```
 
 ---
 
-# 🧩 Frontend Architecture
-
-## Layouts
-
-- MainLayout
-- AuthLayout
-
----
-
-## Components
-
-- Navbar
-- Hero
-- Stats
-- FeatureCard
-- Footer
-- Loader
-- AuthCard
-- AuthButton
-- FormInput
-- PasswordInput
-- ProtectedRoute
-- WhyChooseUs
-
----
-
-## Context API
-
-- AuthContext
-
----
-
-## Services
-
-- api.js
-- authService.js
-- dashboardService.js
-
----
-
-## Pages
-
-- Home
-- Login
-- Register
-- Dashboard
-- Profile
-- Admin Dashboard
-- Forgot Password
-- Not Found
-
----
-
-# 📖 Documentation
-
-Complete project documentation is available inside the **docs/** directory.
-
-Documentation includes:
-
-- Day1.md
-- Day2.md
-- Day3.md
-- Day4.md
-- Day5.md
-- Day6.md
-- Day7.md
-- Day8.md
-- Day9.md
-- API Documentation
-- Architecture
-- Project Roadmap
-
-Each development day is documented separately with completed features, implementation details, challenges, and future planning.
-
----
-
-# 🔐 REST API Endpoints
-
-## Authentication
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/signup` | Register New User |
-| POST | `/api/auth/login` | User Login |
-
----
-
-## Student Dashboard
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/dashboard` | User Dashboard |
-
----
-
-## Question Bank
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/questions/add` | Add Question |
-| GET | `/api/questions` | Get All Questions |
-| GET | `/api/questions/random?limit=10` | Random Questions |
-
----
-
-## Mock Test
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/test/start` | Start Test |
-| POST | `/api/test/submit/:testId` | Submit Test |
-| GET | `/api/test/history` | Test History |
-| GET | `/api/test/performance` | Performance Summary |
-| GET | `/api/test/dashboard` | Dashboard Analytics |
-| GET | `/api/test/:testId` | Test Details |
-
----
-
-## Admin APIs
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/admin/test` | Verify Admin |
-| GET | `/api/admin/dashboard` | Admin Dashboard |
-| PUT | `/api/admin/question/:id` | Update Question |
-| DELETE | `/api/admin/question/:id` | Delete Question |
-| POST | `/api/admin/upload/csv` | Bulk CSV Upload |
-
----
-
-# ⚙️ Installation Guide
+# ⚙️ Installation
 
 ## Clone Repository
 
@@ -465,7 +255,7 @@ Each development day is documented separately with completed features, implement
 git clone https://github.com/Aditya99977/ExamBoosters.git
 ```
 
-Move into the project folder:
+Move into the project folder
 
 ```bash
 cd ExamBoosters
@@ -475,13 +265,19 @@ cd ExamBoosters
 
 # 🔧 Backend Setup
 
-Install dependencies:
+Move into backend
+
+```bash
+cd backend
+```
+
+Install dependencies
 
 ```bash
 npm install
 ```
 
-Create a **.env** file:
+Create a `.env` file
 
 ```env
 PORT=5000
@@ -491,15 +287,15 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 ```
 
-Run backend:
+Run the backend
 
 ```bash
 npm run dev
 ```
 
-Backend Server:
+Backend URL
 
-```text
+```
 http://localhost:5000
 ```
 
@@ -507,415 +303,252 @@ http://localhost:5000
 
 # 🎨 Frontend Setup
 
-Move into frontend folder:
+Move into frontend
 
 ```bash
 cd frontend
 ```
 
-Install dependencies:
+Install dependencies
 
 ```bash
 npm install
 ```
 
-Run React application:
+Run the frontend
 
 ```bash
 npm run dev
 ```
 
-Frontend:
+Frontend URL
 
-```text
+```
 http://localhost:5173
 ```
 
-*(If port 5173 is occupied, Vite will automatically use another available port such as 5174.)*
+---
+
+# 🔌 REST API Overview
+
+## Authentication
+
+| Method | Endpoint |
+|---------|----------|
+| POST | `/api/auth/signup` |
+| POST | `/api/auth/login` |
 
 ---
 
-# 🧪 Testing
+## Dashboard
 
-Backend APIs can be tested using:
-
-- Thunder Client
-- Postman
-- curl
-
-Frontend testing currently includes:
-
-- User Registration
-- User Login
-- JWT Authentication
-- Protected Routes
-- Dynamic Profile
-- API Integration
-
-More testing modules will be added during future development phases.
----
-
-# 📅 Development Timeline
-
-## ✅ Day 1 — Project Foundation
-
-- Project Initialization
-- Express.js Server Setup
-- MongoDB Atlas Connection
-- Environment Configuration
-- GitHub Repository Setup
+| Method | Endpoint |
+|---------|----------|
+| GET | `/api/dashboard` |
 
 ---
 
-## ✅ Day 2 — Authentication Backend
+## Profile
 
-- User Registration API
-- User Login API
-- Password Hashing (bcryptjs)
-- JWT Authentication
-- Protected Routes
-
----
-
-## ✅ Day 3 — Question Bank
-
-- Question Model
-- Add Question API
-- Get Questions API
-- Subject Filtering
-- Difficulty Filtering
-- Random Question Generator
+| Method | Endpoint |
+|---------|----------|
+| GET | `/api/profile` |
+| PUT | `/api/profile` |
 
 ---
 
-## ✅ Day 4 — Mock Test Engine
+## Question Bank
 
-- Start Mock Test
-- Submit Mock Test
-- Automatic Evaluation
-- Answer Storage
-- Score Calculation
-
----
-
-## ✅ Day 5 — Student Analytics
-
-- Test History
-- Performance Summary
-- Dashboard Analytics
-- Test Details
-- User Statistics
+| Method | Endpoint |
+|---------|----------|
+| POST | `/api/questions/add` |
+| GET | `/api/questions` |
+| GET | `/api/questions/random` |
 
 ---
 
-## ✅ Day 6 — Admin Panel
+## Mock Test
 
-- Admin Authentication
-- Admin Dashboard
-- Edit Questions
-- Delete Questions
-- Bulk CSV Upload
-- Subject-wise Analytics
-
----
-
-## ✅ Day 7 — MVC Refactoring
-
-- Controller Layer
-- Utility Functions
-- Professional Folder Structure
-- Business Logic Separation
-- Clean Architecture
+| Method | Endpoint |
+|---------|----------|
+| POST | `/api/test/start` |
+| POST | `/api/test/submit/:testId` |
+| GET | `/api/test/history` |
+| GET | `/api/test/performance` |
+| GET | `/api/test/:testId` |
 
 ---
 
-## ✅ Day 8 — Frontend Foundation
+## Admin
 
-- React + Vite Setup
-- Bootstrap Integration
-- React Router
-- Axios Configuration
-- Landing Page
-- Hero Section
-- Statistics Section
-- Features Section
-- Supported Exams
-- Why Choose Us
-- Call-To-Action
-- Footer
+| Method | Endpoint |
+|---------|----------|
+| GET | `/api/admin/dashboard` |
+| PUT | `/api/admin/question/:id` |
+| DELETE | `/api/admin/question/:id` |
+| POST | `/api/admin/upload/csv` |
 
 ---
 
-## ✅ Day 9 — Authentication Module
+# 📚 Documentation
 
-- Login Page
-- Registration Page
-- Authentication Layout
-- React Hook Form
-- Zod Validation
-- Toast Notifications
-- JWT Storage
-- Auth Context
-- Protected Routes
-- Dynamic Navbar
-- Logout
-- Profile Page
-- Dynamic Profile Data
-- Axios Interceptors
-- Backend Integration
-- CORS Configuration
-- JWT Middleware Fix
+Detailed documentation is available in the **docs/** folder.
+
+Included documents:
+
+- Development Log (Day 1 onwards)
+- API Documentation
+- Project Architecture
+- Project Roadmap
+
+These documents provide implementation details, design decisions, and future development plans.
 
 ---
-
-# 🚀 Upcoming Development
-
-## 🎯 Day 10
-
-- Premium Student Dashboard
-- Dashboard Cards
-- Subject Progress
-- Recent Tests
-- Quick Actions
-- Study Statistics
-- Dashboard Widgets
-
----
-
-## 🚀 Version 1.0
-
-- Student Dashboard
-- Admin Dashboard UI
-- Mock Test Interface
-- Question Interface
-- Performance Analytics
-- User Settings
-
----
-
-## 🚀 Version 2.0
-
-- Performance Charts
-- Leaderboards
-- Achievements
-- Bookmarks
-- Study Notes
-- Notifications
-- Dark Mode
-- Mobile Optimization
-
----
-
-## 🤖 Version 3.0
-
-- AI Study Planner
-- AI Question Generator
-- AI Performance Analysis
-- AI Doubt Solver
-- Smart Revision Planner
-- Personalized Recommendations
-
----
-
-## 🌍 Version 4.0
-
-- Production Deployment
-- Custom Domain
-- HTTPS
-- Google Search Console
-- Google Analytics
-- SEO Optimization
-- Performance Monitoring
-
----
-
-# 📈 Development Progress
-
-```text
-Backend Development        ██████████████████████████ 100%
-
-Frontend Development       ███████████████░░░░░░░░░░ 60%
-
-Authentication             ██████████████████████████ 100%
-
-Landing Page               ██████████████████████████ 100%
-
-Profile Module             ██████████████████████████ 100%
-
-Student Dashboard          ███░░░░░░░░░░░░░░░░░░░░░░ 15%
-
-Admin Dashboard UI         ░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
-
-Mock Test UI               ░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
-
-AI Features                ░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
-
-Testing                    ███████████░░░░░░░░░░░░░░ 35%
-
-Deployment                 ░░░░░░░░░░░░░░░░░░░░░░░░░ 0%
-
-Overall Project            ███████████████░░░░░░░░░░ 60%
-```
-
----
-
-# 🏆 Project Highlights
-
-- Full-Stack MERN Architecture
-- Professional MVC Backend
-- RESTful API Design
-- JWT Authentication
-- Role-Based Authorization
-- React Context API
-- Protected React Routes
-- Dynamic User Profile
-- Responsive Landing Page
-- Modern Authentication UI
-- Modular Component Architecture
-- Bootstrap 5 UI
-- Axios API Integration
-- CSV Bulk Question Upload
-- Professional Folder Structure
-- Documentation-Driven Development
-- Git Version Control
-- Scalable Project Architecture
-
----
-
 # 📸 Screenshots
 
-> Screenshots will be updated after completion of major UI modules.
+> Screenshots will be updated as development progresses.
 
-## Landing Page
-
-Coming Soon
-
----
-
-## Login Page
+### 🏠 Landing Page
 
 Coming Soon
 
 ---
 
-## Registration Page
+### 🔐 Login Page
 
 Coming Soon
 
 ---
 
-## Student Dashboard
+### 📝 Registration Page
 
 Coming Soon
 
 ---
 
-## Admin Dashboard
+### 📊 Student Dashboard
 
 Coming Soon
 
 ---
 
-## Mock Test Interface
+### 👤 Profile Page
 
 Coming Soon
 
 ---
 
-# 🌐 Deployment Roadmap
+### 👨‍💼 Admin Dashboard
 
-Future production deployment will include:
-
-- Backend Deployment
-- Frontend Deployment
-- Cloud MongoDB
-- Custom Domain
-- HTTPS
-- Google Search Console
-- Google Analytics
-- SEO
-- CDN
-- Performance Monitoring
+Coming Soon
 
 ---
 
-# 🗺️ Long-Term Roadmap
+# 🗺️ Development Roadmap
 
 ## ✅ Phase 1 — Backend Foundation
 
-- REST APIs
-- Authentication
-- Question Bank
+- User Authentication
+- JWT Authorization
+- Question Bank APIs
 - Mock Test Engine
-- Admin Panel
+- Admin Module
 - MVC Architecture
 
 ---
 
 ## 🚧 Phase 2 — Frontend
 
-- Landing Page
-- Authentication
+- Responsive Landing Page
+- Authentication UI
 - Student Dashboard
 - Admin Dashboard
-- Mock Test Interface
-- Responsive Design
+- Profile Management
+- Performance Analytics
 
 ---
 
-## 🔮 Phase 3 — Advanced Features
+## 🔜 Phase 3 — Advanced Features
 
-- Performance Charts
-- Leaderboards
-- Achievements
-- Notifications
+- Live Dashboard Analytics
+- Subject-wise Performance
+- Leaderboard
 - Bookmarks
-- Study Notes
+- Notifications
+- Dark Mode
+- Mobile Optimization
 
 ---
 
-## 🤖 Phase 4 — AI Platform
+## 🤖 Phase 4 — AI Features
 
-- AI Study Assistant
-- AI Doubt Solver
+- AI Study Planner
 - AI Question Generator
-- Smart Revision
-- Performance Prediction
-- Personalized Learning
+- AI Performance Analysis
+- AI Doubt Solver
+- Smart Revision Planner
+- Personalized Learning Recommendations
 
 ---
 
-## 🚀 Phase 5 — Production Launch
+## 🌍 Phase 5 — Production Launch
 
-- Cloud Deployment
+- Backend Deployment
+- Frontend Deployment
 - Custom Domain
 - HTTPS
-- SEO
-- Analytics
-- Performance Optimization
+- Email Verification
+- Forgot Password
+- Reset Password
+- SEO Optimization
+- Google Analytics
 
 ---
 
-# 🎯 Future Goals
+# 📊 Current Progress
 
-ExamBooster aims to become a complete digital learning ecosystem by providing:
+| Module | Progress |
+|---------|----------|
+| Backend Development | ████████████████████ 100% |
+| Authentication | ████████████████████ 100% |
+| Landing Page | ████████████████████ 100% |
+| Profile Management | █████████████████░░░ 80% |
+| Student Dashboard | ███████████████░░░░░ 75% |
+| Admin Dashboard | ██████████░░░░░░░░░░ 50% |
+| Mock Test UI | ███████░░░░░░░░░░░░░ 35% |
+| AI Features | ░░░░░░░░░░░░░░░░░░░░ 0% |
+| Deployment | ░░░░░░░░░░░░░░░░░░░░ 0% |
 
-- High-Quality Practice Questions
-- Full-Length Mock Tests
-- Performance Analytics
-- AI-Based Study Planning
-- Intelligent Recommendations
-- Personalized Learning
-- Career Guidance
-- Mobile-Friendly Learning
+### Overall Project Completion
+
+```text
+████████████████░░░░ 82%
+```
+
+---
+
+# 🚀 Upcoming Features
+
+- Live Dashboard Integration
+- Email Verification
+- Forgot Password
+- Reset Password
+- AI Study Assistant
+- AI Mock Test Analysis
+- Leaderboard
+- Study Planner
+- Daily Goals
+- Achievement System
+- Admin Analytics
+- Production Deployment
 
 ---
 
 # 🤝 Contributing
 
-Currently, ExamBooster is under active development.
+ExamBooster is currently under active development.
 
-Community contributions, feature requests, bug reports, and suggestions will be welcomed after the first stable public release.
+Feedback, suggestions, and constructive discussions are always welcome. Community contributions will be welcomed after the first stable public release.
 
 ---
 
@@ -923,29 +556,22 @@ Community contributions, feature requests, bug reports, and suggestions will be 
 
 **Aditya Thakur**
 
-B.Sc. Information Technology Graduate
-
+B.Sc. Information Technology Graduate  
 Graphic Era Deemed to be University
 
-Future MBA (AI & Data Science) Aspirant
+**Tech Interests**
 
-India
+- Full Stack Web Development
+- MERN Stack
+- Artificial Intelligence
+- Data Science
+- Software Engineering
 
----
+GitHub:
+https://github.com/Aditya99977
 
-# 🙏 Acknowledgements
-
-Special thanks to the open-source community and the creators of:
-
-- React
-- Vite
-- Node.js
-- Express.js
-- MongoDB
-- Bootstrap
-- JWT
-- Axios
-- Git & GitHub
+LinkedIn:
+https://www.linkedin.com/in/aditya-thakur-67745141a/
 
 ---
 
@@ -953,30 +579,44 @@ Special thanks to the open-source community and the creators of:
 
 This project is currently being developed for educational, portfolio, and startup purposes.
 
-The license may be updated upon the first public production release.
+A production license will be added before the first public release.
 
 ---
 
 # ⭐ Support
 
-If you like this project:
+If you found this project interesting, consider:
 
-- ⭐ Star the repository
-- 🍴 Fork the project
-- 🐛 Report bugs
-- 💡 Suggest improvements
-- 🚀 Share with others
+- ⭐ Starring the repository
+- 🍴 Forking the project
+- 🐞 Reporting issues
+- 💡 Suggesting improvements
 
-Your support motivates continued development.
+Your support helps improve the project and motivates continued development.
 
 ---
 
-# 🚀 Vision Statement
+# 🎯 Vision
 
-> **"Empowering every government exam aspirant with technology, intelligent learning, and AI-driven preparation."**
+> **"Helping every government exam aspirant prepare smarter through technology."**
 
-ExamBooster is more than just another government exam website.
+ExamBooster is being built as a modern learning platform that combines structured preparation, performance tracking, and future AI-powered assistance into a single ecosystem.
 
-It is being developed as a scalable, production-ready EdTech platform that combines modern software engineering with Artificial Intelligence to help students prepare smarter, track their progress effectively, and achieve success in competitive examinations.
+The goal is to provide students with a reliable platform that supports continuous learning, measurable progress, and personalized preparation for competitive government examinations.
 
-The long-term vision is to launch ExamBooster as a nationwide learning platform serving thousands of aspirants through secure, intelligent, and personalized digital education.
+---
+
+## 🙏 Acknowledgements
+
+Special thanks to the open-source community and the teams behind:
+
+- React
+- Vite
+- Node.js
+- Express.js
+- MongoDB
+- Bootstrap
+- Chart.js
+- Axios
+- JWT
+- Git & GitHub

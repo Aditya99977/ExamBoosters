@@ -1,6 +1,6 @@
 import api from "./api";
 
-export const getProfile = async () => {
+export const getDashboard = async () => {
 
     const response = await api.get("/dashboard");
 

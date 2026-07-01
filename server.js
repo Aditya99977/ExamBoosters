@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const profileRoutes = require("./routes/profile");
 
 const authRoutes = require("./routes/auth");
 const dashboardRoutes = require("./routes/dashboard");
@@ -30,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 Routes
 ==============================
 */
-
+app.use("/api/profile", profileRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/questions", questionRoutes);

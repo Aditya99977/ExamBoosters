@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import Loader from "../components/Loader";
 
-import { getProfile } from "../services/dashboardService";
+import { getProfile } from "../services/profileService";
 
 function Profile() {
+
+    const navigate = useNavigate();
 
     const [profile, setProfile] = useState(null);
 
@@ -73,9 +76,7 @@ function Profile() {
                                             fontSize: "40px"
                                         }}
                                     >
-
                                         👤
-
                                     </div>
 
                                     <h2 className="mt-3 fw-bold">
@@ -196,7 +197,10 @@ function Profile() {
 
                                 <div className="mt-5 text-center">
 
-                                    <button className="btn btn-primary rounded-pill px-4">
+                                    <button
+                                        className="btn btn-primary rounded-pill px-4"
+                                        onClick={() => navigate("/edit-profile")}
+                                    >
 
                                         Edit Profile
 

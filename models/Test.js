@@ -8,6 +8,11 @@ const TestSchema = new mongoose.Schema(
         required: true
     },
 
+    exam: {
+        type: String,
+        default: "Mock Test"
+    },
+
     questions: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -34,6 +39,11 @@ const TestSchema = new mongoose.Schema(
     },
 
     totalQuestions: {
+        type: Number,
+        default: 0
+    },
+
+    accuracy: {
         type: Number,
         default: 0
     },

@@ -2,8 +2,11 @@ const Test = require("../models/Test");
 const Question = require("../models/Question");
 
 /*
+==============================
 Start Test
+==============================
 */
+
 exports.startTest = async (req, res) => {
 
     try {
@@ -17,23 +20,39 @@ exports.startTest = async (req, res) => {
         ]);
 
         const test = new Test({
+
             user: req.user.id,
-            questions: questions.map(q => q._id),
+
+            exam: req.body.exam || "General Mock Test",
+
+            questions: questions.map(question => question._id),
+
             totalQuestions: questions.length
+
         });
 
         await test.save();
 
         res.status(201).json({
+
             message: "Mock Test Started",
+
             testId: test._id,
+
+            exam: test.exam,
+
             questions
+
         });
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
         res.status(500).json({
+
             message: err.message
+
         });
 
     }
@@ -41,8 +60,11 @@ exports.startTest = async (req, res) => {
 };
 
 /*
+==============================
 Submit Test
+==============================
 */
+
 exports.submitTest = async (req, res) => {
 
     try {
@@ -52,66 +74,125 @@ exports.submitTest = async (req, res) => {
         if (!test) {
 
             return res.status(404).json({
+
                 message: "Test not found"
+
+            });
+
+        }
+
+        if (test.submitted) {
+
+            return res.status(400).json({
+
+                message: "Test already submitted"
+
             });
 
         }
 
         let score = 0;
 
-        for (const answer of req.body.answers) {
+        const answers = req.body.answers || [];
+
+        for (const answer of answers) {
 
             const question = await Question.findById(answer.questionId);
 
             if (
+
                 question &&
+
                 question.correctAnswer === answer.selectedAnswer
+
             ) {
+
                 score++;
+
             }
 
         }
 
-        test.answers = req.body.answers;
+        const accuracy = test.totalQuestions > 0
+
+            ? Number(((score / test.totalQuestions) * 100).toFixed(2))
+
+            : 0;
+
+        test.answers = answers;
+
         test.score = score;
+
+        test.accuracy = accuracy;
+
         test.submitted = true;
+
         test.submittedAt = new Date();
 
         await test.save();
 
         res.json({
+
             message: "Test submitted successfully",
+
+            exam: test.exam,
+
             score,
-            totalQuestions: test.totalQuestions
-        });
 
-    } catch (err) {
+            totalQuestions: test.totalQuestions,
 
-        res.status(500).json({
-            message: err.message
+            accuracy,
+
+            submittedAt: test.submittedAt
+
         });
 
     }
 
-};
+    catch (err) {
 
+        res.status(500).json({
+
+            message: err.message
+
+        });
+
+    }
+    
+
+};
 /*
+==============================
 Get Test History
+==============================
 */
+
 exports.getHistory = async (req, res) => {
 
     try {
 
         const tests = await Test.find({
-            user: req.user.id
-        }).sort({ createdAt: -1 });
+
+            user: req.user.id,
+
+            submitted: true
+
+        }).sort({
+
+            submittedAt: -1
+
+        });
 
         res.json(tests);
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
         res.status(500).json({
+
             message: err.message
+
         });
 
     }
@@ -119,107 +200,101 @@ exports.getHistory = async (req, res) => {
 };
 
 /*
+==============================
 Performance Summary
+==============================
 */
+
 exports.getPerformance = async (req, res) => {
 
     try {
 
         const tests = await Test.find({
+
             user: req.user.id,
+
             submitted: true
+
         });
 
         if (tests.length === 0) {
 
             return res.json({
+
                 totalTests: 0,
+
                 averageScore: 0,
+
                 highestScore: 0,
-                latestScore: 0
+
+                latestScore: 0,
+
+                averageAccuracy: 0
+
             });
 
         }
 
-        let totalScore = 0;
-        let highestScore = 0;
+        const totalTests = tests.length;
 
-        tests.forEach(test => {
+        const totalScore = tests.reduce(
 
-            totalScore += test.score;
+            (sum, test) => sum + test.score,
 
-            if (test.score > highestScore) {
-                highestScore = test.score;
-            }
+            0
 
-        });
+        );
 
-        const averageScore = totalScore / tests.length;
+        const totalAccuracy = tests.reduce(
+
+            (sum, test) => sum + test.accuracy,
+
+            0
+
+        );
+
+        const highestScore = Math.max(
+
+            ...tests.map(test => test.score)
+
+        );
 
         const latestScore = tests[tests.length - 1].score;
 
-        res.json({
-            totalTests: tests.length,
-            averageScore: Number(averageScore.toFixed(2)),
-            highestScore,
-            latestScore
-        });
+        const averageScore = Number(
 
-    } catch (err) {
+            (totalScore / totalTests).toFixed(2)
 
-        res.status(500).json({
-            message: err.message
-        });
+        );
 
-    }
+        const averageAccuracy = Number(
 
-};
+            (totalAccuracy / totalTests).toFixed(2)
 
-/*
-Dashboard API
-*/
-exports.getDashboard = async (req, res) => {
-
-    try {
-
-        const tests = await Test.find({
-            user: req.user.id,
-            submitted: true
-        }).sort({ createdAt: -1 });
-
-        let totalTests = tests.length;
-        let totalScore = 0;
-        let highestScore = 0;
-
-        tests.forEach(test => {
-
-            totalScore += test.score;
-
-            if (test.score > highestScore) {
-                highestScore = test.score;
-            }
-
-        });
-
-        const averageScore =
-            totalTests > 0 ? totalScore / totalTests : 0;
+        );
 
         res.json({
 
             totalTests,
 
-            averageScore: Number(averageScore.toFixed(2)),
+            averageScore,
 
             highestScore,
 
-            recentTests: tests.slice(0, 5)
+            latestScore,
+
+            averageAccuracy
 
         });
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
         res.status(500).json({
+
             message: err.message
+
         });
 
     }
@@ -227,8 +302,107 @@ exports.getDashboard = async (req, res) => {
 };
 
 /*
-Get Test Details
+==============================
+Dashboard API
+==============================
 */
+
+exports.getDashboard = async (req, res) => {
+
+    try {
+
+        const tests = await Test.find({
+
+            user: req.user.id,
+
+            submitted: true
+
+        }).sort({
+
+            submittedAt: -1
+
+        });
+
+        const totalTests = tests.length;
+
+        const highestScore = totalTests
+            ? Math.max(...tests.map(test => test.score))
+            : 0;
+
+        const averageAccuracy = totalTests
+            ? Number(
+                (
+                    tests.reduce(
+                        (sum, test) => sum + test.accuracy,
+                        0
+                    ) / totalTests
+                ).toFixed(2)
+            )
+            : 0;
+
+        const recentTests = tests.slice(0, 5).map(test => ({
+
+            exam: test.exam,
+
+            score: test.score,
+
+            accuracy: test.accuracy,
+
+            submittedAt: test.submittedAt
+
+        }));
+
+        const weeklyPerformance = tests
+            .slice(0, 7)
+            .reverse()
+            .map(test => ({
+
+                date: test.submittedAt,
+
+                score: test.score
+
+            }));
+
+        res.json({
+
+            stats: {
+
+                practiceQuestions: 0,
+
+                mockTestsCompleted: totalTests,
+
+                accuracy: averageAccuracy,
+
+                highestScore
+
+            },
+
+            recentTests,
+
+            weeklyPerformance
+
+        });
+
+    }
+
+    catch (err) {
+
+        res.status(500).json({
+
+            message: err.message
+
+        });
+
+    }
+
+};
+
+/*
+==============================
+Get Test Details
+==============================
+*/
+
 exports.getTestDetails = async (req, res) => {
 
     try {
@@ -240,7 +414,9 @@ exports.getTestDetails = async (req, res) => {
         if (!test) {
 
             return res.status(404).json({
+
                 message: "Test not found"
+
             });
 
         }
@@ -248,17 +424,23 @@ exports.getTestDetails = async (req, res) => {
         if (test.user.toString() !== req.user.id) {
 
             return res.status(403).json({
+
                 message: "Access denied"
+
             });
 
         }
 
         res.json(test);
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
         res.status(500).json({
+
             message: err.message
+
         });
 
     }
