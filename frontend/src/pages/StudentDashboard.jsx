@@ -20,34 +20,51 @@ import {
 function StudentDashboard() {
 
     const [dashboard, setDashboard] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
-        loadDashboard();
+        fetchDashboard();
 
     }, []);
 
-    const loadDashboard = async () => {
+    const fetchDashboard = async () => {
 
         try {
 
-            const data = await getDashboard();
+            const response = await getDashboard();
 
-            setDashboard(data);
+            setDashboard(response);
 
-        }
+        } catch (err) {
 
-        catch (err) {
+            console.error("Dashboard Error:", err);
 
-            console.log(err);
+        } finally {
+
+            setLoading(false);
 
         }
 
     };
 
-    if (!dashboard) {
+    if (loading) {
 
-        return <h2 className="text-center mt-5">Loading Dashboard...</h2>;
+        return (
+
+            <DashboardLayout>
+
+                <div className="text-center py-5">
+
+                    <div className="spinner-border text-primary"></div>
+
+                    <p className="mt-3">Loading Dashboard...</p>
+
+                </div>
+
+            </DashboardLayout>
+
+        );
 
     }
 
@@ -55,13 +72,13 @@ function StudentDashboard() {
 
         <DashboardLayout>
 
-            <WelcomeCard user={dashboard.user} />
+            <WelcomeCard user={dashboard?.user} />
 
             <div className="row">
 
                 <StatCard
                     title="Practice Questions"
-                    value={dashboard.stats.practiceQuestions}
+                    value={dashboard?.stats?.practiceQuestions ?? 0}
                     subtitle="Questions Attempted"
                     icon={<FaBook color="#2563EB" />}
                     color="#16A34A"
@@ -69,7 +86,7 @@ function StudentDashboard() {
 
                 <StatCard
                     title="Mock Tests"
-                    value={dashboard.stats.mockTestsCompleted}
+                    value={dashboard?.stats?.mockTestsCompleted ?? 0}
                     subtitle="Completed"
                     icon={<FaClipboardList color="#7C3AED" />}
                     color="#16A34A"
@@ -77,7 +94,7 @@ function StudentDashboard() {
 
                 <StatCard
                     title="Accuracy"
-                    value={`${dashboard.stats.accuracy}%`}
+                    value={`${dashboard?.stats?.accuracy ?? 0}%`}
                     subtitle="Average Accuracy"
                     icon={<FaChartLine color="#F59E0B" />}
                     color="#2563EB"
@@ -85,7 +102,7 @@ function StudentDashboard() {
 
                 <StatCard
                     title="Highest Score"
-                    value={dashboard.stats.highestScore}
+                    value={dashboard?.stats?.highestScore ?? 0}
                     subtitle="Best Performance"
                     icon={<FaTrophy color="#F97316" />}
                     color="#2563EB"
@@ -94,11 +111,11 @@ function StudentDashboard() {
             </div>
 
             <SubjectProgress
-                data={dashboard.subjectProgress}
+                data={dashboard?.subjectProgress || []}
             />
 
             <PerformanceChart
-                data={dashboard.weeklyPerformance}
+                data={dashboard?.weeklyPerformance || []}
             />
 
             <div className="row mt-4">
@@ -106,7 +123,7 @@ function StudentDashboard() {
                 <div className="col-lg-8">
 
                     <RecentTests
-                        tests={dashboard.recentTests}
+                        tests={dashboard?.recentTests || []}
                     />
 
                 </div>
@@ -125,4 +142,4 @@ function StudentDashboard() {
 
 }
 
-export default StudentDashboard;    
+export default StudentDashboard;

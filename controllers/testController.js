@@ -2,9 +2,9 @@ const Test = require("../models/Test");
 const Question = require("../models/Question");
 
 /*
-==============================
-Start Test
-==============================
+=================================================
+Start Mock Test
+=================================================
 */
 
 exports.startTest = async (req, res) => {
@@ -49,9 +49,11 @@ exports.startTest = async (req, res) => {
 
     catch (err) {
 
+        console.error(err);
+
         res.status(500).json({
 
-            message: err.message
+            message: "Internal Server Error"
 
         });
 
@@ -60,9 +62,9 @@ exports.startTest = async (req, res) => {
 };
 
 /*
-==============================
-Submit Test
-==============================
+=================================================
+Submit Mock Test
+=================================================
 */
 
 exports.submitTest = async (req, res) => {
@@ -91,35 +93,61 @@ exports.submitTest = async (req, res) => {
 
         }
 
-        let score = 0;
+       let score = 0;
 
-        const answers = req.body.answers || [];
+const submittedAnswers = [];
 
-        for (const answer of answers) {
+const answers = req.body.answers || [];
 
-            const question = await Question.findById(answer.questionId);
+for (const answer of answers) {
 
-            if (
+    const question = await Question.findById(answer.questionId);
 
-                question &&
+    if (!question) continue;
 
-                question.correctAnswer === answer.selectedAnswer
+    const isCorrect =
 
-            ) {
+        question.correctAnswer === answer.selectedAnswer;
 
-                score++;
+    if (isCorrect) {
 
-            }
+        score++;
 
-        }
+    }
+
+    submittedAnswers.push({
+
+        questionId: question._id,
+
+        subject: question.subject,
+
+        difficulty: question.difficulty,
+
+        selectedAnswer: answer.selectedAnswer,
+
+        correctAnswer: question.correctAnswer,
+
+        isCorrect
+
+    });
+
+}
 
         const accuracy = test.totalQuestions > 0
 
-            ? Number(((score / test.totalQuestions) * 100).toFixed(2))
+            ? Number(
+
+                (
+
+                    (score / test.totalQuestions) * 100
+
+                ).toFixed(2)
+
+            )
 
             : 0;
 
-        test.answers = answers;
+        test.answers = submittedAnswers;
 
         test.score = score;
 
@@ -133,7 +161,7 @@ exports.submitTest = async (req, res) => {
 
         res.json({
 
-            message: "Test submitted successfully",
+            message: "Test Submitted Successfully",
 
             exam: test.exam,
 
@@ -151,20 +179,22 @@ exports.submitTest = async (req, res) => {
 
     catch (err) {
 
+        console.error(err);
+
         res.status(500).json({
 
-            message: err.message
+            message: "Internal Server Error"
 
         });
 
     }
-    
 
 };
+
 /*
-==============================
+=================================================
 Get Test History
-==============================
+=================================================
 */
 
 exports.getHistory = async (req, res) => {
@@ -177,7 +207,9 @@ exports.getHistory = async (req, res) => {
 
             submitted: true
 
-        }).sort({
+        })
+
+        .sort({
 
             submittedAt: -1
 
@@ -189,20 +221,21 @@ exports.getHistory = async (req, res) => {
 
     catch (err) {
 
+        console.error(err);
+
         res.status(500).json({
 
-            message: err.message
+            message: "Internal Server Error"
 
         });
 
     }
 
 };
-
 /*
-==============================
+=================================================
 Performance Summary
-==============================
+=================================================
 */
 
 exports.getPerformance = async (req, res) => {
@@ -247,7 +280,7 @@ exports.getPerformance = async (req, res) => {
 
         const totalAccuracy = tests.reduce(
 
-            (sum, test) => sum + test.accuracy,
+            (sum, test) => sum + (test.accuracy || 0),
 
             0
 
@@ -259,7 +292,17 @@ exports.getPerformance = async (req, res) => {
 
         );
 
-        const latestScore = tests[tests.length - 1].score;
+        const latestTest = tests.sort(
+
+            (a, b) =>
+
+                new Date(b.submittedAt) -
+
+                new Date(a.submittedAt)
+
+        )[0];
+
+        const latestScore = latestTest.score;
 
         const averageScore = Number(
 
@@ -291,9 +334,11 @@ exports.getPerformance = async (req, res) => {
 
     catch (err) {
 
+        console.error(err);
+
         res.status(500).json({
 
-            message: err.message
+            message: "Internal Server Error"
 
         });
 
@@ -302,114 +347,24 @@ exports.getPerformance = async (req, res) => {
 };
 
 /*
-==============================
-Dashboard API
-==============================
-*/
-
-exports.getDashboard = async (req, res) => {
-
-    try {
-
-        const tests = await Test.find({
-
-            user: req.user.id,
-
-            submitted: true
-
-        }).sort({
-
-            submittedAt: -1
-
-        });
-
-        const totalTests = tests.length;
-
-        const highestScore = totalTests
-            ? Math.max(...tests.map(test => test.score))
-            : 0;
-
-        const averageAccuracy = totalTests
-            ? Number(
-                (
-                    tests.reduce(
-                        (sum, test) => sum + test.accuracy,
-                        0
-                    ) / totalTests
-                ).toFixed(2)
-            )
-            : 0;
-
-        const recentTests = tests.slice(0, 5).map(test => ({
-
-            exam: test.exam,
-
-            score: test.score,
-
-            accuracy: test.accuracy,
-
-            submittedAt: test.submittedAt
-
-        }));
-
-        const weeklyPerformance = tests
-            .slice(0, 7)
-            .reverse()
-            .map(test => ({
-
-                date: test.submittedAt,
-
-                score: test.score
-
-            }));
-
-        res.json({
-
-            stats: {
-
-                practiceQuestions: 0,
-
-                mockTestsCompleted: totalTests,
-
-                accuracy: averageAccuracy,
-
-                highestScore
-
-            },
-
-            recentTests,
-
-            weeklyPerformance
-
-        });
-
-    }
-
-    catch (err) {
-
-        res.status(500).json({
-
-            message: err.message
-
-        });
-
-    }
-
-};
-
-/*
-==============================
+=================================================
 Get Test Details
-==============================
+=================================================
 */
 
 exports.getTestDetails = async (req, res) => {
 
     try {
 
-        const test = await Test.findById(req.params.testId)
-            .populate("questions")
-            .populate("answers.questionId");
+        const test = await Test.findById(
+
+            req.params.testId
+
+        )
+
+        .populate("questions")
+
+        .populate("answers.questionId");
 
         if (!test) {
 
@@ -421,11 +376,15 @@ exports.getTestDetails = async (req, res) => {
 
         }
 
-        if (test.user.toString() !== req.user.id) {
+        if (
+
+            test.user.toString() !== req.user.id
+
+        ) {
 
             return res.status(403).json({
 
-                message: "Access denied"
+                message: "Access Denied"
 
             });
 
@@ -437,9 +396,11 @@ exports.getTestDetails = async (req, res) => {
 
     catch (err) {
 
+        console.error(err);
+
         res.status(500).json({
 
-            message: err.message
+            message: "Internal Server Error"
 
         });
 

@@ -24,11 +24,34 @@ const TestSchema = new mongoose.Schema(
         {
             questionId: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "Question"
+                ref: "Question",
+                required: true
+            },
+
+            subject: {
+                type: String,
+                required: true
+            },
+
+            difficulty: {
+                type: String,
+                enum: ["Easy", "Medium", "Hard"],
+                required: true
             },
 
             selectedAnswer: {
-                type: String
+                type: String,
+                required: true
+            },
+
+            correctAnswer: {
+                type: String,
+                required: true
+            },
+
+            isCorrect: {
+                type: Boolean,
+                default: false
             }
         }
     ],

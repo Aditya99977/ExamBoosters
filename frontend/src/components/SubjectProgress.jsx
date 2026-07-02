@@ -1,48 +1,16 @@
-function SubjectProgress() {
+function SubjectProgress({ data = [] }) {
 
-    const subjects = [
+    const getColor = (progress) => {
 
-        {
+        if (progress >= 80) return "bg-success";
 
-            name: "Reasoning",
+        if (progress >= 60) return "bg-primary";
 
-            progress: 90,
+        if (progress >= 40) return "bg-warning";
 
-            color: "bg-success"
+        return "bg-danger";
 
-        },
-
-        {
-
-            name: "English",
-
-            progress: 75,
-
-            color: "bg-primary"
-
-        },
-
-        {
-
-            name: "Quantitative Aptitude",
-
-            progress: 82,
-
-            color: "bg-warning"
-
-        },
-
-        {
-
-            name: "General Awareness",
-
-            progress: 60,
-
-            color: "bg-danger"
-
-        }
-
-    ];
+    };
 
     return (
 
@@ -58,49 +26,74 @@ function SubjectProgress() {
 
                 {
 
-                    subjects.map((subject, index) => (
+                    data.length === 0 ? (
 
-                        <div key={index} className="mb-4">
+                        <div className="text-center py-4">
 
-                            <div className="d-flex justify-content-between">
+                            <p className="text-muted mb-0">
 
-                                <strong>
+                                No subject progress available yet.
 
-                                    {subject.name}
+                            </p>
 
-                                </strong>
+                            <small className="text-secondary">
 
-                                <span>
+                                Complete a mock test to see your performance.
 
-                                    {subject.progress}%
+                            </small>
 
-                                </span>
+                        </div>
 
-                            </div>
+                    ) : (
 
-                            <div className="progress mt-2">
+                        data.map((subject, index) => (
 
-                                <div
+                            <div
+                                key={index}
+                                className="mb-4"
+                            >
 
-                                    className={`progress-bar ${subject.color}`}
+                                <div className="d-flex justify-content-between">
 
-                                    role="progressbar"
+                                    <strong>
 
-                                    style={{
+                                        {subject.subject}
 
-                                        width: `${subject.progress}%`
+                                    </strong>
 
-                                    }}
+                                    <span>
 
-                                >
+                                        {subject.progress}%
+
+                                    </span>
+
+                                </div>
+
+                                <div className="progress mt-2">
+
+                                    <div
+
+                                        className={`progress-bar ${getColor(subject.progress)}`}
+
+                                        role="progressbar"
+
+                                        style={{
+
+                                            width: `${subject.progress}%`
+
+                                        }}
+
+                                    >
+
+                                    </div>
 
                                 </div>
 
                             </div>
 
-                        </div>
+                        ))
 
-                    ))
+                    )
 
                 }
 
