@@ -1,6 +1,9 @@
 import { FaFire, FaBullseye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function WelcomeCard({ user }) {
+
+    const navigate = useNavigate();
 
     return (
 
@@ -62,7 +65,13 @@ function WelcomeCard({ user }) {
 
                     <div className="col-lg-4 text-lg-end mt-4 mt-lg-0">
 
-                        <button className="btn btn-light btn-lg rounded-pill px-5 fw-bold">
+                        <button
+
+                            className="btn btn-light btn-lg rounded-pill px-5 fw-bold"
+
+                            onClick={() => navigate("/practice")}
+
+                        >
 
                             Start Practice
 

@@ -8,6 +8,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import NotFound from "./pages/NotFound";
+import Practice from "./pages/Practice";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -35,6 +36,14 @@ function App() {
                     </ProtectedRoute>
                 }
             />
+            <Route
+    path="/practice"
+    element={
+        <ProtectedRoute>
+            <Practice />
+        </ProtectedRoute>
+    }
+/>
 
             <Route
                 path="/profile"

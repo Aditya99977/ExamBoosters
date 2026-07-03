@@ -23,9 +23,9 @@ function Sidebar() {
         <div
             className="bg-primary text-white position-fixed"
             style={{
-                width:"260px",
-                height:"100vh",
-                padding:"30px"
+                width: "260px",
+                height: "100vh",
+                padding: "30px"
             }}
         >
 
@@ -37,49 +37,67 @@ function Sidebar() {
 
             <div className="d-flex flex-column gap-3">
 
-                <Link className="text-white text-decoration-none" to="/dashboard">
+                <Link
+                    className="text-white text-decoration-none"
+                    to="/dashboard"
+                >
 
-                    <FaHome className="me-2"/>
+                    <FaHome className="me-2" />
 
                     Dashboard
 
                 </Link>
 
-                <Link className="text-white text-decoration-none" to="#">
+                <Link
+                    className="text-white text-decoration-none"
+                    to="/practice"
+                >
 
-                    <FaBook className="me-2"/>
+                    <FaBook className="me-2" />
 
                     Practice
 
                 </Link>
 
-                <Link className="text-white text-decoration-none" to="#">
+                <Link
+                    className="text-white text-decoration-none"
+                    to="/mock-tests"
+                >
 
-                    <FaClipboardList className="me-2"/>
+                    <FaClipboardList className="me-2" />
 
                     Mock Tests
 
                 </Link>
 
-                <Link className="text-white text-decoration-none" to="#">
+                <Link
+                    className="text-white text-decoration-none"
+                    to="/performance"
+                >
 
-                    <FaChartBar className="me-2"/>
+                    <FaChartBar className="me-2" />
 
                     Performance
 
                 </Link>
 
-                <Link className="text-white text-decoration-none" to="/profile">
+                <Link
+                    className="text-white text-decoration-none"
+                    to="/profile"
+                >
 
-                    <FaUser className="me-2"/>
+                    <FaUser className="me-2" />
 
                     Profile
 
                 </Link>
 
-                <Link className="text-white text-decoration-none mt-5" to="/">
+                <Link
+                    className="text-white text-decoration-none mt-5"
+                    to="/"
+                >
 
-                    <FaSignOutAlt className="me-2"/>
+                    <FaSignOutAlt className="me-2" />
 
                     Logout
 
