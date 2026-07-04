@@ -7,8 +7,9 @@ import StudentDashboard from "./pages/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
-import NotFound from "./pages/NotFound";
 import Practice from "./pages/Practice";
+import MockTest from "./pages/MockTest";
+import NotFound from "./pages/NotFound";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -18,7 +19,9 @@ function App() {
 
         <Routes>
 
-            {/* Public Routes */}
+            {/* ==============================
+                Public Routes
+            ============================== */}
 
             <Route path="/" element={<Home />} />
 
@@ -26,7 +29,9 @@ function App() {
 
             <Route path="/register" element={<Register />} />
 
-            {/* Protected Student Routes */}
+            {/* ==============================
+                Protected Student Routes
+            ============================== */}
 
             <Route
                 path="/dashboard"
@@ -36,14 +41,24 @@ function App() {
                     </ProtectedRoute>
                 }
             />
+
             <Route
-    path="/practice"
-    element={
-        <ProtectedRoute>
-            <Practice />
-        </ProtectedRoute>
-    }
-/>
+                path="/practice"
+                element={
+                    <ProtectedRoute>
+                        <Practice />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/mock-tests"
+                element={
+                    <ProtectedRoute>
+                        <MockTest />
+                    </ProtectedRoute>
+                }
+            />
 
             <Route
                 path="/profile"
@@ -54,8 +69,6 @@ function App() {
                 }
             />
 
-            {/* NEW Edit Profile Route */}
-
             <Route
                 path="/edit-profile"
                 element={
@@ -65,7 +78,9 @@ function App() {
                 }
             />
 
-            {/* Protected Admin Route */}
+            {/* ==============================
+                Protected Admin Route
+            ============================== */}
 
             <Route
                 path="/admin"
@@ -76,7 +91,9 @@ function App() {
                 }
             />
 
-            {/* 404 Page */}
+            {/* ==============================
+                404 Route
+            ============================== */}
 
             <Route
                 path="*"
