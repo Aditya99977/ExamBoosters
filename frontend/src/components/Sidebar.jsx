@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import {
 
@@ -17,6 +17,32 @@ import {
 } from "react-icons/fa";
 
 function Sidebar() {
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+
+        localStorage.removeItem("token");
+
+        navigate("/");
+
+    };
+
+    const linkStyle = ({ isActive }) => ({
+
+        color: "white",
+
+        textDecoration: "none",
+
+        padding: "10px 15px",
+
+        borderRadius: "8px",
+
+        backgroundColor: isActive ? "rgba(255,255,255,0.2)" : "transparent",
+
+        transition: "0.3s"
+
+    });
 
     return (
 
@@ -37,71 +63,71 @@ function Sidebar() {
 
             <div className="d-flex flex-column gap-3">
 
-                <Link
-                    className="text-white text-decoration-none"
+                <NavLink
                     to="/dashboard"
+                    style={linkStyle}
                 >
 
                     <FaHome className="me-2" />
 
                     Dashboard
 
-                </Link>
+                </NavLink>
 
-                <Link
-                    className="text-white text-decoration-none"
+                <NavLink
                     to="/practice"
+                    style={linkStyle}
                 >
 
                     <FaBook className="me-2" />
 
                     Practice
 
-                </Link>
+                </NavLink>
 
-                <Link
-                    className="text-white text-decoration-none"
+                <NavLink
                     to="/mock-tests"
+                    style={linkStyle}
                 >
 
                     <FaClipboardList className="me-2" />
 
                     Mock Tests
 
-                </Link>
+                </NavLink>
 
-                <Link
-                    className="text-white text-decoration-none"
+                <NavLink
                     to="/performance"
+                    style={linkStyle}
                 >
 
                     <FaChartBar className="me-2" />
 
                     Performance
 
-                </Link>
+                </NavLink>
 
-                <Link
-                    className="text-white text-decoration-none"
+                <NavLink
                     to="/profile"
+                    style={linkStyle}
                 >
 
                     <FaUser className="me-2" />
 
                     Profile
 
-                </Link>
+                </NavLink>
 
-                <Link
-                    className="text-white text-decoration-none mt-5"
-                    to="/"
+                <button
+                    className="btn btn-outline-light mt-5 text-start"
+                    onClick={handleLogout}
                 >
 
                     <FaSignOutAlt className="me-2" />
 
                     Logout
 
-                </Link>
+                </button>
 
             </div>
 

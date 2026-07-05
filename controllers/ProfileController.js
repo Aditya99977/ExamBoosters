@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Test = require("../models/Test");
 
 /*
 ==============================
@@ -22,11 +23,53 @@ exports.getProfile = async (req, res) => {
 
         }
 
-        res.json(user);
+        /*
+        =====================================
+        Calculate Statistics
+        =====================================
+        */
+
+        const tests = await Test.find({
+
+            user: req.user.id,
+
+            submitted: true
+
+        });
+
+        const testsAttempted = tests.length;
+
+        const highestScore = tests.length > 0
+
+            ? Math.max(...tests.map(test => test.score))
+
+            : 0;
+
+        res.json({
+
+            _id: user._id,
+
+            name: user.name,
+
+            email: user.email,
+
+            role: user.role,
+
+            examTarget: user.examTarget,
+
+            createdAt: user.createdAt,
+
+            testsAttempted,
+
+            highestScore
+
+        });
 
     }
 
     catch (err) {
+
+        console.error(err);
 
         res.status(500).json({
 
@@ -71,7 +114,9 @@ exports.updateProfile = async (req, res) => {
         }
 
         user.name = name;
+
         user.email = email;
+
         user.examTarget = examTarget;
 
         await user.save();
@@ -87,6 +132,8 @@ exports.updateProfile = async (req, res) => {
     }
 
     catch (err) {
+
+        console.error(err);
 
         res.status(500).json({
 

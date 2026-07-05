@@ -69,14 +69,23 @@ function Profile() {
                                 <div className="text-center mb-4">
 
                                     <div
+
                                         className="rounded-circle bg-primary text-white d-inline-flex justify-content-center align-items-center"
+
                                         style={{
+
                                             width: "100px",
+
                                             height: "100px",
+
                                             fontSize: "40px"
+
                                         }}
+
                                     >
+
                                         👤
+
                                     </div>
 
                                     <h2 className="mt-3 fw-bold">
@@ -153,9 +162,9 @@ function Profile() {
 
                                         </h6>
 
-                                        <h5>
+                                        <h5 className="text-primary">
 
-                                            {profile.testsAttempted || 0}
+                                            {profile.testsAttempted}
 
                                         </h5>
 
@@ -169,9 +178,9 @@ function Profile() {
 
                                         </h6>
 
-                                        <h5>
+                                        <h5 className="text-success">
 
-                                            {profile.score || 0}
+                                            {profile.highestScore}
 
                                         </h5>
 
@@ -198,8 +207,11 @@ function Profile() {
                                 <div className="mt-5 text-center">
 
                                     <button
+
                                         className="btn btn-primary rounded-pill px-4"
+
                                         onClick={() => navigate("/edit-profile")}
+
                                     >
 
                                         Edit Profile

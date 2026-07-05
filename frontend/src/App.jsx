@@ -10,6 +10,7 @@ import EditProfile from "./pages/EditProfile";
 import Practice from "./pages/Practice";
 import MockTest from "./pages/MockTest";
 import NotFound from "./pages/NotFound";
+import Performance from "./pages/Performance";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -59,6 +60,14 @@ function App() {
                     </ProtectedRoute>
                 }
             />
+            <Route
+                 path="/performance"
+                 element={
+                     <ProtectedRoute>
+                      <Performance />
+                  </ProtectedRoute>
+      }
+   />
 
             <Route
                 path="/profile"

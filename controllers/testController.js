@@ -1,6 +1,7 @@
 const Test = require("../models/Test");
 const Question = require("../models/Question");
 
+
 /*
 =================================================
 Start Mock Test
@@ -93,45 +94,45 @@ exports.submitTest = async (req, res) => {
 
         }
 
-       let score = 0;
+        let score = 0;
 
-const submittedAnswers = [];
+        const submittedAnswers = [];
 
-const answers = req.body.answers || [];
+        const answers = req.body.answers || [];
 
-for (const answer of answers) {
+        for (const answer of answers) {
 
-    const question = await Question.findById(answer.questionId);
+            const question = await Question.findById(answer.questionId);
 
-    if (!question) continue;
+            if (!question) continue;
 
-    const isCorrect =
+            const isCorrect =
 
-        question.correctAnswer === answer.selectedAnswer;
+                question.correctAnswer === answer.selectedAnswer;
 
-    if (isCorrect) {
+            if (isCorrect) {
 
-        score++;
+                score++;
 
-    }
+            }
 
-    submittedAnswers.push({
+            submittedAnswers.push({
 
-        questionId: question._id,
+                questionId: question._id,
 
-        subject: question.subject,
+                subject: question.subject,
 
-        difficulty: question.difficulty,
+                difficulty: question.difficulty,
 
-        selectedAnswer: answer.selectedAnswer,
+                selectedAnswer: answer.selectedAnswer,
 
-        correctAnswer: question.correctAnswer,
+                correctAnswer: question.correctAnswer,
 
-        isCorrect
+                isCorrect
 
-    });
+            });
 
-}
+        }
 
         const accuracy = test.totalQuestions > 0
 
@@ -159,7 +160,8 @@ for (const answer of answers) {
 
         await test.save();
 
-        res.json({
+        
+                res.json({
 
             message: "Test Submitted Successfully",
 
@@ -232,6 +234,7 @@ exports.getHistory = async (req, res) => {
     }
 
 };
+
 /*
 =================================================
 Performance Summary
