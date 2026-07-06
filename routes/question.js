@@ -2,6 +2,9 @@ const express = require("express");
 
 const router = express.Router();
 
+const auth = require("../middleware/authMiddleware");
+const admin = require("../middleware/adminMiddleware");
+
 const {
 
     addQuestion,
@@ -16,7 +19,17 @@ const {
 Add Question
 */
 
-router.post("/add", addQuestion);
+router.post(
+
+    "/add",
+
+    auth,
+
+    admin,
+
+    addQuestion
+
+);
 
 /*
 Get All Questions

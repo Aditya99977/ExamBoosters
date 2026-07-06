@@ -235,5 +235,73 @@ exports.uploadCSV = async (req, res) => {
         });
 
     }
+};
+    /*
+========================================
+Get All Users
+========================================
+*/
+
+exports.getAllUsers = async (req, res) => {
+
+    try {
+
+        const users = await User.find()
+
+            .select("-password")
+
+            .sort({
+
+                createdAt: -1
+
+            });
+
+        res.json(users);
+
+    }
+
+    catch (err) {
+
+        res.status(500).json({
+
+            message: err.message
+
+        });
+
+    }
 
 };
+/*
+========================================
+Get All Questions
+========================================
+*/
+
+exports.getAllQuestions = async (req, res) => {
+
+    try {
+
+        const questions = await Question.find()
+
+            .sort({
+
+                createdAt: -1
+
+            });
+
+        res.json(questions);
+
+    }
+
+    catch (err) {
+
+        res.status(500).json({
+
+            message: err.message
+
+        });
+
+    }
+
+};
+

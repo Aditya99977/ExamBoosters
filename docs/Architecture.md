@@ -1,151 +1,387 @@
 # ExamBooster Architecture
 
-## High-Level Architecture
+# High-Level Architecture
 
-Client
-↓
-Express Server
-↓
-Routes
-↓
-Middleware
-↓
-Models
-↓
+```
+React.js Frontend
+        │
+        ▼
+Axios Service Layer
+        │
+        ▼
+Express.js REST APIs
+        │
+        ▼
+Authentication & Authorization Middleware
+        │
+        ▼
+Controllers
+        │
+        ▼
+MongoDB Models (Mongoose)
+        │
+        ▼
 MongoDB Atlas
+```
 
 ---
 
-## Folder Structure
+# Current Project Structure
 
+```
 ExamBooster
 
-├── models
-
-├── routes
-
+├── config
+│
+├── controllers
+│   ├── adminController.js
+│   ├── authController.js
+│   ├── dashboardController.js
+│   ├── ProfileController.js
+│   ├── questionController.js
+│   └── testController.js
+│
 ├── middleware
-
+│   ├── authMiddleware.js
+│   ├── adminMiddleware.js
+│   └── uploadMiddleware.js
+│
+├── models
+│   ├── User.js
+│   ├── Question.js
+│   └── Test.js
+│
+├── routes
+│   ├── admin.js
+│   ├── auth.js
+│   ├── dashboard.js
+│   ├── Profile.js
+│   ├── question.js
+│   └── test.js
+│
+├── uploads
+│
 ├── docs
-
-├── public
-
-├── views
-
-├── .env
-
+│
 ├── server.js
-
+│
 └── package.json
+```
 
 ---
 
-## Components
+# Frontend Architecture
 
-### Server
+```
+frontend
 
-File:
+src
+
+├── components
+│
+├── context
+│
+├── hooks
+│
+├── layouts
+│
+├── pages
+│
+├── services
+│
+├── styles
+│
+├── App.jsx
+│
+└── main.jsx
+```
+
+---
+
+# Backend Components
+
+## Server
+
+**File**
 
 server.js
 
-Responsibilities:
+### Responsibilities
 
-* Start Express server
-* Connect MongoDB Atlas
-* Load routes
-* Configure middleware
-
----
-
-### Models
-
-Purpose:
-
-Define MongoDB schemas.
-
-Current Models:
-
-* User
-
-Future Models:
-
-* Question
-* Test
-* Result
+- Start Express Server
+- Connect MongoDB Atlas
+- Register Routes
+- Configure Middleware
+- Parse JSON Requests
+- Enable CORS
 
 ---
 
-### Routes
+## Controllers
 
-Purpose:
+Business logic layer.
 
-Handle API requests.
+Current Controllers
 
-Current Routes:
-
-* Authentication
-* Dashboard
-
-Future Routes:
-
-* Questions
-* Tests
-* Results
+- Authentication
+- Dashboard
+- Profile
+- Questions
+- Mock Tests
+- Admin
 
 ---
 
-### Middleware
+## Models
 
-Purpose:
+MongoDB schemas.
 
-Handle request processing.
+Current Models
 
-Current Middleware:
-
-* JWT Authentication
-
-Future Middleware:
-
-* Admin Authorization
-* Request Validation
+- User
+- Question
+- Test
 
 ---
 
-### Database
+## Routes
 
-Database:
+REST API endpoints.
+
+Current Routes
+
+- Authentication
+- Dashboard
+- Profile
+- Questions
+- Mock Tests
+- Admin
+
+---
+
+## Middleware
+
+Current Middleware
+
+- JWT Authentication
+- Admin Authorization
+- CSV Upload Middleware
+
+---
+
+# Database
+
+Database
 
 MongoDB Atlas
 
-Collections:
+Collections
 
-* users
-
-Future Collections:
-
-* questions
-* tests
-* results
+- users
+- questions
+- tests
 
 ---
 
-## Security Features
+# Frontend Modules
 
-* Password Hashing (bcrypt)
-* JWT Authentication
-* Environment Variables
-* Protected Routes
+## Authentication
+
+- Login
+- Register
+- JWT Authentication
 
 ---
 
-## Future Architecture
+## Student Dashboard
 
-Frontend (React.js)
+- Welcome Card
+- Performance Overview
+- Practice Shortcut
+- Mock Test Shortcut
+
+---
+
+## Practice Module
+
+- Subject Filter
+- Difficulty Filter
+- Random Questions
+- Instant Feedback
+
+---
+
+## Mock Test Module
+
+- Countdown Timer
+- Question Palette
+- Review Screen
+- Auto Submit
+- Result Screen
+
+---
+
+## Performance Module
+
+- Statistics
+- Charts
+- Subject-wise Progress
+- Test History
+
+---
+
+## Admin Panel
+
+Current Features
+
+- Dashboard Statistics
+- Question Management
+- Recent Users
+- Add Question
+- CSV Upload Backend
+
+Upcoming Features
+
+- Edit Question
+- Delete Question
+- Search Questions
+- User Management
+- Mock Test Management
+
+---
+
+# Service Layer
+
+Frontend Services
+
+- api.js
+- authService.js
+- dashboardService.js
+- practiceService.js
+- ProfileService.js
+- testService.js
+- adminService.js
+
+Responsibilities
+
+- API Communication
+- Token Handling
+- Error Handling
+
+---
+
+# Security Features
+
+- Password Hashing (bcrypt)
+- JWT Authentication
+- Protected Routes
+- Admin Authorization
+- Environment Variables
+- Role-Based Access Control (RBAC)
+
+---
+
+# Current Technology Stack
+
+## Frontend
+
+- React.js
+- React Router
+- Bootstrap 5
+- Axios
+- React Icons
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt
+- Multer
+- CSV Parser
+
+---
+
+# Data Flow
+
+```
+User
+
 ↓
+
+React Components
+
+↓
+
+Service Layer
+
+↓
+
 REST APIs
+
 ↓
-Node.js + Express.js
+
+Authentication Middleware
+
 ↓
+
+Controllers
+
+↓
+
+Mongoose Models
+
+↓
+
 MongoDB Atlas
+
 ↓
-AI Recommendation Engine
+
+JSON Response
+
+↓
+
+React UI
+```
+
+---
+
+# Future Enhancements
+
+- Question Editing
+- Question Deletion
+- Advanced Search
+- CSV Upload UI
+- Mock Test Management
+- User Management
+- Performance Analytics
+- Deployment (Render + Vercel)
+- AI-Based Question Recommendation
+- AI Performance Analysis
+- AI Study Planner
+
+---
+
+# Project Status (After Day 15)
+
+```
+Authentication          ✅ Complete
+
+Dashboard               ✅ Complete
+
+Profile                 ✅ Complete
+
+Practice Module         ✅ Complete
+
+Mock Test Module        ✅ Complete
+
+Performance Module      ✅ Complete
+
+Admin Panel             🚧 In Progress
+
+Deployment              ⏳ Pending
+```
