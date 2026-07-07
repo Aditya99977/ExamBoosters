@@ -12,7 +12,13 @@ import {
 
 function QuickActions({
 
-    onAddQuestion
+    onAddQuestion,
+
+    onManageQuestions,
+
+    onManageMockTests,
+
+    onViewUsers
 
 }) {
 
@@ -66,6 +72,8 @@ function QuickActions({
 
                             className="btn btn-success w-100 py-4"
 
+                            onClick={onManageQuestions}
+
                         >
 
                             <FaQuestionCircle
@@ -94,6 +102,8 @@ function QuickActions({
 
                             className="btn btn-warning w-100 py-4"
 
+                            onClick={onManageMockTests}
+
                         >
 
                             <FaClipboardList
@@ -121,6 +131,8 @@ function QuickActions({
                         <button
 
                             className="btn btn-danger w-100 py-4"
+
+                            onClick={onViewUsers}
 
                         >
 

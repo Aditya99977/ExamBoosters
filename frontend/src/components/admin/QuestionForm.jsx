@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function QuestionForm({
 
@@ -12,9 +12,9 @@ function QuestionForm({
 
     const [formData, setFormData] = useState({
 
-        question: initialData.question || "",
+        question: "",
 
-        options: initialData.options || [
+        options: [
 
             "",
 
@@ -26,19 +26,57 @@ function QuestionForm({
 
         ],
 
-        correctAnswer:
+        correctAnswer: "",
 
-            initialData.correctAnswer || "",
+        subject: "",
 
-        subject:
-
-            initialData.subject || "",
-
-        difficulty:
-
-            initialData.difficulty || "Easy"
+        difficulty: "Easy"
 
     });
+
+    /*
+    =====================================
+    Populate Form
+    =====================================
+    */
+
+    useEffect(() => {
+
+        setFormData({
+
+            question:
+
+                initialData.question || "",
+
+            options:
+
+                initialData.options || [
+
+                    "",
+
+                    "",
+
+                    "",
+
+                    ""
+
+                ],
+
+            correctAnswer:
+
+                initialData.correctAnswer || "",
+
+            subject:
+
+                initialData.subject || "",
+
+            difficulty:
+
+                initialData.difficulty || "Easy"
+
+        });
+
+    }, [initialData]);
 
     /*
     =====================================
@@ -92,7 +130,7 @@ function QuestionForm({
 
     /*
     =====================================
-    Submit Form
+    Submit
     =====================================
     */
 
@@ -103,7 +141,8 @@ function QuestionForm({
         onSubmit(formData);
 
     };
-        return (
+
+    return (
 
         <form onSubmit={handleSubmit}>
 
@@ -153,8 +192,6 @@ function QuestionForm({
 
                         <input
 
-                            type="text"
-
                             className="form-control"
 
                             value={option}
@@ -185,7 +222,7 @@ function QuestionForm({
 
                 <div className="col-md-4">
 
-                    <label className="form-label">
+                    <label>
 
                         Correct Answer
 
@@ -200,8 +237,6 @@ function QuestionForm({
                         value={formData.correctAnswer}
 
                         onChange={handleChange}
-
-                        required
 
                     >
 
@@ -251,7 +286,7 @@ function QuestionForm({
 
                 <div className="col-md-4">
 
-                    <label className="form-label">
+                    <label>
 
                         Subject
 
@@ -267,35 +302,33 @@ function QuestionForm({
 
                         onChange={handleChange}
 
-                        required
-
                     >
 
                         <option value="">
 
-                            Select Subject
+                            Select
 
                         </option>
 
-                        <option value="Reasoning">
+                        <option>
 
                             Reasoning
 
                         </option>
 
-                        <option value="English">
+                        <option>
 
                             English
 
                         </option>
 
-                        <option value="Quantitative Aptitude">
+                        <option>
 
                             Quantitative Aptitude
 
                         </option>
 
-                        <option value="General Awareness">
+                        <option>
 
                             General Awareness
 
@@ -307,7 +340,7 @@ function QuestionForm({
 
                 <div className="col-md-4">
 
-                    <label className="form-label">
+                    <label>
 
                         Difficulty
 
@@ -323,23 +356,21 @@ function QuestionForm({
 
                         onChange={handleChange}
 
-                        required
-
                     >
 
-                        <option value="Easy">
+                        <option>
 
                             Easy
 
                         </option>
 
-                        <option value="Medium">
+                        <option>
 
                             Medium
 
                         </option>
 
-                        <option value="Hard">
+                        <option>
 
                             Hard
 
@@ -351,13 +382,11 @@ function QuestionForm({
 
             </div>
 
-            <div className="d-flex justify-content-end mt-4">
+            <div className="text-end mt-4">
 
                 <button
 
-                    type="submit"
-
-                    className="btn btn-primary px-4"
+                    className="btn btn-primary"
 
                     disabled={loading}
 

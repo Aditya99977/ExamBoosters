@@ -79,6 +79,7 @@ export const deleteQuestion = async (id) => {
     return response.data;
 
 };
+
 /*
 ========================================
 Add Question
@@ -92,6 +93,40 @@ export const addQuestion = async (questionData) => {
         "/questions/add",
 
         questionData
+
+    );
+
+    return response.data;
+
+};
+
+/*
+========================================
+Upload CSV
+========================================
+*/
+
+export const uploadCSV = async (file) => {
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    const response = await api.post(
+
+        "/admin/upload/csv",
+
+        formData,
+
+        {
+
+            headers: {
+
+                "Content-Type": "multipart/form-data"
+
+            }
+
+        }
 
     );
 

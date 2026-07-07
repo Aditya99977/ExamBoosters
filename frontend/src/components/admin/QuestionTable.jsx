@@ -1,10 +1,56 @@
+import { useMemo, useState } from "react";
+
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 function QuestionTable({
 
-    questions = []
+    questions = [],
+
+    onEdit,
+
+    onDelete
 
 }) {
+
+    const [search, setSearch] = useState("");
+
+    /*
+    =====================================
+    Search Questions
+    =====================================
+    */
+
+    const filteredQuestions = useMemo(() => {
+
+        if (!search.trim()) {
+
+            return questions;
+
+        }
+
+        return questions.filter((question) =>
+
+            question.question
+
+                .toLowerCase()
+
+                .includes(search.toLowerCase()) ||
+
+            question.subject
+
+                .toLowerCase()
+
+                .includes(search.toLowerCase()) ||
+
+            question.difficulty
+
+                .toLowerCase()
+
+                .includes(search.toLowerCase())
+
+        );
+
+    }, [questions, search]);
 
     return (
 
@@ -27,6 +73,14 @@ function QuestionTable({
                         className="form-control"
 
                         placeholder="Search Questions..."
+
+                        value={search}
+
+                        onChange={(e) =>
+
+                            setSearch(e.target.value)
+
+                        }
 
                         style={{
 
@@ -64,7 +118,7 @@ function QuestionTable({
 
                             {
 
-                                questions.length === 0 ? (
+                                filteredQuestions.length === 0 ? (
 
                                     <tr>
 
@@ -84,11 +138,15 @@ function QuestionTable({
 
                                 ) : (
 
-                                    questions.map(
+                                    filteredQuestions.map(
 
                                         (question, index) => (
 
-                                            <tr key={question._id}>
+                                            <tr
+
+                                                key={question._id}
+
+                                            >
 
                                                 <td>
 
@@ -98,19 +156,31 @@ function QuestionTable({
 
                                                 <td>
 
-                                                    {question.question}
+                                                    {
+
+                                                        question.question
+
+                                                    }
 
                                                 </td>
 
                                                 <td>
 
-                                                    {question.subject}
+                                                    {
+
+                                                        question.subject
+
+                                                    }
 
                                                 </td>
 
                                                 <td>
 
-                                                    {question.difficulty}
+                                                    {
+
+                                                        question.difficulty
+
+                                                    }
 
                                                 </td>
 
@@ -119,6 +189,16 @@ function QuestionTable({
                                                     <button
 
                                                         className="btn btn-warning btn-sm me-2"
+
+                                                        onClick={() =>
+
+                                                            onEdit(
+
+                                                                question
+
+                                                            )
+
+                                                        }
 
                                                     >
 
@@ -129,6 +209,16 @@ function QuestionTable({
                                                     <button
 
                                                         className="btn btn-danger btn-sm"
+
+                                                        onClick={() =>
+
+                                                            onDelete(
+
+                                                                question
+
+                                                            )
+
+                                                        }
 
                                                     >
 

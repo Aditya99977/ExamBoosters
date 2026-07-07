@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import MainLayout from "../layouts/MainLayout";
 
@@ -7,6 +7,8 @@ import QuickActions from "../components/admin/QuickActions";
 import QuestionTable from "../components/admin/QuestionTable";
 import RecentUsers from "../components/admin/RecentUsers";
 import QuestionForm from "../components/admin/QuestionForm";
+import DeleteConfirmation from "../components/admin/DeleteConfirmation";
+import CsvUploadModal from "../components/admin/CsvUploadModal";
 
 import {
 
@@ -16,7 +18,13 @@ import {
 
     getAllQuestions,
 
-    addQuestion
+    addQuestion,
+
+    updateQuestion,
+
+    deleteQuestion,
+
+    uploadCSV
 
 } from "../services/adminService";
 
@@ -30,9 +38,31 @@ function AdminDashboard() {
 
     const [loading, setLoading] = useState(true);
 
-    const [showAddModal, setShowAddModal] = useState(false);
-
     const [savingQuestion, setSavingQuestion] = useState(false);
+
+    const [deletingQuestion, setDeletingQuestion] = useState(false);
+
+    const [uploadingCSV, setUploadingCSV] = useState(false);
+
+    const [showQuestionModal, setShowQuestionModal] = useState(false);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    const [showCsvModal, setShowCsvModal] = useState(false);
+
+    const [editingQuestion, setEditingQuestion] = useState(null);
+
+    const [selectedQuestion, setSelectedQuestion] = useState(null);
+
+    /*
+    =====================================
+    Section Refs
+    =====================================
+    */
+
+    const questionSectionRef = useRef(null);
+
+    const userSectionRef = useRef(null);
 
     useEffect(() => {
 
@@ -102,23 +132,99 @@ function AdminDashboard() {
 
     /*
     =====================================
-    Add Question
+    Manage Questions
     =====================================
     */
 
-    const handleAddQuestion = async (formData) => {
+    const handleManageQuestions = () => {
+
+        questionSectionRef.current?.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "start"
+
+        });
+
+    };
+
+    /*
+    =====================================
+    View Users
+    =====================================
+    */
+
+    const handleViewUsers = () => {
+
+        userSectionRef.current?.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "start"
+
+        });
+
+    };
+
+    /*
+    =====================================
+    Upload CSV
+    =====================================
+    */
+
+    const handleManageMockTests = () => {
+
+        setShowCsvModal(true);
+
+    };
+
+    /*
+    =====================================
+    Save Question
+    =====================================
+    */
+
+    const handleSaveQuestion = async (formData) => {
 
         try {
 
             setSavingQuestion(true);
 
-            await addQuestion(formData);
+            if (editingQuestion) {
 
-            alert("Question added successfully.");
+                await updateQuestion(
 
-            setShowAddModal(false);
+                    editingQuestion._id,
 
-            loadDashboard();
+                    formData
+
+                );
+
+                alert(
+
+                    "Question updated successfully."
+
+                );
+
+            }
+
+            else {
+
+                await addQuestion(formData);
+
+                alert(
+
+                    "Question added successfully."
+
+                );
+
+            }
+
+            setShowQuestionModal(false);
+
+            setEditingQuestion(null);
+
+            await loadDashboard();
 
         }
 
@@ -126,13 +232,143 @@ function AdminDashboard() {
 
             console.log(err);
 
-            alert("Unable to add question.");
+            alert(
+
+                err.response?.data?.message ||
+
+                "Operation failed."
+
+            );
 
         }
 
         finally {
 
             setSavingQuestion(false);
+
+        }
+
+    };
+
+    /*
+    =====================================
+    Edit Question
+    =====================================
+    */
+
+    const handleEditQuestion = (question) => {
+
+        setEditingQuestion(question);
+
+        setShowQuestionModal(true);
+
+    };
+
+    /*
+    =====================================
+    Delete Question
+    =====================================
+    */
+
+    const handleDeleteClick = (question) => {
+
+        setSelectedQuestion(question);
+
+        setShowDeleteModal(true);
+
+    };
+
+    /*
+    =====================================
+    Confirm Delete
+    =====================================
+    */
+
+    const confirmDelete = async () => {
+
+        try {
+
+            setDeletingQuestion(true);
+
+            await deleteQuestion(
+
+                selectedQuestion._id
+
+            );
+
+            alert(
+
+                "Question deleted successfully."
+
+            );
+
+            setShowDeleteModal(false);
+
+            setSelectedQuestion(null);
+
+            await loadDashboard();
+
+        }
+
+        catch (err) {
+
+            console.log(err);
+
+            alert(
+
+                "Unable to delete question."
+
+            );
+
+        }
+
+        finally {
+
+            setDeletingQuestion(false);
+
+        }
+
+    };
+
+    /*
+    =====================================
+    Upload CSV File
+    =====================================
+    */
+
+    const handleUploadCSV = async (file) => {
+
+        try {
+
+            setUploadingCSV(true);
+
+            const data = await uploadCSV(file);
+
+            alert(data.message);
+
+            setShowCsvModal(false);
+
+            await loadDashboard();
+
+        }
+
+        catch (err) {
+
+            console.log(err);
+
+            alert(
+
+                err.response?.data?.message ||
+
+                "CSV Upload Failed."
+
+            );
+
+        }
+
+        finally {
+
+            setUploadingCSV(false);
 
         }
 
@@ -159,40 +395,69 @@ function AdminDashboard() {
         );
 
     }
-
     return (
 
-        <MainLayout>
+    <MainLayout>
 
-            <div className="container-fluid py-4">
+        <div className="container-fluid py-4">
 
-                <h1 className="fw-bold mb-4">
+            <h1 className="fw-bold mb-4">
 
-                    🛠 Admin Dashboard
+                🛠 Admin Dashboard
 
-                </h1>
+            </h1>
 
-                <AdminStats
+            <AdminStats
 
-                    stats={stats}
+                stats={stats}
 
-                />
+            />
 
-                <QuickActions
+            <QuickActions
 
-                    onAddQuestion={() =>
+                onAddQuestion={() => {
 
-                        setShowAddModal(true)
+                    setEditingQuestion(null);
 
-                    }
+                    setShowQuestionModal(true);
 
-                />
+                }}
+
+                onManageQuestions={
+
+                    handleManageQuestions
+
+                }
+
+                onManageMockTests={
+
+                    handleManageMockTests
+
+                }
+
+                onViewUsers={
+
+                    handleViewUsers
+
+                }
+
+            />
+
+            <div ref={questionSectionRef}>
 
                 <QuestionTable
 
                     questions={questions}
 
+                    onEdit={handleEditQuestion}
+
+                    onDelete={handleDeleteClick}
+
                 />
+
+            </div>
+
+            <div ref={userSectionRef}>
 
                 <RecentUsers
 
@@ -202,71 +467,89 @@ function AdminDashboard() {
 
             </div>
 
-            {
+        </div>
 
-                showAddModal && (
+        {
 
-                    <div
+            showQuestionModal && (
 
-                        className="modal fade show"
+                <div
 
-                        style={{
+                    className="modal fade show"
 
-                            display: "block",
+                    style={{
 
-                            backgroundColor: "rgba(0,0,0,0.5)"
+                        display: "block",
 
-                        }}
+                        backgroundColor:
 
-                    >
+                            "rgba(0,0,0,0.5)"
 
-                        <div className="modal-dialog modal-lg">
+                    }}
 
-                            <div className="modal-content">
+                >
 
-                                <div className="modal-header">
+                    <div className="modal-dialog modal-lg">
 
-                                    <h5 className="modal-title">
+                        <div className="modal-content">
 
-                                        ➕ Add Question
+                            <div className="modal-header">
 
-                                    </h5>
+                                <h5 className="modal-title">
 
-                                    <button
+                                    {
 
-                                        type="button"
+                                        editingQuestion
 
-                                        className="btn-close"
+                                            ? "✏️ Edit Question"
 
-                                        onClick={() =>
+                                            : "➕ Add Question"
 
-                                            setShowAddModal(false)
+                                    }
 
-                                        }
+                                </h5>
 
-                                    ></button>
+                                <button
 
-                                </div>
+                                    type="button"
 
-                                <div className="modal-body">
+                                    className="btn-close"
 
-                                    <QuestionForm
+                                    onClick={() => {
 
-                                        onSubmit={
+                                        setShowQuestionModal(false);
 
-                                            handleAddQuestion
+                                        setEditingQuestion(null);
 
-                                        }
+                                    }}
 
-                                        loading={
+                                ></button>
 
-                                            savingQuestion
+                            </div>
 
-                                        }
+                            <div className="modal-body">
 
-                                    />
+                                <QuestionForm
 
-                                </div>
+                                    initialData={
+
+                                        editingQuestion || {}
+
+                                    }
+
+                                    onSubmit={
+
+                                        handleSaveQuestion
+
+                                    }
+
+                                    loading={
+
+                                        savingQuestion
+
+                                    }
+
+                                />
 
                             </div>
 
@@ -274,13 +557,81 @@ function AdminDashboard() {
 
                     </div>
 
-                )
+                </div>
 
-            }
+            )
 
-        </MainLayout>
+        }
 
-    );
+        {
+
+            showDeleteModal && (
+
+                <DeleteConfirmation
+
+                    title="Delete Question"
+
+                    message={`Are you sure you want to delete "${selectedQuestion?.question}"?`}
+
+                    loading={
+
+                        deletingQuestion
+
+                    }
+
+                    onCancel={() => {
+
+                        setShowDeleteModal(false);
+
+                        setSelectedQuestion(null);
+
+                    }}
+
+                    onConfirm={
+
+                        confirmDelete
+
+                    }
+
+                />
+
+            )
+
+        }
+
+        {
+
+            showCsvModal && (
+
+                <CsvUploadModal
+
+                    loading={
+
+                        uploadingCSV
+
+                    }
+
+                    onUpload={
+
+                        handleUploadCSV
+
+                    }
+
+                    onClose={() =>
+
+                        setShowCsvModal(false)
+
+                    }
+
+                />
+
+            )
+
+        }
+
+    </MainLayout>
+
+);
 
 }
 
