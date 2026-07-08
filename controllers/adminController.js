@@ -6,7 +6,9 @@ const User = require("../models/User");
 const Test = require("../models/Test");
 
 /*
+========================================
 Admin Test Route
+========================================
 */
 
 exports.adminTest = async (req, res) => {
@@ -18,7 +20,9 @@ exports.adminTest = async (req, res) => {
 };
 
 /*
+========================================
 Update Question
+========================================
 */
 
 exports.updateQuestion = async (req, res) => {
@@ -54,7 +58,9 @@ exports.updateQuestion = async (req, res) => {
 
         });
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
         res.status(500).json({
 
@@ -67,7 +73,9 @@ exports.updateQuestion = async (req, res) => {
 };
 
 /*
+========================================
 Delete Question
+========================================
 */
 
 exports.deleteQuestion = async (req, res) => {
@@ -79,7 +87,9 @@ exports.deleteQuestion = async (req, res) => {
         if (!question) {
 
             return res.status(404).json({
+
                 message: "Question not found"
+
             });
 
         }
@@ -90,7 +100,9 @@ exports.deleteQuestion = async (req, res) => {
 
         });
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
         res.status(500).json({
 
@@ -103,7 +115,9 @@ exports.deleteQuestion = async (req, res) => {
 };
 
 /*
+========================================
 Admin Dashboard
+========================================
 */
 
 exports.getAdminDashboard = async (req, res) => {
@@ -119,7 +133,6 @@ exports.getAdminDashboard = async (req, res) => {
         const subjectStats = await Question.aggregate([
 
             {
-
                 $group: {
 
                     _id: "$subject",
@@ -146,6 +159,26 @@ exports.getAdminDashboard = async (req, res) => {
 
         ]);
 
+        const averageScore = await Test.aggregate([
+
+            {
+
+                $group: {
+
+                    _id: null,
+
+                    average: {
+
+                        $avg: "$score"
+
+                    }
+
+                }
+
+            }
+
+        ]);
+
         res.json({
 
             totalUsers,
@@ -154,11 +187,17 @@ exports.getAdminDashboard = async (req, res) => {
 
             totalTests,
 
+            averageScore: averageScore.length
+                ? averageScore[0].average.toFixed(2)
+                : 0,
+
             subjectStats
 
         });
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
         res.status(500).json({
 
@@ -171,7 +210,9 @@ exports.getAdminDashboard = async (req, res) => {
 };
 
 /*
+========================================
 Bulk CSV Upload
+========================================
 */
 
 exports.uploadCSV = async (req, res) => {
@@ -226,7 +267,9 @@ exports.uploadCSV = async (req, res) => {
 
             });
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
         res.status(500).json({
 
@@ -235,8 +278,10 @@ exports.uploadCSV = async (req, res) => {
         });
 
     }
+
 };
-    /*
+
+/*
 ========================================
 Get All Users
 ========================================
@@ -247,16 +292,66 @@ exports.getAllUsers = async (req, res) => {
     try {
 
         const users = await User.find()
-
             .select("-password")
-
             .sort({
 
                 createdAt: -1
 
             });
 
-        res.json(users);
+        const result = await Promise.all(
+
+            users.map(async (user) => {
+
+                const tests = await Test.find({
+
+                    user: user._id,
+
+                    submitted: true
+
+                });
+
+                const totalTests = tests.length;
+
+                const averageScore = totalTests
+
+                    ? Number(
+
+                        (
+
+                            tests.reduce((sum, test) => sum + test.score, 0)
+
+                            / totalTests
+
+                        ).toFixed(2)
+
+                    )
+
+                    : 0;
+
+                const highestScore = totalTests
+
+                    ? Math.max(...tests.map(test => test.score))
+
+                    : 0;
+
+                return {
+
+                    ...user.toObject(),
+
+                    totalTests,
+
+                    averageScore,
+
+                    highestScore
+
+                };
+
+            })
+
+        );
+
+        res.json(result);
 
     }
 
@@ -271,6 +366,117 @@ exports.getAllUsers = async (req, res) => {
     }
 
 };
+
+/*
+========================================
+Get User Details
+========================================
+*/
+
+exports.getUserDetails = async (req, res) => {
+
+    try {
+
+        const user = await User.findById(req.params.id)
+
+            .select("-password");
+
+        if (!user) {
+
+            return res.status(404).json({
+
+                message: "User not found"
+
+            });
+
+        }
+
+        const tests = await Test.find({
+
+            user: user._id
+
+        })
+
+            .populate("questions")
+
+            .sort({
+
+                createdAt: -1
+
+            });
+
+        res.json({
+
+            user,
+
+            tests
+
+        });
+
+    }
+
+    catch (err) {
+
+        res.status(500).json({
+
+            message: err.message
+
+        });
+
+    }
+
+};
+
+/*
+========================================
+Delete User
+========================================
+*/
+
+exports.deleteUser = async (req, res) => {
+
+    try {
+
+        const user = await User.findById(req.params.id);
+
+        if (!user) {
+
+            return res.status(404).json({
+
+                message: "User not found"
+
+            });
+
+        }
+
+        await Test.deleteMany({
+
+            user: req.params.id
+
+        });
+
+        await User.findByIdAndDelete(req.params.id);
+
+        res.json({
+
+            message: "User deleted successfully"
+
+        });
+
+    }
+
+    catch (err) {
+
+        res.status(500).json({
+
+            message: err.message
+
+        });
+
+    }
+
+};
+
 /*
 ========================================
 Get All Questions
@@ -304,4 +510,3 @@ exports.getAllQuestions = async (req, res) => {
     }
 
 };
-

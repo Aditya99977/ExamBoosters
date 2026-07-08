@@ -18,6 +18,10 @@ const {
 
     getAllUsers,
 
+    getUserDetails,
+
+    deleteUser,
+
     getAllQuestions
 
 } = require("../controllers/adminController");
@@ -44,42 +48,6 @@ router.get(
 
 /*
 ========================================
-Update Question
-========================================
-*/
-
-router.put(
-
-    "/question/:id",
-
-    auth,
-
-    admin,
-
-    updateQuestion
-
-);
-
-/*
-========================================
-Delete Question
-========================================
-*/
-
-router.delete(
-
-    "/question/:id",
-
-    auth,
-
-    admin,
-
-    deleteQuestion
-
-);
-
-/*
-========================================
 Admin Dashboard
 ========================================
 */
@@ -98,8 +66,12 @@ router.get(
 
 /*
 ========================================
-Get All Users
+User Management
 ========================================
+*/
+
+/*
+Get All Users
 */
 
 router.get(
@@ -115,9 +87,45 @@ router.get(
 );
 
 /*
+Get User Details
+*/
+
+router.get(
+
+    "/users/:id",
+
+    auth,
+
+    admin,
+
+    getUserDetails
+
+);
+
+/*
+Delete User
+*/
+
+router.delete(
+
+    "/users/:id",
+
+    auth,
+
+    admin,
+
+    deleteUser
+
+);
+
+/*
 ========================================
+Question Management
+========================================
+*/
+
+/*
 Get All Questions
-========================================
 */
 
 router.get(
@@ -129,6 +137,38 @@ router.get(
     admin,
 
     getAllQuestions
+
+);
+
+/*
+Update Question
+*/
+
+router.put(
+
+    "/question/:id",
+
+    auth,
+
+    admin,
+
+    updateQuestion
+
+);
+
+/*
+Delete Question
+*/
+
+router.delete(
+
+    "/question/:id",
+
+    auth,
+
+    admin,
+
+    deleteQuestion
 
 );
 

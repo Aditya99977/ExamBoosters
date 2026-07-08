@@ -30,6 +30,42 @@ export const getAllUsers = async () => {
 
 /*
 ========================================
+Get User Details
+========================================
+*/
+
+export const getUserDetails = async (id) => {
+
+    const response = await api.get(
+
+        `/admin/users/${id}`
+
+    );
+
+    return response.data;
+
+};
+
+/*
+========================================
+Delete User
+========================================
+*/
+
+export const deleteUser = async (id) => {
+
+    const response = await api.delete(
+
+        `/admin/users/${id}`
+
+    );
+
+    return response.data;
+
+};
+
+/*
+========================================
 Get All Questions
 ========================================
 */
@@ -48,7 +84,13 @@ Update Question
 ========================================
 */
 
-export const updateQuestion = async (id, questionData) => {
+export const updateQuestion = async (
+
+    id,
+
+    questionData
+
+) => {
 
     const response = await api.put(
 
@@ -86,7 +128,11 @@ Add Question
 ========================================
 */
 
-export const addQuestion = async (questionData) => {
+export const addQuestion = async (
+
+    questionData
+
+) => {
 
     const response = await api.post(
 
