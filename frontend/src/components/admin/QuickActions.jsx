@@ -1,26 +1,21 @@
 import {
-
     FaPlus,
-
     FaQuestionCircle,
-
     FaClipboardList,
-
     FaUsers
-
 } from "react-icons/fa";
+
+import { useNavigate } from "react-router-dom";
 
 function QuickActions({
 
     onAddQuestion,
-
     onManageQuestions,
-
-    onManageMockTests,
-
     onViewUsers
 
 }) {
+
+    const navigate = useNavigate();
 
     return (
 
@@ -36,22 +31,18 @@ function QuickActions({
 
                 <div className="row g-3">
 
+                    {/* Add Question */}
+
                     <div className="col-md-6 col-lg-3">
 
                         <button
-
                             className="btn btn-primary w-100 py-4"
-
                             onClick={onAddQuestion}
-
                         >
 
                             <FaPlus
-
                                 size={28}
-
                                 className="mb-2"
-
                             />
 
                             <br />
@@ -66,22 +57,18 @@ function QuickActions({
 
                     </div>
 
+                    {/* Manage Questions */}
+
                     <div className="col-md-6 col-lg-3">
 
                         <button
-
                             className="btn btn-success w-100 py-4"
-
                             onClick={onManageQuestions}
-
                         >
 
                             <FaQuestionCircle
-
                                 size={28}
-
                                 className="mb-2"
-
                             />
 
                             <br />
@@ -96,22 +83,18 @@ function QuickActions({
 
                     </div>
 
+                    {/* Manage Mock Tests */}
+
                     <div className="col-md-6 col-lg-3">
 
                         <button
-
                             className="btn btn-warning w-100 py-4"
-
-                            onClick={onManageMockTests}
-
+                            onClick={() => navigate("/admin/mock-tests")}
                         >
 
                             <FaClipboardList
-
                                 size={28}
-
                                 className="mb-2"
-
                             />
 
                             <br />
@@ -126,22 +109,18 @@ function QuickActions({
 
                     </div>
 
+                    {/* View Users */}
+
                     <div className="col-md-6 col-lg-3">
 
                         <button
-
                             className="btn btn-danger w-100 py-4"
-
                             onClick={onViewUsers}
-
                         >
 
                             <FaUsers
-
                                 size={28}
-
                                 className="mb-2"
-
                             />
 
                             <br />

@@ -8,8 +8,6 @@ import QuestionTable from "../components/admin/QuestionTable";
 import RecentUsers from "../components/admin/RecentUsers";
 import QuestionForm from "../components/admin/QuestionForm";
 import DeleteConfirmation from "../components/admin/DeleteConfirmation";
-import CsvUploadModal from "../components/admin/CsvUploadModal";
-
 import UserTable from "../components/admin/UserTable";
 import UserDetailsModal from "../components/admin/UserDetailsModal";
 
@@ -29,9 +27,7 @@ import {
 
     updateQuestion,
 
-    deleteQuestion,
-
-    uploadCSV
+    deleteQuestion
 
 } from "../services/adminService";
 
@@ -85,14 +81,6 @@ function AdminDashboard() {
 
     /*
     =====================================
-    CSV States
-    =====================================
-    */
-
-    const [uploadingCSV, setUploadingCSV] = useState(false);
-
-    /*
-    =====================================
     Modal States
     =====================================
     */
@@ -100,8 +88,6 @@ function AdminDashboard() {
     const [showQuestionModal, setShowQuestionModal] = useState(false);
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-    const [showCsvModal, setShowCsvModal] = useState(false);
 
     /*
     =====================================
@@ -222,18 +208,6 @@ function AdminDashboard() {
         });
 
     };
-
-    /*
-    =====================================
-    Upload CSV Button
-    =====================================
-    */
-
-    const handleManageMockTests = () => {
-
-        setShowCsvModal(true);
-
-    };
         /*
     =====================================
     Save Question
@@ -249,17 +223,12 @@ function AdminDashboard() {
             if (editingQuestion) {
 
                 await updateQuestion(
-
                     editingQuestion._id,
-
                     formData
-
                 );
 
                 alert(
-
                     "Question updated successfully."
-
                 );
 
             }
@@ -269,9 +238,7 @@ function AdminDashboard() {
                 await addQuestion(formData);
 
                 alert(
-
                     "Question added successfully."
-
                 );
 
             }
@@ -347,15 +314,11 @@ function AdminDashboard() {
             setDeletingQuestion(true);
 
             await deleteQuestion(
-
                 selectedQuestion._id
-
             );
 
             alert(
-
                 "Question deleted successfully."
-
             );
 
             setShowDeleteModal(false);
@@ -371,9 +334,7 @@ function AdminDashboard() {
             console.log(err);
 
             alert(
-
                 "Unable to delete question."
-
             );
 
         }
@@ -397,21 +358,15 @@ function AdminDashboard() {
         try {
 
             const data = await getUserDetails(
-
                 user._id
-
             );
 
             setSelectedUser(
-
                 data.user
-
             );
 
             setUserTests(
-
                 data.tests
-
             );
 
             setShowUserModal(true);
@@ -423,9 +378,7 @@ function AdminDashboard() {
             console.log(err);
 
             alert(
-
                 "Unable to load user details."
-
             );
 
         }
@@ -459,15 +412,11 @@ function AdminDashboard() {
             setDeletingUser(true);
 
             await deleteUser(
-
                 selectedDeleteUser._id
-
             );
 
             alert(
-
                 "User deleted successfully."
-
             );
 
             setShowDeleteUserModal(false);
@@ -502,50 +451,6 @@ function AdminDashboard() {
 
     /*
     =====================================
-    Upload CSV
-    =====================================
-    */
-
-    const handleUploadCSV = async (file) => {
-
-        try {
-
-            setUploadingCSV(true);
-
-            const data = await uploadCSV(file);
-
-            alert(data.message);
-
-            setShowCsvModal(false);
-
-            await loadDashboard();
-
-        }
-
-        catch (err) {
-
-            console.log(err);
-
-            alert(
-
-                err.response?.data?.message ||
-
-                "CSV Upload Failed."
-
-            );
-
-        }
-
-        finally {
-
-            setUploadingCSV(false);
-
-        }
-
-    };
-
-    /*
-    =====================================
     Loading Screen
     =====================================
     */
@@ -571,23 +476,35 @@ function AdminDashboard() {
         );
 
     }
-
-    return (
+        return (
 
         <MainLayout>
 
             <div className="container-fluid py-4">
+
+                {/* ===============================
+                    Page Title
+                =============================== */}
 
                 <h1 className="fw-bold mb-4">
 
                     🛠 Admin Dashboard
 
                 </h1>
-                                <AdminStats
+
+                {/* ===============================
+                    Dashboard Statistics
+                =============================== */}
+
+                <AdminStats
 
                     stats={stats}
 
                 />
+
+                {/* ===============================
+                    Quick Actions
+                =============================== */}
 
                 <QuickActions
 
@@ -605,12 +522,6 @@ function AdminDashboard() {
 
                     }
 
-                    onManageMockTests={
-
-                        handleManageMockTests
-
-                    }
-
                     onViewUsers={
 
                         handleViewUsers
@@ -621,7 +532,7 @@ function AdminDashboard() {
 
                 {/* ===============================
                     Question Management
-                ================================ */}
+                =============================== */}
 
                 <div
 
@@ -645,7 +556,7 @@ function AdminDashboard() {
 
                 {/* ===============================
                     User Management
-                ================================ */}
+                =============================== */}
 
                 <div
 
@@ -669,7 +580,7 @@ function AdminDashboard() {
 
                 {/* ===============================
                     Recent Users
-                ================================ */}
+                =============================== */}
 
                 <div className="mt-5">
 
@@ -682,25 +593,20 @@ function AdminDashboard() {
                 </div>
 
             </div>
+                        {/* ===============================
+                Add / Edit Question Modal
+            =============================== */}
 
             {
 
                 showQuestionModal && (
 
                     <div
-
                         className="modal fade show"
-
                         style={{
-
                             display: "block",
-
-                            backgroundColor:
-
-                                "rgba(0,0,0,0.5)"
-
+                            backgroundColor: "rgba(0,0,0,0.5)"
                         }}
-
                     >
 
                         <div className="modal-dialog modal-lg">
@@ -724,9 +630,7 @@ function AdminDashboard() {
                                     </h5>
 
                                     <button
-
                                         className="btn-close"
-
                                         onClick={() => {
 
                                             setShowQuestionModal(false);
@@ -734,7 +638,6 @@ function AdminDashboard() {
                                             setEditingQuestion(null);
 
                                         }}
-
                                     ></button>
 
                                 </div>
@@ -774,7 +677,12 @@ function AdminDashboard() {
                 )
 
             }
-                        {
+
+            {/* ===============================
+                Delete Question Modal
+            =============================== */}
+
+            {
 
                 showDeleteModal && (
 
@@ -809,6 +717,10 @@ function AdminDashboard() {
                 )
 
             }
+
+            {/* ===============================
+                Delete User Modal
+            =============================== */}
 
             {
 
@@ -845,6 +757,10 @@ function AdminDashboard() {
                 )
 
             }
+
+            {/* ===============================
+                User Details Modal
+            =============================== */}
 
             {
 
@@ -886,36 +802,7 @@ function AdminDashboard() {
 
             }
 
-            {
-
-                showCsvModal && (
-
-                    <CsvUploadModal
-
-                        loading={
-
-                            uploadingCSV
-
-                        }
-
-                        onUpload={
-
-                            handleUploadCSV
-
-                        }
-
-                        onClose={() =>
-
-                            setShowCsvModal(false)
-
-                        }
-
-                    />
-
-                )
-
-            }
-                    </MainLayout>
+        </MainLayout>
 
     );
 

@@ -5,12 +5,13 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import StudentDashboard from "./pages/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import MockTestManagement from "./pages/MockTestManagement";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import Practice from "./pages/Practice";
 import MockTest from "./pages/MockTest";
-import NotFound from "./pages/NotFound";
 import Performance from "./pages/Performance";
+import NotFound from "./pages/NotFound";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -60,14 +61,15 @@ function App() {
                     </ProtectedRoute>
                 }
             />
+
             <Route
-                 path="/performance"
-                 element={
-                     <ProtectedRoute>
-                      <Performance />
-                  </ProtectedRoute>
-      }
-   />
+                path="/performance"
+                element={
+                    <ProtectedRoute>
+                        <Performance />
+                    </ProtectedRoute>
+                }
+            />
 
             <Route
                 path="/profile"
@@ -88,7 +90,7 @@ function App() {
             />
 
             {/* ==============================
-                Protected Admin Route
+                Protected Admin Routes
             ============================== */}
 
             <Route
@@ -96,6 +98,15 @@ function App() {
                 element={
                     <ProtectedRoute>
                         <AdminDashboard />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/admin/mock-tests"
+                element={
+                    <ProtectedRoute>
+                        <MockTestManagement />
                     </ProtectedRoute>
                 }
             />
