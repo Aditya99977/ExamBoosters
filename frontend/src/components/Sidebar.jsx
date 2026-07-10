@@ -1,19 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
 
 import {
-
     FaHome,
-
     FaBook,
-
     FaClipboardList,
-
     FaChartBar,
-
     FaUser,
-
-    FaSignOutAlt
-
+    FaSignOutAlt,
+    FaFilePdf
 } from "react-icons/fa";
 
 function Sidebar() {
@@ -38,7 +32,9 @@ function Sidebar() {
 
         borderRadius: "8px",
 
-        backgroundColor: isActive ? "rgba(255,255,255,0.2)" : "transparent",
+        backgroundColor: isActive
+            ? "rgba(255,255,255,0.2)"
+            : "transparent",
 
         transition: "0.3s"
 
@@ -63,6 +59,8 @@ function Sidebar() {
 
             <div className="d-flex flex-column gap-3">
 
+                {/* Dashboard */}
+
                 <NavLink
                     to="/dashboard"
                     style={linkStyle}
@@ -73,6 +71,8 @@ function Sidebar() {
                     Dashboard
 
                 </NavLink>
+
+                {/* Practice */}
 
                 <NavLink
                     to="/practice"
@@ -85,6 +85,8 @@ function Sidebar() {
 
                 </NavLink>
 
+                {/* Mock Tests */}
+
                 <NavLink
                     to="/mock-tests"
                     style={linkStyle}
@@ -95,6 +97,21 @@ function Sidebar() {
                     Mock Tests
 
                 </NavLink>
+
+                {/* Previous Year Papers */}
+
+                <NavLink
+                    to="/previous-year-papers"
+                    style={linkStyle}
+                >
+
+                    <FaFilePdf className="me-2" />
+
+                    Previous Year Papers
+
+                </NavLink>
+
+                {/* Performance */}
 
                 <NavLink
                     to="/performance"
@@ -107,6 +124,8 @@ function Sidebar() {
 
                 </NavLink>
 
+                {/* Profile */}
+
                 <NavLink
                     to="/profile"
                     style={linkStyle}
@@ -117,6 +136,8 @@ function Sidebar() {
                     Profile
 
                 </NavLink>
+
+                {/* Logout */}
 
                 <button
                     className="btn btn-outline-light mt-5 text-start"

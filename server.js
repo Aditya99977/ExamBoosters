@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 // Routes
 const authRoutes = require("./routes/auth");
@@ -12,6 +13,7 @@ const questionRoutes = require("./routes/question");
 const testRoutes = require("./routes/test");
 const adminRoutes = require("./routes/admin");
 const mockTestRoutes = require("./routes/MockTestRoute");
+const paperRoutes = require("./routes/paperRoutes");
 
 const app = express();
 
@@ -26,6 +28,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve Uploaded Files
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "uploads"))
+);
+
 /*
 ==============================
 Routes
@@ -39,6 +47,7 @@ app.use("/api/questions", questionRoutes);
 app.use("/api/test", testRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/mocktests", mockTestRoutes);
+app.use("/api/papers", paperRoutes);
 
 /*
 ==============================
@@ -64,6 +73,19 @@ Default Route
 
 app.get("/", (req, res) => {
   res.send("🚀 ExamBooster Backend Running");
+});
+
+/*
+==============================
+404 Route
+==============================
+*/
+
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route Not Found",
+  });
 });
 
 /*

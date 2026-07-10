@@ -3,14 +3,22 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+
 import StudentDashboard from "./pages/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+
 import MockTestManagement from "./pages/MockTestManagement";
+import PaperManagement from "./pages/PaperManagement";
+
+import PreviousYearPapers from "./pages/PreviousYearPapers";
+
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+
 import Practice from "./pages/Practice";
 import MockTest from "./pages/MockTest";
 import Performance from "./pages/Performance";
+
 import NotFound from "./pages/NotFound";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -63,6 +71,15 @@ function App() {
             />
 
             <Route
+                path="/previous-year-papers"
+                element={
+                    <ProtectedRoute>
+                        <PreviousYearPapers />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
                 path="/performance"
                 element={
                     <ProtectedRoute>
@@ -107,6 +124,15 @@ function App() {
                 element={
                     <ProtectedRoute>
                         <MockTestManagement />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/admin/papers"
+                element={
+                    <ProtectedRoute>
+                        <PaperManagement />
                     </ProtectedRoute>
                 }
             />

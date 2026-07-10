@@ -2,7 +2,8 @@ import {
     FaPlus,
     FaQuestionCircle,
     FaClipboardList,
-    FaUsers
+    FaUsers,
+    FaFilePdf
 } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
@@ -33,7 +34,7 @@ function QuickActions({
 
                     {/* Add Question */}
 
-                    <div className="col-md-6 col-lg-3">
+                    <div className="col-md-6 col-lg-4">
 
                         <button
                             className="btn btn-primary w-100 py-4"
@@ -59,7 +60,7 @@ function QuickActions({
 
                     {/* Manage Questions */}
 
-                    <div className="col-md-6 col-lg-3">
+                    <div className="col-md-6 col-lg-4">
 
                         <button
                             className="btn btn-success w-100 py-4"
@@ -85,7 +86,7 @@ function QuickActions({
 
                     {/* Manage Mock Tests */}
 
-                    <div className="col-md-6 col-lg-3">
+                    <div className="col-md-6 col-lg-4">
 
                         <button
                             className="btn btn-warning w-100 py-4"
@@ -109,9 +110,35 @@ function QuickActions({
 
                     </div>
 
+                    {/* Manage Previous Year Papers */}
+
+                    <div className="col-md-6 col-lg-6">
+
+                        <button
+                            className="btn btn-info w-100 py-4 text-white"
+                            onClick={() => navigate("/admin/papers")}
+                        >
+
+                            <FaFilePdf
+                                size={28}
+                                className="mb-2"
+                            />
+
+                            <br />
+
+                            <strong>
+
+                                Manage Papers
+
+                            </strong>
+
+                        </button>
+
+                    </div>
+
                     {/* View Users */}
 
-                    <div className="col-md-6 col-lg-3">
+                    <div className="col-md-6 col-lg-6">
 
                         <button
                             className="btn btn-danger w-100 py-4"

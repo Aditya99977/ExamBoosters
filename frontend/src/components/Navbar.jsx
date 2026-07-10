@@ -49,6 +49,8 @@ function Navbar() {
 
                     <ul className="navbar-nav ms-auto align-items-lg-center">
 
+                        {/* Public Navigation */}
+
                         <li className="nav-item">
 
                             <Link
@@ -126,6 +128,8 @@ function Navbar() {
 
                                 <>
 
+                                    {/* Student Navigation */}
+
                                     <li className="nav-item">
 
                                         <Link
@@ -134,6 +138,58 @@ function Navbar() {
                                         >
 
                                             Dashboard
+
+                                        </Link>
+
+                                    </li>
+
+                                    <li className="nav-item">
+
+                                        <Link
+                                            className="nav-link"
+                                            to="/practice"
+                                        >
+
+                                            Practice
+
+                                        </Link>
+
+                                    </li>
+
+                                    <li className="nav-item">
+
+                                        <Link
+                                            className="nav-link"
+                                            to="/mock-tests"
+                                        >
+
+                                            Mock Tests
+
+                                        </Link>
+
+                                    </li>
+
+                                    <li className="nav-item">
+
+                                        <Link
+                                            className="nav-link"
+                                            to="/previous-year-papers"
+                                        >
+
+                                            Previous Papers
+
+                                        </Link>
+
+                                    </li>
+
+                                    <li className="nav-item">
+
+                                        <Link
+                                            className="nav-link"
+                                            to="/performance"
+                                        >
+
+                                            Performance
 
                                         </Link>
 
