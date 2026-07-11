@@ -14,6 +14,7 @@ const testRoutes = require("./routes/test");
 const adminRoutes = require("./routes/admin");
 const mockTestRoutes = require("./routes/MockTestRoute");
 const paperRoutes = require("./routes/paperRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use("/api/test", testRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/mocktests", mockTestRoutes);
 app.use("/api/papers", paperRoutes);
+app.use("/api/ai", aiRoutes);
 
 /*
 ==============================
