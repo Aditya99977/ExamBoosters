@@ -7,7 +7,8 @@ import {
     FaChartBar,
     FaUser,
     FaSignOutAlt,
-    FaFilePdf
+    FaFilePdf,
+    FaRobot,
 } from "react-icons/fa";
 
 function Sidebar() {
@@ -40,6 +41,52 @@ function Sidebar() {
 
     });
 
+    const menuItems = [
+
+        {
+            name: "Dashboard",
+            path: "/dashboard",
+            icon: <FaHome className="me-2" />
+        },
+
+        {
+            name: "Practice",
+            path: "/practice",
+            icon: <FaBook className="me-2" />
+        },
+
+        {
+            name: "Mock Tests",
+            path: "/mock-tests",
+            icon: <FaClipboardList className="me-2" />
+        },
+
+        {
+            name: "Previous Year Papers",
+            path: "/previous-year-papers",
+            icon: <FaFilePdf className="me-2" />
+        },
+
+        {
+            name: "Performance",
+            path: "/performance",
+            icon: <FaChartBar className="me-2" />
+        },
+
+        {
+            name: "AI Tutor",
+            path: "/ai-tutor",
+            icon: <FaRobot className="me-2" />
+        },
+
+        {
+            name: "Profile",
+            path: "/profile",
+            icon: <FaUser className="me-2" />
+        }
+
+    ];
+
     return (
 
         <div
@@ -59,85 +106,21 @@ function Sidebar() {
 
             <div className="d-flex flex-column gap-3">
 
-                {/* Dashboard */}
+                {menuItems.map((item) => (
 
-                <NavLink
-                    to="/dashboard"
-                    style={linkStyle}
-                >
+                    <NavLink
+                        key={item.path}
+                        to={item.path}
+                        style={linkStyle}
+                    >
 
-                    <FaHome className="me-2" />
+                        {item.icon}
 
-                    Dashboard
+                        {item.name}
 
-                </NavLink>
+                    </NavLink>
 
-                {/* Practice */}
-
-                <NavLink
-                    to="/practice"
-                    style={linkStyle}
-                >
-
-                    <FaBook className="me-2" />
-
-                    Practice
-
-                </NavLink>
-
-                {/* Mock Tests */}
-
-                <NavLink
-                    to="/mock-tests"
-                    style={linkStyle}
-                >
-
-                    <FaClipboardList className="me-2" />
-
-                    Mock Tests
-
-                </NavLink>
-
-                {/* Previous Year Papers */}
-
-                <NavLink
-                    to="/previous-year-papers"
-                    style={linkStyle}
-                >
-
-                    <FaFilePdf className="me-2" />
-
-                    Previous Year Papers
-
-                </NavLink>
-
-                {/* Performance */}
-
-                <NavLink
-                    to="/performance"
-                    style={linkStyle}
-                >
-
-                    <FaChartBar className="me-2" />
-
-                    Performance
-
-                </NavLink>
-
-                {/* Profile */}
-
-                <NavLink
-                    to="/profile"
-                    style={linkStyle}
-                >
-
-                    <FaUser className="me-2" />
-
-                    Profile
-
-                </NavLink>
-
-                {/* Logout */}
+                ))}
 
                 <button
                     className="btn btn-outline-light mt-5 text-start"

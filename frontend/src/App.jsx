@@ -22,6 +22,7 @@ import Performance from "./pages/Performance";
 import NotFound from "./pages/NotFound";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import AITutor from "./pages/AITutor";
 
 function App() {
 
@@ -86,6 +87,14 @@ function App() {
                         <Performance />
                     </ProtectedRoute>
                 }
+            />
+             <Route
+                 path="/ai-tutor"
+                 element={
+                     <ProtectedRoute>
+                         <AITutor />
+                    </ProtectedRoute>
+               }
             />
 
             <Route
