@@ -1,208 +1,63 @@
-import { useMemo, useState } from "react";
 import {
-    BrainCircuit,
-    Search,
+    GraduationCap,
     Plus,
+    Search,
     MessageSquare,
-    User,
-    Crown,
+    History,
+    Bookmark,
+    Settings,
+    ChevronRight,
 } from "lucide-react";
 
-const Sidebar = ({
-    chats = [],
-    activeChat,
-    onSelectChat,
-    onNewChat,
-    user,
-}) => {
+const chats = [
+    "DBMS Normalization",
+    "Operating System",
+    "Python Interview",
+];
 
-    const [search, setSearch] = useState("");
+const Sidebar = () => {
 
-    // ===============================
-    // Search Filter
-    // ===============================
+    return (
 
-    const filteredChats = useMemo(() => {
+        <aside className="w-72 bg-[#0A1120] flex flex-col">
 
-        if (!search.trim()) return chats;
+            {/* Logo */}
 
-        return chats.filter((chat) =>
-            chat.title
-                ?.toLowerCase()
-                .includes(search.toLowerCase())
-        );
-
-    }, [search, chats]);
-
-    // ===============================
-    // Group Chats
-    // ===============================
-
-    const groupedChats = useMemo(() => {
-
-        const today = [];
-        const yesterday = [];
-        const older = [];
-
-        const now = new Date();
-
-        filteredChats.forEach((chat) => {
-
-            const date = new Date(chat.createdAt);
-
-            const diff =
-                (now - date) /
-                (1000 * 60 * 60 * 24);
-
-            if (diff < 1) {
-
-                today.push(chat);
-
-            }
-
-            else if (diff < 2) {
-
-                yesterday.push(chat);
-
-            }
-
-            else {
-
-                older.push(chat);
-
-            }
-
-        });
-
-        return {
-
-            today,
-
-            yesterday,
-
-            older,
-
-        };
-
-    }, [filteredChats]);
-
-    // ===============================
-    // Render Chat Section
-    // ===============================
-
-    const renderSection = (
-        title,
-        list
-    ) => {
-
-        if (!list.length) return null;
-
-        return (
-
-            <div className="mb-8">
-
-                <h4 className="mb-3 px-3 text-xs font-semibold uppercase tracking-widest text-slate-400">
-
-                    {title}
-
-                </h4>
-
-                <div className="space-y-2">
-
-                    {list.map((chat) => (
-
-                        <button
-                            key={chat.id}
-                            onClick={() =>
-                                onSelectChat(chat)
-                            }
-                            className={`group w-full rounded-2xl border p-3 text-left transition-all duration-300
-
-                            ${
-                                activeChat?.id ===
-                                chat.id
-                                    ? "border-blue-200 bg-blue-50 shadow"
-                                    : "border-transparent hover:border-slate-200 hover:bg-slate-50"
-                            }`}
-                        >
-
-                            <div className="flex items-start gap-3">
-
-                                <div
-                                    className={`rounded-xl p-2
-
-                                    ${
-                                        activeChat?.id ===
-                                        chat.id
-                                            ? "bg-blue-600 text-white"
-                                            : "bg-slate-200 text-slate-600"
-                                    }`}
-                                >
-
-                                    <MessageSquare
-                                        size={15}
-                                    />
-
-                                </div>
-
-                                <div className="min-w-0 flex-1">
-
-                                    <p className="truncate font-medium text-slate-800">
-
-                                        {chat.title}
-
-                                    </p>
-
-                                    <p className="mt-1 text-xs text-slate-500">
-
-                                        {chat.subject}
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </button>
-
-                    ))}
-
-                </div>
-
-            </div>
-
-        );
-
-    };
-        return (
-
-        <aside className="flex h-full flex-col bg-white">
-
-            {/* ===============================
-                Header
-            =============================== */}
-
-            <div className="border-b border-slate-200 p-6">
+            <div className="px-6 pt-8">
 
                 <div className="flex items-center gap-4">
 
-                    <div className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-3 text-white shadow-lg">
+                    <div
+                        className="
+                        h-14
+                        w-14
+                        rounded-2xl
+                        bg-gradient-to-br
+                        from-blue-600
+                        to-violet-600
+                        flex
+                        items-center
+                        justify-center
+                        shadow-lg
+                        shadow-blue-500/20
+                    "
+                    >
 
-                        <BrainCircuit size={24} />
+                        <GraduationCap size={28} />
 
                     </div>
 
                     <div>
 
-                        <h2 className="text-lg font-bold text-slate-900">
+                        <h2 className="text-2xl font-bold">
 
-                            ExamBooster AI
+                            ExamBooster
 
                         </h2>
 
                         <p className="text-sm text-slate-500">
 
-                            Learn Smarter. Score Higher.
+                            AI Tutor
 
                         </p>
 
@@ -210,17 +65,28 @@ const Sidebar = ({
 
                 </div>
 
-            </div>
-
-            {/* ===============================
-                New Chat
-            =============================== */}
-
-            <div className="p-5">
+                {/* New Chat */}
 
                 <button
-                    onClick={onNewChat}
-                    className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+                    className="
+                    mt-8
+                    flex
+                    w-full
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-2xl
+                    bg-gradient-to-r
+                    from-blue-600
+                    to-violet-600
+                    py-3
+                    font-semibold
+                    transition-all
+                    duration-300
+                    hover:scale-[1.02]
+                    hover:shadow-xl
+                    hover:shadow-blue-500/20
+                "
                 >
 
                     <Plus size={18} />
@@ -231,117 +97,161 @@ const Sidebar = ({
 
             </div>
 
-            {/* ===============================
-                Search
-            =============================== */}
+            {/* Search */}
 
-            <div className="px-5 pb-5">
+            <div className="px-6 pt-7">
 
-                <div className="flex items-center rounded-2xl border border-slate-200 bg-slate-50 px-4">
+                <div
+                    className="
+                    flex
+                    items-center
+                    gap-3
+                    rounded-xl
+                    bg-[#131D31]
+                    px-4
+                    py-3
+                "
+                >
 
                     <Search
                         size={18}
-                        className="text-slate-400"
+                        className="text-slate-500"
                     />
 
                     <input
-                        type="text"
-                        value={search}
-                        onChange={(e) =>
-                            setSearch(e.target.value)
-                        }
-                        placeholder="Search conversations..."
-                        className="w-full bg-transparent px-3 py-3 text-sm outline-none placeholder:text-slate-400"
+                        placeholder="Search..."
+                        className="
+                        flex-1
+                        bg-transparent
+                        outline-none
+                        text-sm
+                        placeholder:text-slate-500
+                    "
                     />
 
                 </div>
 
             </div>
 
-            {/* ===============================
-                Chat History
-            =============================== */}
+            {/* Recent */}
 
-            <div className="flex-1 overflow-y-auto px-4">
+            <div className="mt-8 px-6">
 
-                {filteredChats.length === 0 ? (
+                <p className="mb-4 text-xs uppercase tracking-[4px] text-slate-600">
 
-                    <div className="mt-16 text-center">
+                    Recent Chats
 
-                        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100">
+                </p>
+
+                <div className="space-y-1">
+
+                    {chats.map(chat => (
+
+                        <button
+                            key={chat}
+                            className="
+                            group
+                            flex
+                            w-full
+                            items-center
+                            gap-3
+                            rounded-xl
+                            px-3
+                            py-3
+                            transition
+                            hover:bg-[#131D31]
+                        "
+                        >
 
                             <MessageSquare
-                                size={24}
-                                className="text-slate-400"
+                                size={17}
+                                className="text-blue-400"
                             />
+
+                            <span className="truncate text-sm">
+
+                                {chat}
+
+                            </span>
+
+                        </button>
+
+                    ))}
+
+                </div>
+
+            </div>
+
+            {/* Menu */}
+
+            <div className="mt-8 px-6 space-y-2">
+
+                <Menu
+                    icon={<History size={19} />}
+                    title="History"
+                />
+
+                <Menu
+                    icon={<Bookmark size={19} />}
+                    title="Bookmarks"
+                />
+
+                <Menu
+                    icon={<Settings size={19} />}
+                    title="Settings"
+                />
+
+            </div>
+
+            <div className="flex-1"/>
+
+            {/* User */}
+
+            <div className="px-6 pb-8">
+
+                <div
+                    className="
+                    rounded-2xl
+                    bg-[#131D31]
+                    p-4
+                "
+                >
+
+                    <div className="flex items-center gap-3">
+
+                        <div
+                            className="
+                            h-12
+                            w-12
+                            rounded-full
+                            bg-gradient-to-r
+                            from-blue-600
+                            to-violet-600
+                            flex
+                            items-center
+                            justify-center
+                            font-bold
+                            text-lg
+                        "
+                        >
+
+                            A
 
                         </div>
 
-                        <h3 className="font-semibold text-slate-700">
+                        <div>
 
-                            No Conversations
+                            <h3 className="font-semibold">
 
-                        </h3>
+                                Aditya
 
-                        <p className="mt-2 text-sm text-slate-500">
+                            </h3>
 
-                            Start your first conversation with ExamBooster AI.
+                            <p className="text-sm text-slate-500">
 
-                        </p>
+                                Premium Member
 
-                    </div>
-
-                ) : (
-
-                    <>
-
-                        {renderSection(
-                            "Today",
-                            groupedChats.today
-                        )}
-
-                        {renderSection(
-                            "Yesterday",
-                            groupedChats.yesterday
-                        )}
-
-                        {renderSection(
-                            "Older",
-                            groupedChats.older
-                        )}
-
-                    </>
-
-                )}
-
-            </div>
-                        {/* ===============================
-                Footer
-            =============================== */}
-
-            <div className="border-t border-slate-200 bg-white p-5">
-
-                <div className="flex items-center gap-3 rounded-2xl bg-slate-50 p-3 transition-all duration-300 hover:bg-slate-100">
-
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow">
-
-                        <User size={18} />
-
-                    </div>
-
-                    <div className="min-w-0 flex-1">
-
-                        <p className="truncate font-semibold text-slate-800">
-
-                            {user?.name || "Student"}
-
-                        </p>
-
-                        <div className="mt-1 flex items-center gap-1 text-xs font-medium text-amber-600">
-
-                            <Crown size={13} />
-
-                            Premium Member
+                            </p>
 
                         </div>
 
@@ -356,5 +266,39 @@ const Sidebar = ({
     );
 
 };
+
+const Menu = ({ icon, title }) => (
+
+    <button
+        className="
+        group
+        flex
+        w-full
+        items-center
+        justify-between
+        rounded-xl
+        px-3
+        py-3
+        transition
+        hover:bg-[#131D31]
+    "
+    >
+
+        <div className="flex items-center gap-3">
+
+            {icon}
+
+            {title}
+
+        </div>
+
+        <ChevronRight
+            size={17}
+            className="opacity-0 transition group-hover:opacity-100"
+        />
+
+    </button>
+
+);
 
 export default Sidebar;

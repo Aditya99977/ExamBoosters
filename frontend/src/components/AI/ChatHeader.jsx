@@ -1,42 +1,79 @@
 import {
-    BrainCircuit,
     Sparkles,
-    Plus,
+    Bell,
+    ChevronDown,
+    Menu,
+    UserCircle2,
 } from "lucide-react";
 
-const ChatHeader = ({
-    exam,
-    subject,
-    setExam,
-    setSubject,
-    onNewChat,
-}) => {
+const ChatHeader = () => {
 
     return (
 
-        <header className="flex h-20 items-center justify-between border-b border-slate-200 bg-white px-8">
+        <header
+            className="
+            h-16
+            px-8
+            flex
+            items-center
+            justify-between
+            bg-[#08111F]/80
+            backdrop-blur-3xl
+            sticky
+            top-0
+            z-50
+        "
+        >
 
-            {/* Left Section */}
+            {/* Left */}
 
             <div className="flex items-center gap-4">
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg">
+                <button
+                    className="
+                    lg:hidden
+                    h-10
+                    w-10
+                    rounded-xl
+                    bg-[#131D31]
+                    flex
+                    items-center
+                    justify-center
+                    hover:bg-[#1B2943]
+                    transition
+                "
+                >
 
-                    <BrainCircuit size={24} />
+                    <Menu size={20} />
 
-                </div>
+                </button>
 
                 <div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
 
-                        <h1 className="text-2xl font-bold text-slate-900">
+                        <h1 className="text-3xl font-bold tracking-tight">
 
-                            AI Tutor
+                            ExamBooster AI
 
                         </h1>
 
-                        <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                        <span
+                            className="
+                            flex
+                            items-center
+                            gap-2
+                            rounded-full
+                            bg-emerald-500/10
+                            px-3
+                            py-1
+                            text-xs
+                            font-semibold
+                            text-emerald-400
+                        "
+                        >
+
+                            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
 
                             Online
 
@@ -44,104 +81,86 @@ const ChatHeader = ({
 
                     </div>
 
-                    <p className="mt-1 flex items-center gap-2 text-sm text-slate-500">
+                    <div className="mt-1 flex items-center gap-2 text-sm text-slate-500">
 
-                        <Sparkles size={14} />
+                        <Sparkles
+                            size={14}
+                            className="text-blue-400"
+                        />
 
-                        Powered by Gemini AI
+                        Gemini 2.5 Flash
 
-                    </p>
+                    </div>
 
                 </div>
 
             </div>
 
-            {/* Right Section */}
+            {/* Right */}
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
 
-                {/* Exam */}
-
-                <select
-                    value={exam}
-                    onChange={(e) =>
-                        setExam(e.target.value)
-                    }
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                >
-
-                    <option value="">
-                        Select Exam
-                    </option>
-
-                    <option value="SSC CGL">
-                        SSC CGL
-                    </option>
-
-                    <option value="SSC CHSL">
-                        SSC CHSL
-                    </option>
-
-                    <option value="UPSC">
-                        UPSC
-                    </option>
-
-                    <option value="Railway">
-                        Railway
-                    </option>
-
-                    <option value="Bank PO">
-                        Bank PO
-                    </option>
-
-                </select>
-
-                {/* Subject */}
-
-                <select
-                    value={subject}
-                    onChange={(e) =>
-                        setSubject(e.target.value)
-                    }
-                    className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none transition-all duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                >
-
-                    <option value="">
-                        Select Subject
-                    </option>
-
-                    <option value="Reasoning">
-                        Reasoning
-                    </option>
-
-                    <option value="Quantitative Aptitude">
-                        Quantitative Aptitude
-                    </option>
-
-                    <option value="English">
-                        English
-                    </option>
-
-                    <option value="General Knowledge">
-                        General Knowledge
-                    </option>
-
-                    <option value="Computer">
-                        Computer
-                    </option>
-
-                </select>
-
-                {/* New Chat */}
+                {/* Notification */}
 
                 <button
-                    onClick={onNewChat}
-                    className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 font-medium text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                    className="
+                    h-11
+                    w-11
+                    rounded-xl
+                    bg-[#131D31]
+                    flex
+                    items-center
+                    justify-center
+                    hover:bg-[#1B2943]
+                    transition
+                "
                 >
 
-                    <Plus size={18} />
+                    <Bell size={19} />
 
-                    New Chat
+                </button>
+
+                {/* User */}
+
+                <button
+                    className="
+                    flex
+                    items-center
+                    gap-3
+                    rounded-2xl
+                    bg-[#131D31]
+                    px-3
+                    py-2
+                    hover:bg-[#1B2943]
+                    transition
+                "
+                >
+
+                    <UserCircle2
+                        size={36}
+                        className="text-blue-500"
+                    />
+
+                    <div className="hidden md:block text-left">
+
+                        <h3 className="font-semibold">
+
+                            Aditya
+
+                        </h3>
+
+                        <p className="text-xs text-slate-500">
+
+                            Premium
+
+                        </p>
+
+                    </div>
+
+                    <ChevronDown
+                        size={16}
+                        className="text-slate-500"
+                    />
 
                 </button>
 

@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
+    "@tailwindcss/vite": "^4.3.2",
     "axios": "^1.18.1",
     "bootstrap": "^5.3.8",
     "chart.js": "^4.5.1",
+    "framer-motion": "^12.42.2",
+    "highlight.js": "^11.11.1",
     "lucide-react": "^1.24.0",
     "react": "^19.2.7",
     "react-chartjs-2": "^5.3.1",
@@ -24,7 +27,9 @@
     "react-router-dom": "^7.18.0",
     "react-syntax-highlighter": "^16.1.1",
     "react-toastify": "^11.1.0",
+    "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1",
+    "tailwindcss": "^4.3.2",
     "zod": "^4.4.3"
   },
   "devDependencies": {

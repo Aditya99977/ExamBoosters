@@ -1,333 +1,53 @@
-import { useEffect, useState } from "react";
-
 import Sidebar from "../components/ai/Sidebar";
 import ChatHeader from "../components/ai/ChatHeader";
-import ChatWindow from "../components/ai/ChatWindow";
-import ChatInput from "../components/ai/ChatInput";
-
-import {
-    sendMessage,
-    getChatHistory,
-} from "../services/aiService";
-
-import { mapHistoryToMessages } from "../utils/chatMapper";
+import EmptyState from "../components/ai/EmptyState";
 
 const AITutor = () => {
-
-    // ===========================
-    // States
-    // ===========================
-
-    const [allMessages, setAllMessages] = useState([]);
-
-    const [messages, setMessages] = useState([]);
-
-    const [input, setInput] = useState("");
-
-    const [loading, setLoading] = useState(false);
-
-    const [exam, setExam] = useState("");
-
-    const [subject, setSubject] = useState("");
-
-    const [chats, setChats] = useState([]);
-
-    const [activeChat, setActiveChat] = useState(null);
-
-    const [user, setUser] = useState(null);
-
-    // ===========================
-    // Load Chat History
-    // ===========================
-
-    const loadChatHistory = async () => {
-
-        try {
-
-            const history = await getChatHistory();
-
-            const mappedMessages =
-                mapHistoryToMessages(history);
-
-            setAllMessages(mappedMessages);
-
-            setMessages(mappedMessages);
-
-            const sidebarChats = history.map((chat) => ({
-
-                id: chat._id,
-
-                title:
-                    chat.question.length > 45
-                        ? `${chat.question.substring(0, 45)}...`
-                        : chat.question,
-
-                createdAt: chat.createdAt,
-
-                exam: chat.exam,
-
-                subject: chat.subject,
-
-            }));
-
-            setChats(sidebarChats);
-
-            if (sidebarChats.length) {
-
-                setActiveChat(sidebarChats[0]);
-
-            }
-
-        }
-
-        catch (err) {
-
-            console.error(err);
-
-        }
-
-    };
-
-    useEffect(() => {
-
-        loadChatHistory();
-
-    }, []);
-
-    // ===========================
-    // Send Message
-    // ===========================
-
-    const handleSendMessage = async (
-        messageText = input
-    ) => {
-
-        if (!messageText.trim()) return;
-
-        if (!exam || !subject) {
-
-            alert("Please select Exam & Subject");
-
-            return;
-
-        }
-
-        const userMessage = {
-
-            id: Date.now(),
-
-            sender: "user",
-
-            text: messageText,
-
-            exam,
-
-            subject,
-
-            time: new Date().toLocaleTimeString([], {
-
-                hour: "2-digit",
-
-                minute: "2-digit",
-
-            }),
-
-        };
-
-        setMessages((prev) => [
-
-            ...prev,
-
-            userMessage,
-
-        ]);
-
-        setInput("");
-
-        setLoading(true);
-
-        try {
-
-            const data = await sendMessage({
-
-                exam,
-
-                subject,
-
-                message: messageText,
-
-            });
-
-            const aiMessage = {
-
-                id: `${data.chatId}-ai`,
-
-                sender: "ai",
-
-                text: data.response,
-
-                exam,
-
-                subject,
-
-                time: new Date().toLocaleTimeString([], {
-
-                    hour: "2-digit",
-
-                    minute: "2-digit",
-
-                }),
-
-            };
-
-            setMessages((prev) => [
-
-                ...prev,
-
-                aiMessage,
-
-            ]);
-
-            await loadChatHistory();
-
-        }
-
-        catch (err) {
-
-            console.error(err);
-
-        }
-
-        finally {
-
-            setLoading(false);
-
-        }
-
-    };
-
-    // ===========================
-    // New Chat
-    // ===========================
-
-    const handleNewChat = () => {
-
-        setMessages([]);
-
-        setInput("");
-
-        setActiveChat(null);
-
-    };
-
-    // ===========================
-    // Select Chat
-    // ===========================
-
-    const handleSelectChat = (chat) => {
-
-        setActiveChat(chat);
-
-        const filtered = allMessages.filter(
-
-            (msg) =>
-
-                msg.exam === chat.exam &&
-
-                msg.subject === chat.subject
-
-        );
-
-        setMessages(filtered);
-
-        setExam(chat.exam);
-
-        setSubject(chat.subject);
-
-    };
-
-    // ===========================
-    // Render
-    // ===========================
-
     return (
+        <div className="h-screen w-full bg-slate-950 text-white overflow-hidden">
 
-        <div className="flex h-screen overflow-hidden bg-slate-100">
+            <div className="flex h-full">
 
-            {/* Sidebar */}
+                {/* Sidebar */}
 
-            <div className="w-[320px] border-r border-slate-200 bg-white">
+                <Sidebar />
 
-                <Sidebar
+                {/* Main */}
 
-                    chats={chats}
+                <div className="flex flex-1 flex-col">
 
-                    activeChat={activeChat}
+                    {/* Header */}
 
-                    onSelectChat={handleSelectChat}
+                    <ChatHeader />
 
-                    onNewChat={handleNewChat}
+                    {/* Chat Area */}
 
-                    user={user}
+                    <main className="relative flex-1 overflow-y-auto">
 
-                />
+                        {/* Background Glow */}
 
-            </div>
+                        <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-            {/* Main */}
+                            <div className="absolute -top-44 left-1/2 -translate-x-1/2 h-[600px] w-[600px] rounded-full bg-blue-600/10 blur-[180px]" />
 
-            <div className="flex flex-1 flex-col">
+                            <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-violet-600/10 blur-[150px]" />
 
-                <ChatHeader
+                        </div>
 
-                    exam={exam}
+                        <div className="relative z-10 h-full">
 
-                    subject={subject}
+                            <EmptyState />
 
-                    setExam={setExam}
+                        </div>
 
-                    setSubject={setSubject}
-
-                    onNewChat={handleNewChat}
-
-                />
-
-                <div className="flex-1 overflow-hidden">
-
-                    <ChatWindow
-
-                        messages={messages}
-
-                        loading={loading}
-
-                        onSuggestionClick={(prompt) =>
-
-                            setInput(prompt)
-
-                        }
-
-                    />
+                    </main>
 
                 </div>
-
-                <ChatInput
-
-                    input={input}
-
-                    setInput={setInput}
-
-                    onSend={handleSendMessage}
-
-                    loading={loading}
-
-                />
 
             </div>
 
         </div>
-
     );
-
 };
 
 export default AITutor;

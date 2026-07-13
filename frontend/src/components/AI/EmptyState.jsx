@@ -1,110 +1,129 @@
 import {
-    BrainCircuit,
-    BookOpen,
-    PenTool,
-    GraduationCap,
-    Code2,
     Sparkles,
+    GraduationCap,
+    ArrowUpRight,
 } from "lucide-react";
 
-const EmptyState = ({ onSuggestionClick }) => {
+import ChatInput from "./ChatInput";
 
-    const suggestions = [
-        {
-            title: "Learn a Topic",
-            description: "Understand concepts step by step.",
-            prompt: "Teach me Coding Decoding from scratch.",
-            icon: <BookOpen size={20} />,
-        },
-        {
-            title: "Practice Questions",
-            description: "Generate exam-level MCQs.",
-            prompt: "Generate 10 SSC CGL Reasoning MCQs.",
-            icon: <PenTool size={20} />,
-        },
-        {
-            title: "Interview Preparation",
-            description: "Prepare for technical interviews.",
-            prompt: "Help me prepare for an AI Internship interview.",
-            icon: <GraduationCap size={20} />,
-        },
-        {
-            title: "Programming Help",
-            description: "Learn coding with examples.",
-            prompt: "Explain Binary Search with C++ example.",
-            icon: <Code2 size={20} />,
-        },
-    ];
+const subjects = [
+    "SSC CGL",
+    "UPSC",
+    "Banking",
+    "Railway",
+    "Reasoning",
+    "Quant",
+    "English",
+    "Current Affairs",
+];
+
+const suggestions = [
+    "Explain DBMS Normalization",
+    "Generate 20 SSC Reasoning MCQs",
+    "Summarize Operating System",
+    "Create UPSC Revision Notes",
+    "Solve Previous Year Questions",
+    "Explain with Examples",
+];
+
+const EmptyState = () => {
 
     return (
 
-        <div className="flex flex-1 items-center justify-center px-10">
+        <div className="flex h-full items-center justify-center px-8">
 
-            <div className="w-full max-w-4xl text-center">
+            <div className="w-full max-w-5xl">
 
-                {/* AI Logo */}
+                {/* Hero */}
 
-                <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl">
+                <div className="text-center">
 
-                    <BrainCircuit size={42} />
+                    <div
+                        className="
+                        inline-flex
+                        items-center
+                        gap-2
+                        rounded-full
+                        bg-[#131D31]
+                        px-5
+                        py-2
+                        text-blue-400
+                    "
+                    >
+
+                        <Sparkles size={18} />
+
+                        ExamBooster AI
+
+                    </div>
+
+                    <h1
+                        className="
+                        mt-8
+                        text-6xl
+                        font-black
+                        tracking-tight
+                    "
+                    >
+
+                        Good Afternoon 👋
+
+                    </h1>
+
+                    <p
+                        className="
+                        mx-auto
+                        mt-5
+                        max-w-2xl
+                        text-lg
+                        leading-8
+                        text-slate-400
+                    "
+                    >
+
+                        Ask anything about your competitive exam preparation.
+
+                    </p>
 
                 </div>
 
-                {/* Heading */}
+                {/* Input */}
 
-                <h1 className="text-4xl font-bold text-slate-900">
+                <div className="mt-12">
 
-                    Welcome to ExamBooster AI
-
-                </h1>
-
-                <p className="mt-4 text-lg text-slate-500">
-
-                    Your personal AI tutor for competitive exam preparation.
-
-                </p>
-
-                {/* AI Badge */}
-
-                <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-5 py-2 text-sm font-semibold text-blue-700">
-
-                    <Sparkles size={16} />
-
-                    Powered by Gemini AI
+                    <ChatInput />
 
                 </div>
 
-                {/* Suggestion Cards */}
+                {/* Subjects */}
 
-                <div className="mt-14 grid gap-5 md:grid-cols-2">
+                <div
+                    className="
+                    mt-8
+                    flex
+                    flex-wrap
+                    justify-center
+                    gap-3
+                "
+                >
 
-                    {suggestions.map((item) => (
+                    {subjects.map(subject => (
 
                         <button
-                            key={item.title}
-                            onClick={() =>
-                                onSuggestionClick(item.prompt)
-                            }
-                            className="group rounded-3xl border border-slate-200 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+                            key={subject}
+                            className="
+                            rounded-full
+                            bg-[#131D31]
+                            px-5
+                            py-2.5
+                            text-sm
+                            transition-all
+                            duration-300
+                            hover:bg-blue-600
+                        "
                         >
 
-                            <div className="mb-5 inline-flex rounded-2xl bg-blue-50 p-3 text-blue-600">
-
-                                {item.icon}
-
-                            </div>
-
-                            <h3 className="text-lg font-semibold text-slate-800">
-
-                                {item.title}
-
-                            </h3>
-
-                            <p className="mt-2 text-sm text-slate-500">
-
-                                {item.description}
-
-                            </p>
+                            {subject}
 
                         </button>
 
@@ -112,13 +131,67 @@ const EmptyState = ({ onSuggestionClick }) => {
 
                 </div>
 
-                {/* Footer */}
+                {/* Suggestions */}
 
-                <p className="mt-12 text-sm text-slate-400">
+                <div
+                    className="
+                    mt-14
+                    grid
+                    gap-3
+                    md:grid-cols-2
+                "
+                >
 
-                    Ask questions, practice concepts, solve doubts and prepare for your dream job with AI.
+                    {suggestions.map((item) => (
 
-                </p>
+                        <button
+                            key={item}
+                            className="
+                            group
+                            flex
+                            items-center
+                            justify-between
+                            rounded-2xl
+                            bg-[#131D31]
+                            px-5
+                            py-4
+                            text-left
+                            transition-all
+                            duration-300
+                            hover:bg-[#1A2942]
+                            hover:translate-x-1
+                        "
+                        >
+
+                            <div className="flex items-center gap-3">
+
+                                <GraduationCap
+                                    size={20}
+                                    className="text-blue-400"
+                                />
+
+                                <span>
+
+                                    {item}
+
+                                </span>
+
+                            </div>
+
+                            <ArrowUpRight
+                                size={18}
+                                className="
+                                opacity-0
+                                transition
+                                group-hover:opacity-100
+                            "
+                            />
+
+                        </button>
+
+                    ))}
+
+                </div>
 
             </div>
 

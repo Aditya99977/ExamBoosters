@@ -1,124 +1,148 @@
-import { useRef } from "react";
 import {
+    Paperclip,
+    Mic,
     SendHorizontal,
-    Loader2,
-    Sparkles,
+    Smile,
 } from "lucide-react";
 
-const ChatInput = ({
-    input,
-    setInput,
-    onSend,
-    loading,
-}) => {
-
-    const textareaRef = useRef(null);
-
-    // ============================
-    // Send on Enter
-    // ============================
-
-    const handleKeyDown = (e) => {
-
-        if (
-            e.key === "Enter" &&
-            !e.shiftKey
-        ) {
-
-            e.preventDefault();
-
-            if (!loading && input.trim()) {
-
-                onSend();
-
-            }
-
-        }
-
-    };
+const ChatInput = () => {
 
     return (
 
-        <div className="border-t border-slate-200 bg-white px-8 py-6">
+        <div className="mx-auto w-full max-w-5xl">
 
-            <div className="mx-auto w-full max-w-5xl">
+            <div
+                className="
+                flex
+                items-center
+                gap-4
+                rounded-[32px]
+                bg-[#182338]
+                px-6
+                py-4
+                shadow-2xl
+                shadow-black/20
+                transition-all
+                duration-300
+                focus-within:shadow-blue-500/20
+                focus-within:ring-2
+                focus-within:ring-blue-500/20
+            "
+            >
 
-                <div className="rounded-3xl border border-slate-200 bg-white shadow-lg transition-all duration-300 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100">
+                {/* Upload */}
 
-                    <div className="flex items-end gap-4 p-4">
+                <button
+                    className="
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
+                    rounded-xl
+                    transition
+                    hover:bg-slate-700
+                "
+                >
 
-                        {/* AI Icon */}
+                    <Paperclip
+                        size={20}
+                        className="text-slate-400"
+                    />
 
-                        <div className="mb-1 rounded-2xl bg-blue-50 p-3 text-blue-600">
+                </button>
 
-                            <Sparkles size={20} />
+                {/* Input */}
 
-                        </div>
+                <input
+                    type="text"
+                    placeholder="Ask ExamBooster AI anything..."
+                    className="
+                    flex-1
+                    bg-transparent
+                    text-lg
+                    outline-none
+                    placeholder:text-slate-500
+                "
+                />
 
-                        {/* Text Area */}
+                {/* Emoji */}
 
-                        <textarea
-                            ref={textareaRef}
-                            rows={1}
-                            value={input}
-                            disabled={loading}
-                            onChange={(e) =>
-                                setInput(e.target.value)
-                            }
-                            onKeyDown={handleKeyDown}
-                            placeholder="Ask ExamBooster AI anything..."
-                            className="max-h-40 flex-1 resize-none bg-transparent text-slate-800 placeholder:text-slate-400 focus:outline-none"
-                        />
+                <button
+                    className="
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
+                    rounded-xl
+                    transition
+                    hover:bg-slate-700
+                "
+                >
 
-                        {/* Send Button */}
+                    <Smile
+                        size={20}
+                        className="text-slate-400"
+                    />
 
-                        <button
-                            onClick={onSend}
-                            disabled={
-                                loading ||
-                                !input.trim()
-                            }
-                            className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50"
-                        >
+                </button>
 
-                            {loading ? (
+                {/* Voice */}
 
-                                <Loader2
-                                    size={20}
-                                    className="animate-spin"
-                                />
+                <button
+                    className="
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
+                    rounded-xl
+                    transition
+                    hover:bg-slate-700
+                "
+                >
 
-                            ) : (
+                    <Mic
+                        size={20}
+                        className="text-slate-400"
+                    />
 
-                                <SendHorizontal size={20} />
+                </button>
 
-                            )}
+                {/* Send */}
 
-                        </button>
+                <button
+                    className="
+                    flex
+                    h-12
+                    w-12
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    bg-gradient-to-r
+                    from-blue-600
+                    to-violet-600
+                    shadow-lg
+                    shadow-blue-500/20
+                    transition-all
+                    duration-300
+                    hover:scale-110
+                    hover:shadow-blue-500/40
+                "
+                >
 
-                    </div>
+                    <SendHorizontal size={20} />
 
-                    {/* Footer */}
-
-                    <div className="flex items-center justify-between border-t border-slate-100 px-5 py-3 text-xs text-slate-400">
-
-                        <span>
-
-                            Press <strong>Enter</strong> to send
-
-                        </span>
-
-                        <span>
-
-                            <strong>Shift + Enter</strong> for new line
-
-                        </span>
-
-                    </div>
-
-                </div>
+                </button>
 
             </div>
+
+            <p className="mt-4 text-center text-xs text-slate-500">
+
+                ExamBooster AI may generate incorrect responses. Always verify important information.
+
+            </p>
 
         </div>
 

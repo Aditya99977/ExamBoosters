@@ -12,10 +12,6 @@ const ChatWindow = ({
 
     const bottomRef = useRef(null);
 
-    // ===================================
-    // Auto Scroll
-    // ===================================
-
     useEffect(() => {
 
         bottomRef.current?.scrollIntoView({
@@ -24,15 +20,11 @@ const ChatWindow = ({
 
     }, [messages, loading]);
 
-    // ===================================
-    // Empty State
-    // ===================================
-
     if (!messages.length) {
 
         return (
 
-            <div className="flex flex-1 items-center justify-center bg-slate-50">
+            <div className="flex flex-1 items-center justify-center">
 
                 <EmptyState
                     onSuggestionClick={onSuggestionClick}
@@ -44,32 +36,32 @@ const ChatWindow = ({
 
     }
 
-    // ===================================
-    // Chat Messages
-    // ===================================
-
     return (
 
-        <div className="flex-1 overflow-y-auto bg-slate-50">
+        <div className="flex-1 overflow-y-auto">
 
-            <div className="mx-auto flex w-full max-w-5xl flex-col px-8 py-10">
+            <div className="mx-auto w-full max-w-5xl px-8 py-12">
 
-                {messages.map((message) => (
+                <div className="space-y-10">
 
-                    <MessageBubble
-                        key={message.id}
-                        message={message}
-                    />
+                    {messages.map((message) => (
 
-                ))}
+                        <MessageBubble
+                            key={message.id}
+                            message={message}
+                        />
 
-                {loading && (
+                    ))}
 
-                    <TypingLoader />
+                    {loading && (
 
-                )}
+                        <TypingLoader />
 
-                <div ref={bottomRef} />
+                    )}
+
+                    <div ref={bottomRef} />
+
+                </div>
 
             </div>
 

@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 
 import { useState } from "react";
-
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -30,11 +29,9 @@ const MessageBubble = ({ message }) => {
 
             }, 2000);
 
-        }
+        } catch {
 
-        catch (err) {
-
-            console.error(err);
+            console.error("Copy failed");
 
         }
 
@@ -43,10 +40,8 @@ const MessageBubble = ({ message }) => {
     return (
 
         <div
-            className={`mb-8 flex w-full ${
-                isUser
-                    ? "justify-end"
-                    : "justify-start"
+            className={`flex w-full items-start gap-4 animate-[fadeIn_.35s_ease] ${
+                isUser ? "justify-end" : "justify-start"
             }`}
         >
 
@@ -54,9 +49,25 @@ const MessageBubble = ({ message }) => {
 
             {!isUser && (
 
-                <div className="mr-4 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg">
+                <div
+                    className="
+                    h-12
+                    w-12
+                    rounded-2xl
+                    bg-gradient-to-br
+                    from-blue-600
+                    via-indigo-600
+                    to-violet-600
+                    flex
+                    items-center
+                    justify-center
+                    shadow-xl
+                    shadow-blue-500/20
+                    flex-shrink-0
+                "
+                >
 
-                    <BrainCircuit size={20} />
+                    <BrainCircuit size={22} />
 
                 </div>
 
@@ -65,36 +76,57 @@ const MessageBubble = ({ message }) => {
             {/* Bubble */}
 
             <div
-                className={`group relative max-w-4xl rounded-3xl px-6 py-5 shadow-sm transition-all duration-300
+                className={`group relative max-w-[75%] rounded-[28px] px-6 py-5 transition-all duration-300
 
                 ${
                     isUser
-                        ? "bg-blue-600 text-white"
-                        : "border border-slate-200 bg-white text-slate-800"
+                        ? `
+                        bg-gradient-to-r
+                        from-blue-600
+                        to-indigo-600
+                        text-white
+                        shadow-xl
+                        shadow-blue-500/20
+                        `
+                        : `
+                        border
+                        border-slate-700
+                        bg-slate-900/80
+                        backdrop-blur-xl
+                        text-slate-100
+                        hover:border-blue-500/30
+                        `
                 }`}
             >
 
-                {/* Copy Button */}
+                {/* Copy */}
 
                 {!isUser && (
 
                     <button
                         onClick={handleCopy}
-                        className="absolute right-5 top-5 opacity-0 transition-all duration-300 group-hover:opacity-100"
+                        className="
+                        absolute
+                        top-5
+                        right-5
+                        opacity-0
+                        group-hover:opacity-100
+                        transition
+                        "
                     >
 
                         {copied ? (
 
                             <Check
                                 size={18}
-                                className="text-green-600"
+                                className="text-green-400"
                             />
 
                         ) : (
 
                             <Copy
                                 size={18}
-                                className="text-slate-400 hover:text-blue-600"
+                                className="text-slate-400 hover:text-blue-400"
                             />
 
                         )}
@@ -103,16 +135,20 @@ const MessageBubble = ({ message }) => {
 
                 )}
 
-                {/* Message */}
+                {/* Markdown */}
 
                 <div
-                    className={`prose max-w-none break-words
-
+                    className={`
+                    prose
+                    max-w-none
+                    break-words
+                    leading-8
                     ${
                         isUser
                             ? "prose-invert"
-                            : "prose-slate"
-                    }`}
+                            : "prose-invert"
+                    }
+                `}
                 >
 
                     <ReactMarkdown
@@ -128,12 +164,10 @@ const MessageBubble = ({ message }) => {
                 {/* Time */}
 
                 <p
-                    className={`mt-5 text-xs
-
-                    ${
+                    className={`mt-5 text-xs ${
                         isUser
                             ? "text-blue-100"
-                            : "text-slate-400"
+                            : "text-slate-500"
                     }`}
                 >
 
@@ -143,13 +177,26 @@ const MessageBubble = ({ message }) => {
 
             </div>
 
-            {/* User Avatar */}
+            {/* User */}
 
             {isUser && (
 
-                <div className="ml-4 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-lg">
+                <div
+                    className="
+                    h-12
+                    w-12
+                    rounded-2xl
+                    bg-slate-800
+                    border
+                    border-slate-700
+                    flex
+                    items-center
+                    justify-center
+                    flex-shrink-0
+                "
+                >
 
-                    <User size={18} />
+                    <User size={20} />
 
                 </div>
 

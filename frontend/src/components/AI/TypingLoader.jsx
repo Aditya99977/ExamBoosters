@@ -1,70 +1,70 @@
 import { BrainCircuit } from "lucide-react";
 
 const TypingLoader = () => {
-
     return (
-
-        <div className="mb-8 flex items-start">
+        <div className="flex items-start gap-4 animate-pulse">
 
             {/* AI Avatar */}
 
-            <div className="mr-4 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg">
-
-                <BrainCircuit size={20} />
-
+            <div
+                className="
+                    h-12
+                    w-12
+                    rounded-2xl
+                    bg-gradient-to-br
+                    from-blue-600
+                    via-indigo-600
+                    to-violet-600
+                    flex
+                    items-center
+                    justify-center
+                    shadow-xl
+                    shadow-blue-500/20
+                    flex-shrink-0
+                "
+            >
+                <BrainCircuit size={22} className="text-white" />
             </div>
 
             {/* Bubble */}
 
-            <div className="rounded-3xl border border-slate-200 bg-white px-6 py-5 shadow-sm">
-
-                <div className="mb-3 flex items-center gap-2">
-
-                    <span className="font-semibold text-slate-700">
-
-                        ExamBooster AI
-
-                    </span>
-
-                    <span className="rounded-full bg-green-100 px-2 py-1 text-[10px] font-semibold text-green-700">
-
-                        Thinking...
-
-                    </span>
-
-                </div>
+            <div
+                className="
+                    rounded-[28px]
+                    border
+                    border-slate-700
+                    bg-slate-900/80
+                    backdrop-blur-xl
+                    px-6
+                    py-5
+                    min-w-[220px]
+                "
+            >
 
                 <div className="flex items-center gap-2">
 
-                    <span
-                        className="h-3 w-3 animate-bounce rounded-full bg-blue-600"
-                        style={{
-                            animationDelay: "0ms",
-                        }}
-                    />
+                    <span className="h-3 w-3 rounded-full bg-blue-500 animate-bounce"></span>
 
                     <span
-                        className="h-3 w-3 animate-bounce rounded-full bg-blue-600"
-                        style={{
-                            animationDelay: "150ms",
-                        }}
-                    />
+                        className="h-3 w-3 rounded-full bg-indigo-500 animate-bounce"
+                        style={{ animationDelay: "0.15s" }}
+                    ></span>
 
                     <span
-                        className="h-3 w-3 animate-bounce rounded-full bg-blue-600"
-                        style={{
-                            animationDelay: "300ms",
-                        }}
-                    />
+                        className="h-3 w-3 rounded-full bg-violet-500 animate-bounce"
+                        style={{ animationDelay: "0.3s" }}
+                    ></span>
 
                 </div>
+
+                <p className="mt-4 text-sm text-slate-400">
+                    ExamBooster AI is thinking...
+                </p>
 
             </div>
 
         </div>
-
     );
-
 };
 
 export default TypingLoader;
