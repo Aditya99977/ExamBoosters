@@ -1,65 +1,97 @@
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
+const aiPreferenceSchema = new mongoose.Schema(
+    {
+        subject: {
+            type: String,
+            default: "",
+            trim: true,
+        },
 
-    name: {
+        difficulty: {
+            type: String,
+            enum: ["Easy", "Medium", "Hard"],
+            default: "Medium",
+        },
 
-        type: String,
-
-        required: true,
-
-        trim: true
-
+        mode: {
+            type: String,
+            enum: ["Explain", "Solve", "Quiz", "Hint", "Interview"],
+            default: "Explain",
+        },
     },
-
-    email: {
-
-        type: String,
-
-        required: true,
-
-        unique: true,
-
-        lowercase: true,
-
-        trim: true
-
-    },
-
-    password: {
-
-        type: String,
-
-        required: true
-
-    },
-
-    role: {
-
-        type: String,
-
-        enum: ["student", "admin"],
-
-        default: "student"
-
-    },
-
-    examTarget: {
-
-        type: String,
-
-        default: "IBPS"
-
-    },
-
-    createdAt: {
-
-        type: Date,
-
-        default: Date.now
-
+    {
+        _id: false,
     }
+);
 
-});
+const userSchema = new mongoose.Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+            trim: true,
+        },
 
-module.exports = mongoose.model("User", UserSchema);
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            lowercase: true,
+            trim: true,
+        },
+
+        password: {
+            type: String,
+            required: true,
+        },
+
+        role: {
+            type: String,
+            enum: ["student", "admin"],
+            default: "student",
+        },
+
+        examTarget: {
+            type: String,
+            default: "",
+            trim: true,
+        },
+
+        aiPreferences: aiPreferenceSchema,
+
+        profileImage: {
+            type: String,
+            default: "",
+        },
+
+        studyStats: {
+            questionsSolved: {
+                type: Number,
+                default: 0,
+            },
+
+            aiChats: {
+                type: Number,
+                default: 0,
+            },
+
+            accuracy: {
+                type: Number,
+                default: 0,
+                min: 0,
+                max: 100,
+            },
+        },
+
+        lastActive: {
+            type: Date,
+            default: Date.now,
+        },
+    },
+    {
+        timestamps: true,
+    }
+);
+
+module.exports = mongoose.model("User", userSchema);
