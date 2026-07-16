@@ -1,103 +1,212 @@
-import { FaShieldAlt, FaLaptopCode, FaUsers, FaClock } from "react-icons/fa";
+import {
+    ShieldCheck,
+    Bot,
+    BarChart3,
+    Clock3,
+    CheckCircle2,
+} from "lucide-react";
 
 function WhyChooseUs() {
 
     const reasons = [
-
         {
-            icon: <FaShieldAlt />,
+            icon: ShieldCheck,
             title: "Trusted Platform",
-            description: "Practice with reliable and exam-focused questions."
+            description:
+                "Curated exam-focused questions reviewed for quality and relevance.",
         },
-
         {
-            icon: <FaLaptopCode />,
-            title: "Modern Learning",
-            description: "Interactive dashboard with real-time performance tracking."
+            icon: Bot,
+            title: "AI-Powered Learning",
+            description:
+                "Get instant explanations and personalized guidance while studying.",
         },
-
         {
-            icon: <FaUsers />,
-            title: "Community Driven",
-            description: "Built for thousands of government exam aspirants."
+            icon: BarChart3,
+            title: "Performance Analytics",
+            description:
+                "Track your strengths, weak areas and overall improvement in one place.",
         },
-
         {
-            icon: <FaClock />,
+            icon: Clock3,
             title: "Study Anytime",
-            description: "Access practice tests and analytics 24/7."
-        }
-
+            description:
+                "Practice whenever you want with a seamless experience across devices.",
+        },
     ];
 
     return (
-
-        <section className="section">
-
+        <section
+            style={{
+                background: "#0B1020",
+                padding: "90px 0",
+            }}
+        >
             <div className="container">
 
-                <div className="text-center mb-5">
+                <div className="row align-items-center g-5">
 
-                    <h2 className="fw-bold">
+                    {/* Left Side */}
 
-                        Why Choose ExamBooster?
+                    <div className="col-lg-5">
 
-                    </h2>
+                        <span
+                            style={{
+                                color: "#60A5FA",
+                                textTransform: "uppercase",
+                                letterSpacing: "1.3px",
+                                fontWeight: 600,
+                                fontSize: ".95rem",
+                            }}
+                        >
+                            Why Choose Us
+                        </span>
 
-                    <p className="text-muted">
+                        <h2
+                            className="fw-bold mt-3"
+                            style={{
+                                color: "#F8FAFC",
+                                fontSize: "clamp(2.3rem,4vw,3.2rem)",
+                                lineHeight: 1.2,
+                            }}
+                        >
+                            Prepare Smarter.
+                            <br />
+                            Achieve Faster.
+                        </h2>
 
-                        Everything you need to prepare smarter and succeed.
+                        <p
+                            className="mt-4"
+                            style={{
+                                color: "#CBD5E1",
+                                fontSize: "1.08rem",
+                                lineHeight: 1.9,
+                                maxWidth: "500px",
+                            }}
+                        >
+                            ExamBooster combines quality practice questions,
+                            AI-powered learning, mock tests, and detailed
+                            analytics into one modern platform built for
+                            ambitious government exam aspirants.
+                        </p>
 
-                    </p>
+                    </div>
 
-                </div>
+                    {/* Right Side */}
 
-                <div className="row">
+                    <div className="col-lg-7">
 
-                    {
+                        {reasons.map((item, index) => {
 
-                        reasons.map((item, index) => (
+                            const Icon = item.icon;
 
-                            <div className="col-md-6 col-lg-3 mb-4" key={index}>
+                            return (
 
-                                <div className="card border-0 shadow h-100 rounded-4">
+                                <div
+                                    key={index}
+                                    className="d-flex align-items-start mb-4"
+                                    style={{
+                                        background: "#151F36",
+                                        border: "1px solid rgba(255,255,255,.05)",
+                                        borderRadius: "12px",
+                                        padding: "24px",
+                                        transition: ".3s ease",
+                                    }}
+                                    onMouseEnter={(e) => {
 
-                                    <div className="card-body text-center p-4">
+                                        e.currentTarget.style.borderColor =
+                                            "rgba(96,165,250,.25)";
 
-                                        <div className="display-5 text-primary mb-3">
+                                        e.currentTarget.style.background =
+                                            "#18233D";
 
-                                            {item.icon}
+                                        e.currentTarget.style.transform =
+                                            "translateX(6px)";
+
+                                    }}
+                                    onMouseLeave={(e) => {
+
+                                        e.currentTarget.style.borderColor =
+                                            "rgba(255,255,255,.05)";
+
+                                        e.currentTarget.style.background =
+                                            "#151F36";
+
+                                        e.currentTarget.style.transform =
+                                            "translateX(0)";
+
+                                    }}
+                                >
+
+                                    <div
+                                        className="d-flex align-items-center justify-content-center flex-shrink-0"
+                                        style={{
+                                            width: "58px",
+                                            height: "58px",
+                                            borderRadius: "50%",
+                                            background:
+                                                "rgba(59,130,246,.10)",
+                                            border:
+                                                "1px solid rgba(96,165,250,.15)",
+                                            marginRight: "20px",
+                                        }}
+                                    >
+
+                                        <Icon
+                                            size={26}
+                                            color="#60A5FA"
+                                        />
+
+                                    </div>
+
+                                    <div className="flex-grow-1">
+
+                                        <div className="d-flex align-items-center mb-2">
+
+                                            <CheckCircle2
+                                                size={18}
+                                                color="#60A5FA"
+                                                style={{
+                                                    marginRight: "8px",
+                                                }}
+                                            />
+
+                                            <h5
+                                                className="fw-bold mb-0"
+                                                style={{
+                                                    color: "#F8FAFC",
+                                                }}
+                                            >
+                                                {item.title}
+                                            </h5>
 
                                         </div>
 
-                                        <h5 className="fw-bold">
-
-                                            {item.title}
-
-                                        </h5>
-
-                                        <p className="text-muted">
-
+                                        <p
+                                            className="mb-0"
+                                            style={{
+                                                color: "#CBD5E1",
+                                                lineHeight: 1.8,
+                                            }}
+                                        >
                                             {item.description}
-
                                         </p>
 
                                     </div>
 
                                 </div>
 
-                            </div>
+                            );
 
-                        ))
+                        })}
 
-                    }
+                    </div>
 
                 </div>
 
             </div>
 
         </section>
-
     );
 
 }

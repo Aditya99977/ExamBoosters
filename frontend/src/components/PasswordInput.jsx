@@ -1,6 +1,5 @@
 import { useState, forwardRef } from "react";
-
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Eye, EyeOff } from "lucide-react";
 
 const PasswordInput = forwardRef(
 
@@ -20,13 +19,21 @@ const PasswordInput = forwardRef(
 
             <div className="mb-4">
 
-                <label className="form-label fw-semibold">
-
+                <label
+                    className="fw-semibold mb-2 d-block"
+                    style={{
+                        color: "#E2E8F0",
+                        fontSize: ".95rem",
+                    }}
+                >
                     {label}
-
                 </label>
 
-                <div className="input-group">
+                <div
+                    style={{
+                        position: "relative",
+                    }}
+                >
 
                     <input
 
@@ -36,11 +43,53 @@ const PasswordInput = forwardRef(
 
                         placeholder={placeholder}
 
-                        className={`form-control form-control-lg ${
-                            error ? "is-invalid" : ""
-                        }`}
-
                         {...props}
+
+                        style={{
+
+                            width: "100%",
+
+                            height: "58px",
+
+                            background: "#0F172A",
+
+                            color: "#F8FAFC",
+
+                            border: error
+                                ? "1px solid #EF4444"
+                                : "1px solid rgba(255,255,255,.08)",
+
+                            borderRadius: "14px",
+
+                            padding: "0 56px 0 18px",
+
+                            outline: "none",
+
+                            fontSize: "1rem",
+
+                            transition: ".25s ease",
+
+                        }}
+
+                        onFocus={(e) => {
+
+                            e.target.style.border =
+                                "1px solid #3B82F6";
+
+                            e.target.style.boxShadow =
+                                "0 0 0 4px rgba(59,130,246,.15)";
+
+                        }}
+
+                        onBlur={(e) => {
+
+                            e.target.style.boxShadow = "none";
+
+                            e.target.style.border = error
+                                ? "1px solid #EF4444"
+                                : "1px solid rgba(255,255,255,.08)";
+
+                        }}
 
                     />
 
@@ -48,9 +97,37 @@ const PasswordInput = forwardRef(
 
                         type="button"
 
-                        className="btn btn-outline-secondary"
+                        onClick={() =>
+                            setShowPassword(!showPassword)
+                        }
 
-                        onClick={() => setShowPassword(!showPassword)}
+                        style={{
+
+                            position: "absolute",
+
+                            right: "14px",
+
+                            top: "50%",
+
+                            transform: "translateY(-50%)",
+
+                            border: "none",
+
+                            background: "transparent",
+
+                            color: "#94A3B8",
+
+                            cursor: "pointer",
+
+                            display: "flex",
+
+                            alignItems: "center",
+
+                            justifyContent: "center",
+
+                            padding: 0,
+
+                        }}
 
                     >
 
@@ -58,9 +135,9 @@ const PasswordInput = forwardRef(
 
                             showPassword
 
-                                ? <FaEyeSlash />
+                                ? <EyeOff size={20} />
 
-                                : <FaEye />
+                                : <Eye size={20} />
 
                         }
 
@@ -72,11 +149,25 @@ const PasswordInput = forwardRef(
 
                     error && (
 
-                        <div className="text-danger mt-1">
+                        <p
+
+                            style={{
+
+                                color: "#F87171",
+
+                                fontSize: ".88rem",
+
+                                marginTop: "8px",
+
+                                marginBottom: 0,
+
+                            }}
+
+                        >
 
                             {error}
 
-                        </div>
+                        </p>
 
                     )
 

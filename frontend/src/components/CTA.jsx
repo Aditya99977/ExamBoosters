@@ -1,36 +1,187 @@
 import { Link } from "react-router-dom";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 function CTA() {
 
     return (
 
-        <section className="section bg-primary text-white">
+        <section
+            style={{
+                background: "#0B1020",
+                padding: "10px 0",
+            }}
+        >
 
-            <div className="container text-center">
+            <div className="container">
 
-                <h2 className="fw-bold mb-3">
-
-                    Ready to Start Your Preparation?
-
-                </h2>
-
-                <p className="lead">
-
-                    Join ExamBooster today and take the next step toward your dream government job.
-
-                </p>
-
-                <Link
-
-                    to="/register"
-
-                    className="btn btn-light btn-lg rounded-pill mt-3 px-5"
-
+                <div
+                    className="text-center mx-auto"
+                    style={{
+                        maxWidth: "980px",
+                        background:
+                            "linear-gradient(135deg,#1D4ED8 0%, #2563EB 45%, #3B82F6 100%)",
+                        borderRadius: "24px",
+                        padding: "70px 50px",
+                        position: "relative",
+                        overflow: "hidden",
+                        boxShadow:
+                            "0 30px 80px rgba(37,99,235,.30)",
+                    }}
                 >
 
-                    Create Free Account
+                    {/* Background Glow */}
 
-                </Link>
+                    <div
+                        style={{
+                            position: "absolute",
+                            width: "420px",
+                            height: "420px",
+                            borderRadius: "50%",
+                            background:
+                                "rgba(255,255,255,.08)",
+                            filter: "blur(120px)",
+                            top: "-180px",
+                            right: "-120px",
+                        }}
+                    />
+
+                    <div
+                        style={{
+                            position: "relative",
+                            zIndex: 2,
+                        }}
+                    >
+
+                        <span
+                            style={{
+                                display: "inline-block",
+                                background:
+                                    "rgba(255,255,255,.15)",
+                                border:
+                                    "1px solid rgba(255,255,255,.18)",
+                                color: "#fff",
+                                padding: "8px 18px",
+                                borderRadius: "999px",
+                                fontSize: ".9rem",
+                                fontWeight: 600,
+                                marginBottom: "22px",
+                                letterSpacing: ".5px",
+                            }}
+                        >
+                            🚀 START YOUR JOURNEY
+                        </span>
+
+                        <h2
+                            className="fw-bold"
+                            style={{
+                                color: "#fff",
+                                fontSize: "clamp(2.3rem,4vw,3.5rem)",
+                                lineHeight: 1.15,
+                                marginBottom: "20px",
+                            }}
+                        >
+                            Ready to Crack Your
+                            <br />
+                            Dream Government Job?
+                        </h2>
+
+                        <p
+                            className="mx-auto"
+                            style={{
+                                color: "rgba(255,255,255,.90)",
+                                maxWidth: "650px",
+                                fontSize: "1.15rem",
+                                lineHeight: 1.8,
+                                marginBottom: "42px",
+                            }}
+                        >
+                            Join thousands of aspirants using ExamBooster to
+                            practice smarter, improve faster, and achieve their
+                            dream government career.
+                        </p>
+
+                        <Link
+                            to="/register"
+                            className="btn fw-semibold rounded-pill d-inline-flex align-items-center"
+                            style={{
+                                background: "#FFFFFF",
+                                color: "#1D4ED8",
+                                padding: "16px 34px",
+                                fontSize: "1.05rem",
+                                border: "none",
+                                transition: ".3s",
+                                boxShadow:
+                                    "0 15px 40px rgba(0,0,0,.18)",
+                            }}
+                        >
+                            Create Free Account
+
+                            <ArrowRight
+                                size={20}
+                                style={{
+                                    marginLeft: "10px",
+                                }}
+                            />
+
+                        </Link>
+
+                        <div
+                            className="d-flex justify-content-center flex-wrap mt-5"
+                            style={{
+                                gap: "28px",
+                            }}
+                        >
+
+                            <div
+                                className="d-flex align-items-center"
+                                style={{
+                                    color: "#fff",
+                                }}
+                            >
+                                <CheckCircle2
+                                    size={18}
+                                    style={{
+                                        marginRight: "8px",
+                                    }}
+                                />
+                                Free Forever
+                            </div>
+
+                            <div
+                                className="d-flex align-items-center"
+                                style={{
+                                    color: "#fff",
+                                }}
+                            >
+                                <CheckCircle2
+                                    size={18}
+                                    style={{
+                                        marginRight: "8px",
+                                    }}
+                                />
+                                Instant Access
+                            </div>
+
+                            <div
+                                className="d-flex align-items-center"
+                                style={{
+                                    color: "#fff",
+                                }}
+                            >
+                                <CheckCircle2
+                                    size={18}
+                                    style={{
+                                        marginRight: "8px",
+                                    }}
+                                />
+                                AI-Powered Learning
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 

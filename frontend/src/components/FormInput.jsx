@@ -17,7 +17,19 @@ const FormInput = forwardRef(
 
             <div className="mb-4">
 
-                <label className="form-label fw-semibold">
+                <label
+
+                    className="fw-semibold mb-2 d-block"
+
+                    style={{
+
+                        color: "#E2E8F0",
+
+                        fontSize: ".95rem",
+
+                    }}
+
+                >
 
                     {label}
 
@@ -31,11 +43,55 @@ const FormInput = forwardRef(
 
                     placeholder={placeholder}
 
-                    className={`form-control form-control-lg rounded-3 ${
-                        error ? "is-invalid" : ""
-                    }`}
-
                     {...props}
+
+                    style={{
+
+                        width: "100%",
+
+                        height: "58px",
+
+                        background: "#0F172A",
+
+                        color: "#F8FAFC",
+
+                        border: error
+
+                            ? "1px solid #EF4444"
+
+                            : "1px solid rgba(255,255,255,.08)",
+
+                        borderRadius: "14px",
+
+                        padding: "0 18px",
+
+                        outline: "none",
+
+                        fontSize: "1rem",
+
+                        transition: "all .25s ease",
+
+                    }}
+
+                    onFocus={(e) => {
+
+                        e.target.style.border =
+                            "1px solid #3B82F6";
+
+                        e.target.style.boxShadow =
+                            "0 0 0 4px rgba(59,130,246,.15)";
+
+                    }}
+
+                    onBlur={(e) => {
+
+                        e.target.style.boxShadow = "none";
+
+                        e.target.style.border = error
+                            ? "1px solid #EF4444"
+                            : "1px solid rgba(255,255,255,.08)";
+
+                    }}
 
                 />
 
@@ -43,11 +99,25 @@ const FormInput = forwardRef(
 
                     error && (
 
-                        <div className="invalid-feedback">
+                        <p
+
+                            style={{
+
+                                color: "#F87171",
+
+                                fontSize: ".88rem",
+
+                                marginTop: "8px",
+
+                                marginBottom: "0",
+
+                            }}
+
+                        >
 
                             {error}
 
-                        </div>
+                        </p>
 
                     )
 
