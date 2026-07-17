@@ -3,12 +3,15 @@ const express = require("express");
 const router = express.Router();
 
 const authMiddleware = require("../middleware/authMiddleware");
+const upload = require("../middleware/uploadMiddleware.js");
 
 const {
 
     getProfile,
 
-    updateProfile
+    updateProfile,
+
+    uploadProfileImage
 
 } = require("../controllers/profileController");
 
@@ -41,6 +44,24 @@ router.put(
     authMiddleware,
 
     updateProfile
+
+);
+
+/*
+====================================
+Upload Profile Image
+====================================
+*/
+
+router.put(
+
+    "/upload-profile-image",
+
+    authMiddleware,
+
+    upload.single("profileImage"),
+
+    uploadProfileImage
 
 );
 

@@ -7,17 +7,34 @@ function DashboardLayout({ children }) {
 
     return (
 
-        <div className="dashboard-layout">
+        <div
+            className="dashboard-layout"
+            style={{
+                background: "#0B1120",
+                minHeight: "100vh",
+            }}
+        >
 
             <Sidebar />
 
-            <div className="dashboard-content">
+            <main
+                className="dashboard-content"
+                style={{
+                    padding: "28px 32px",
+                }}
+            >
 
                 <Topbar />
 
-                {children}
+                <div
+                    style={{
+                        marginTop: "24px",
+                    }}
+                >
+                    {children}
+                </div>
 
-            </div>
+            </main>
 
         </div>
 

@@ -57,6 +57,8 @@ exports.getProfile = async (req, res) => {
 
             examTarget: user.examTarget,
 
+            profileImage: user.profileImage,
+
             createdAt: user.createdAt,
 
             testsAttempted,
@@ -126,6 +128,66 @@ exports.updateProfile = async (req, res) => {
             message: "Profile Updated Successfully",
 
             user
+
+        });
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+        res.status(500).json({
+
+            message: err.message
+
+        });
+
+    }
+
+};
+
+/*
+==============================
+Upload Profile Image
+==============================
+*/
+
+exports.uploadProfileImage = async (req, res) => {
+
+    try {
+
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+
+            return res.status(404).json({
+
+                message: "User not found"
+
+            });
+
+        }
+
+        if (!req.file) {
+
+            return res.status(400).json({
+
+                message: "Please upload an image."
+
+            });
+
+        }
+
+        user.profileImage = req.file.filename;
+
+        await user.save();
+
+        res.json({
+
+            message: "Profile image updated successfully.",
+
+            profileImage: user.profileImage
 
         });
 

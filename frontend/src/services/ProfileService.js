@@ -27,3 +27,33 @@ export const updateProfile = async (data) => {
     return response.data;
 
 };
+
+/*
+==============================
+Upload Profile Image
+==============================
+*/
+
+export const uploadProfileImage = async (formData) => {
+
+    const response = await api.put(
+
+        "/profile/upload-profile-image",
+
+        formData,
+
+        {
+
+            headers: {
+
+                "Content-Type": "multipart/form-data",
+
+            },
+
+        }
+
+    );
+
+    return response.data;
+
+};

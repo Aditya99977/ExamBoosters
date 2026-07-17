@@ -54,11 +54,30 @@ function StudentDashboard() {
 
             <DashboardLayout>
 
-                <div className="text-center py-5">
+                <div
+                    className="d-flex flex-column justify-content-center align-items-center"
+                    style={{
+                        minHeight: "70vh",
+                    }}
+                >
 
-                    <div className="spinner-border text-primary"></div>
+                    <div
+                        className="spinner-border text-primary"
+                        style={{
+                            width: "3rem",
+                            height: "3rem",
+                        }}
+                    />
 
-                    <p className="mt-3">Loading Dashboard...</p>
+                    <p
+                        className="mt-4 mb-0"
+                        style={{
+                            color: "#94A3B8",
+                            fontSize: "1.05rem",
+                        }}
+                    >
+                        Loading your dashboard...
+                    </p>
 
                 </div>
 
@@ -72,65 +91,91 @@ function StudentDashboard() {
 
         <DashboardLayout>
 
-            <WelcomeCard user={dashboard?.user} />
+            <div className="container-fluid px-0">
 
-            <div className="row">
+                {/* Welcome */}
 
-                <StatCard
-                    title="Practice Questions"
-                    value={dashboard?.stats?.practiceQuestions ?? 0}
-                    subtitle="Questions Attempted"
-                    icon={<FaBook color="#2563EB" />}
-                    color="#16A34A"
+                <WelcomeCard
+                    user={dashboard?.user}
                 />
 
-                <StatCard
-                    title="Mock Tests"
-                    value={dashboard?.stats?.mockTestsCompleted ?? 0}
-                    subtitle="Completed"
-                    icon={<FaClipboardList color="#7C3AED" />}
-                    color="#16A34A"
-                />
+                {/* Stats */}
 
-                <StatCard
-                    title="Accuracy"
-                    value={`${dashboard?.stats?.accuracy ?? 0}%`}
-                    subtitle="Average Accuracy"
-                    icon={<FaChartLine color="#F59E0B" />}
-                    color="#2563EB"
-                />
+                <div className="row g-4 mt-1">
 
-                <StatCard
-                    title="Highest Score"
-                    value={dashboard?.stats?.highestScore ?? 0}
-                    subtitle="Best Performance"
-                    icon={<FaTrophy color="#F97316" />}
-                    color="#2563EB"
-                />
+                    <StatCard
+                        title="Practice Questions"
+                        value={dashboard?.stats?.practiceQuestions ?? 0}
+                        subtitle="Questions Attempted"
+                        icon={<FaBook />}
+                        color="#22C55E"
+                    />
 
-            </div>
+                    <StatCard
+                        title="Mock Tests"
+                        value={dashboard?.stats?.mockTestsCompleted ?? 0}
+                        subtitle="Completed"
+                        icon={<FaClipboardList />}
+                        color="#22C55E"
+                    />
 
-            <SubjectProgress
-                data={dashboard?.subjectProgress || []}
-            />
+                    <StatCard
+                        title="Accuracy"
+                        value={`${dashboard?.stats?.accuracy ?? 0}%`}
+                        subtitle="Average Accuracy"
+                        icon={<FaChartLine />}
+                        color="#3B82F6"
+                    />
 
-            <PerformanceChart
-                data={dashboard?.weeklyPerformance || []}
-            />
-
-            <div className="row mt-4">
-
-                <div className="col-lg-8">
-
-                    <RecentTests
-                        tests={dashboard?.recentTests || []}
+                    <StatCard
+                        title="Highest Score"
+                        value={dashboard?.stats?.highestScore ?? 0}
+                        subtitle="Best Performance"
+                        icon={<FaTrophy />}
+                        color="#3B82F6"
                     />
 
                 </div>
 
-                <div className="col-lg-4">
+                {/* Analytics */}
 
-                    <QuickActions />
+                <div className="row g-4 mt-1">
+
+                    <div className="col-lg-5">
+
+                        <SubjectProgress
+                            data={dashboard?.subjectProgress || []}
+                        />
+
+                    </div>
+
+                    <div className="col-lg-7">
+
+                        <PerformanceChart
+                            data={dashboard?.weeklyPerformance || []}
+                        />
+
+                    </div>
+
+                </div>
+
+                {/* Bottom Section */}
+
+                <div className="row g-4 mt-1 mb-4">
+
+                    <div className="col-lg-8">
+
+                        <RecentTests
+                            tests={dashboard?.recentTests || []}
+                        />
+
+                    </div>
+
+                    <div className="col-lg-4">
+
+                        <QuickActions />
+
+                    </div>
 
                 </div>
 

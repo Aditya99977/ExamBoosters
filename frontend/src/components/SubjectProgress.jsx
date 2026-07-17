@@ -2,45 +2,73 @@ function SubjectProgress({ data = [] }) {
 
     const getColor = (progress) => {
 
-        if (progress >= 80) return "bg-success";
+        if (progress >= 80) return "#22C55E";
 
-        if (progress >= 60) return "bg-primary";
+        if (progress >= 60) return "#3B82F6";
 
-        if (progress >= 40) return "bg-warning";
+        if (progress >= 40) return "#F59E0B";
 
-        return "bg-danger";
+        return "#EF4444";
 
     };
 
     return (
 
-        <div className="card border-0 shadow-sm rounded-4 mt-4">
+        <div
+            className="rounded-4 mt-4"
+            style={{
+                background: "#111827",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 10px 30px rgba(0,0,0,.18)",
+            }}
+        >
 
-            <div className="card-body p-4">
+            <div className="p-4">
 
-                <h4 className="fw-bold mb-4">
+                <div className="d-flex justify-content-between align-items-center mb-4">
 
-                    📚 Subject Progress
+                    <div>
 
-                </h4>
+                        <h4
+                            className="fw-bold text-white mb-1"
+                        >
+                            📚 Subject Progress
+                        </h4>
+
+                        <p
+                            className="mb-0"
+                            style={{
+                                color: "#94A3B8",
+                                fontSize: ".95rem",
+                            }}
+                        >
+                            Track your performance across all subjects.
+                        </p>
+
+                    </div>
+
+                </div>
 
                 {
 
                     data.length === 0 ? (
 
-                        <div className="text-center py-4">
+                        <div className="text-center py-5">
 
-                            <p className="text-muted mb-0">
+                            <h6
+                                className="text-white mb-2"
+                            >
+                                No progress available
+                            </h6>
 
-                                No subject progress available yet.
-
+                            <p
+                                className="mb-0"
+                                style={{
+                                    color: "#94A3B8",
+                                }}
+                            >
+                                Complete a mock test to start tracking your performance.
                             </p>
-
-                            <small className="text-secondary">
-
-                                Complete a mock test to see your performance.
-
-                            </small>
 
                         </div>
 
@@ -53,39 +81,50 @@ function SubjectProgress({ data = [] }) {
                                 className="mb-4"
                             >
 
-                                <div className="d-flex justify-content-between">
+                                <div className="d-flex justify-content-between align-items-center mb-2">
 
-                                    <strong>
-
+                                    <span
+                                        className="fw-semibold"
+                                        style={{
+                                            color: "#F8FAFC",
+                                        }}
+                                    >
                                         {subject.subject}
+                                    </span>
 
-                                    </strong>
-
-                                    <span>
-
+                                    <span
+                                        className="px-3 py-1 rounded-pill"
+                                        style={{
+                                            background: "rgba(255,255,255,.06)",
+                                            color: getColor(subject.progress),
+                                            fontWeight: 700,
+                                            fontSize: ".85rem",
+                                            border: "1px solid rgba(255,255,255,.08)",
+                                        }}
+                                    >
                                         {subject.progress}%
-
                                     </span>
 
                                 </div>
 
-                                <div className="progress mt-2">
+                                <div
+                                    style={{
+                                        height: "10px",
+                                        borderRadius: "999px",
+                                        background: "#1E293B",
+                                        overflow: "hidden",
+                                    }}
+                                >
 
                                     <div
-
-                                        className={`progress-bar ${getColor(subject.progress)}`}
-
-                                        role="progressbar"
-
                                         style={{
-
-                                            width: `${subject.progress}%`
-
+                                            width: `${subject.progress}%`,
+                                            height: "100%",
+                                            background: getColor(subject.progress),
+                                            borderRadius: "999px",
+                                            transition: "width .5s ease",
                                         }}
-
-                                    >
-
-                                    </div>
+                                    />
 
                                 </div>
 

@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from "react-router-dom";
-
 import {
     FaHome,
     FaBook,
@@ -18,125 +17,234 @@ function Sidebar() {
     const handleLogout = () => {
 
         localStorage.removeItem("token");
-
         navigate("/");
 
     };
 
-    const linkStyle = ({ isActive }) => ({
-
-        color: "white",
-
-        textDecoration: "none",
-
-        padding: "10px 15px",
-
-        borderRadius: "8px",
-
-        backgroundColor: isActive
-            ? "rgba(255,255,255,0.2)"
-            : "transparent",
-
-        transition: "0.3s"
-
-    });
-
     const menuItems = [
-
         {
             name: "Dashboard",
             path: "/dashboard",
-            icon: <FaHome className="me-2" />
+            icon: <FaHome />,
         },
-
         {
             name: "Practice",
             path: "/practice",
-            icon: <FaBook className="me-2" />
+            icon: <FaBook />,
         },
-
         {
             name: "Mock Tests",
             path: "/mock-tests",
-            icon: <FaClipboardList className="me-2" />
+            icon: <FaClipboardList />,
         },
-
         {
             name: "Previous Year Papers",
             path: "/previous-year-papers",
-            icon: <FaFilePdf className="me-2" />
+            icon: <FaFilePdf />,
         },
-
         {
             name: "Performance",
             path: "/performance",
-            icon: <FaChartBar className="me-2" />
+            icon: <FaChartBar />,
         },
-
         {
             name: "AI Tutor",
-            path: "/ai-tutor",
-            icon: <FaRobot className="me-2" />
+            icon: <FaRobot />,
+            disabled: true,
         },
-
         {
             name: "Profile",
             path: "/profile",
-            icon: <FaUser className="me-2" />
-        }
-
+            icon: <FaUser />,
+        },
     ];
 
     return (
-
-        <div
-            className="bg-primary text-white position-fixed"
+        <aside
+            className="position-fixed d-flex flex-column"
             style={{
-                width: "260px",
+                width: "270px",
                 height: "100vh",
-                padding: "30px"
+                background: "#0F172A",
+                borderRight: "1px solid rgba(255,255,255,0.08)",
+                padding: "28px 20px",
             }}
         >
+            {/* Logo */}
 
-            <h3 className="fw-bold mb-5">
+            <div className="mb-5">
 
-                🚀 ExamBooster
-
-            </h3>
-
-            <div className="d-flex flex-column gap-3">
-
-                {menuItems.map((item) => (
-
-                    <NavLink
-                        key={item.path}
-                        to={item.path}
-                        style={linkStyle}
-                    >
-
-                        {item.icon}
-
-                        {item.name}
-
-                    </NavLink>
-
-                ))}
-
-                <button
-                    className="btn btn-outline-light mt-5 text-start"
-                    onClick={handleLogout}
+                <div
+                    className="d-flex align-items-center"
+                    style={{ gap: "12px" }}
                 >
 
-                    <FaSignOutAlt className="me-2" />
+                    <div
+                        style={{
+                            width: "46px",
+                            height: "46px",
+                            borderRadius: "14px",
+                            background:
+                                "linear-gradient(135deg,#2563EB,#3B82F6)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: "20px",
+                        }}
+                    >
+                        🚀
+                    </div>
 
-                    Logout
+                    <div>
 
-                </button>
+                        <h4
+                            className="text-white fw-bold mb-0"
+                            style={{ letterSpacing: ".3px" }}
+                        >
+                            ExamBooster
+                        </h4>
+
+                        <small
+                            style={{
+                                color: "#94A3B8",
+                                fontSize: "12px",
+                            }}
+                        >
+                            Student Portal
+                        </small>
+
+                    </div>
+
+                </div>
 
             </div>
 
-        </div>
+            {/* Navigation */}
 
+            <div
+                className="d-flex flex-column"
+                style={{ gap: "8px", flex: 1 }}
+            >
+
+                {menuItems.map((item) =>
+
+                    item.disabled ? (
+
+                        <div
+                            key={item.name}
+                            style={{
+                                color: "#64748B",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "14px",
+                                padding: "14px 16px",
+                                borderRadius: "16px",
+                                background: "rgba(255,255,255,0.03)",
+                                border: "1px solid rgba(255,255,255,0.05)",
+                                cursor: "not-allowed",
+                                position: "relative",
+                            }}
+                        >
+
+                            <span
+                                style={{
+                                    fontSize: "16px",
+                                    width: "18px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                {item.icon}
+                            </span>
+
+                            <span>{item.name}</span>
+
+                            <span
+                                style={{
+                                    marginLeft: "auto",
+                                    background: "#F59E0B",
+                                    color: "#fff",
+                                    fontSize: ".65rem",
+                                    padding: "3px 8px",
+                                    borderRadius: "999px",
+                                    fontWeight: "600",
+                                }}
+                            >
+                                Soon
+                            </span>
+
+                        </div>
+
+                    ) : (
+
+                        <NavLink
+                            key={item.path}
+                            to={item.path}
+                            style={({ isActive }) => ({
+                                textDecoration: "none",
+                                color: isActive ? "#ffffff" : "#CBD5E1",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "14px",
+                                padding: "14px 16px",
+                                borderRadius: "16px",
+                                background: isActive
+                                    ? "linear-gradient(135deg,#2563EB,#3B82F6)"
+                                    : "transparent",
+                                border: isActive
+                                    ? "1px solid rgba(255,255,255,0.08)"
+                                    : "1px solid transparent",
+                                fontWeight: isActive ? "600" : "500",
+                                transition: "all .25s ease",
+                            })}
+                        >
+
+                            <span
+                                style={{
+                                    fontSize: "16px",
+                                    width: "18px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                {item.icon}
+                            </span>
+
+                            <span>{item.name}</span>
+
+                        </NavLink>
+
+                    )
+
+                )}
+
+            </div>
+
+            {/* Logout */}
+
+            <button
+                onClick={handleLogout}
+                className="btn text-white mt-4"
+                style={{
+                    borderRadius: "16px",
+                    padding: "14px",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    background: "rgba(255,255,255,0.03)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "10px",
+                    fontWeight: "600",
+                }}
+            >
+
+                <FaSignOutAlt />
+
+                Logout
+
+            </button>
+
+        </aside>
     );
 
 }

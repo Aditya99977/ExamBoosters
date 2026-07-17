@@ -1,80 +1,175 @@
-import { FaFire, FaBullseye } from "react-icons/fa";
+import { FaFire, FaBullseye, FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function WelcomeCard({ user }) {
 
     const navigate = useNavigate();
 
+    const greeting = () => {
+
+        const hour = new Date().getHours();
+
+        if (hour < 12) return "Good Morning";
+        if (hour < 17) return "Good Afternoon";
+
+        return "Good Evening";
+
+    };
+
     return (
 
         <div
-            className="card border-0 shadow rounded-4 mb-4"
+            className="position-relative overflow-hidden rounded-4 mb-4"
             style={{
-                background: "linear-gradient(135deg,#2563EB,#1D4ED8)",
-                color: "white"
+                background:
+                    "linear-gradient(135deg,#1D4ED8 0%, #2563EB 45%, #3B82F6 100%)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 20px 45px rgba(37,99,235,.28)",
             }}
         >
 
-            <div className="card-body p-5">
+            {/* Decorative Blur */}
+            <div
+                style={{
+                    position: "absolute",
+                    width: "260px",
+                    height: "260px",
+                    borderRadius: "50%",
+                    background: "rgba(255,255,255,.08)",
+                    top: "-120px",
+                    right: "-80px",
+                    filter: "blur(8px)",
+                }}
+            />
+
+            <div
+                style={{
+                    position: "absolute",
+                    width: "170px",
+                    height: "170px",
+                    borderRadius: "50%",
+                    background: "rgba(255,255,255,.05)",
+                    bottom: "-70px",
+                    left: "-40px",
+                }}
+            />
+
+            <div className="p-5 position-relative">
 
                 <div className="row align-items-center">
 
                     <div className="col-lg-8">
 
-                        <h2 className="fw-bold mb-3">
+                        <span
+                            className="d-inline-block mb-3 px-3 py-2 rounded-pill"
+                            style={{
+                                background: "rgba(255,255,255,.15)",
+                                color: "white",
+                                fontSize: "14px",
+                                fontWeight: 600,
+                                backdropFilter: "blur(12px)",
+                            }}
+                        >
+                            Student Dashboard
+                        </span>
 
-                            👋 Welcome, {user?.name}
-
+                        <h2
+                            className="fw-bold text-white mb-3"
+                            style={{
+                                fontSize: "2.4rem",
+                                lineHeight: 1.2,
+                            }}
+                        >
+                            {greeting()}, {user?.name} 👋
                         </h2>
 
-                        <p className="mb-4 fs-5">
-
-                            Target Exam: <strong>{user?.examTarget}</strong>
-
+                        <p
+                            className="mb-4"
+                            style={{
+                                color: "rgba(255,255,255,.85)",
+                                fontSize: "1.08rem",
+                                maxWidth: "620px",
+                            }}
+                        >
+                            Continue your preparation for{" "}
+                            <strong>{user?.examTarget}</strong>.
+                            Stay consistent, complete today's goals,
+                            and move one step closer to your dream job.
                         </p>
 
-                        <div className="d-flex flex-wrap gap-4">
+                        <div className="d-flex flex-wrap gap-3">
 
-                            <div>
+                            <div
+                                className="px-4 py-3 rounded-4"
+                                style={{
+                                    background: "rgba(255,255,255,.12)",
+                                    backdropFilter: "blur(14px)",
+                                    minWidth: "170px",
+                                }}
+                            >
+                                <div
+                                    className="d-flex align-items-center gap-2 mb-2"
+                                    style={{ color: "#FACC15" }}
+                                >
+                                    <FaFire />
 
-                                <FaFire className="me-2 text-warning" />
+                                    <span className="fw-semibold">
+                                        Study Streak
+                                    </span>
+                                </div>
 
-                                <strong>Study Streak</strong>
-
-                                <br />
-
-                                🔥 Coming Soon
-
+                                <div
+                                    style={{
+                                        color: "rgba(255,255,255,.9)",
+                                    }}
+                                >
+                                    🔥 Coming Soon
+                                </div>
                             </div>
 
-                            <div>
+                            <div
+                                className="px-4 py-3 rounded-4"
+                                style={{
+                                    background: "rgba(255,255,255,.12)",
+                                    backdropFilter: "blur(14px)",
+                                    minWidth: "220px",
+                                }}
+                            >
+                                <div
+                                    className="d-flex align-items-center gap-2 mb-2"
+                                >
+                                    <FaBullseye />
 
-                                <FaBullseye className="me-2" />
+                                    <span className="fw-semibold">
+                                        Today's Goal
+                                    </span>
+                                </div>
 
-                                <strong>Today's Goal</strong>
-
-                                <br />
-
-                                🎯 Complete 2 Mock Tests
-
+                                <div
+                                    style={{
+                                        color: "rgba(255,255,255,.9)",
+                                    }}
+                                >
+                                    Complete 2 Mock Tests
+                                </div>
                             </div>
 
                         </div>
 
                     </div>
 
-                    <div className="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                    <div className="col-lg-4 text-lg-end mt-5 mt-lg-0">
 
                         <button
-
-                            className="btn btn-light btn-lg rounded-pill px-5 fw-bold"
-
+                            className="btn btn-light rounded-pill px-5 py-3 fw-semibold shadow-sm"
+                            style={{
+                                fontSize: "1rem",
+                            }}
                             onClick={() => navigate("/practice")}
-
                         >
-
                             Start Practice
 
+                            <FaArrowRight className="ms-2" />
                         </button>
 
                     </div>

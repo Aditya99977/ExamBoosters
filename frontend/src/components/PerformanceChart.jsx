@@ -6,7 +6,8 @@ import {
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler
 } from "chart.js";
 
 import { Line } from "react-chartjs-2";
@@ -18,7 +19,8 @@ ChartJS.register(
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler
 );
 
 function PerformanceChart({ data = [] }) {
@@ -35,18 +37,31 @@ function PerformanceChart({ data = [] }) {
         datasets: [
             {
                 label: "Weekly Score",
+
                 data:
                     data.length > 0
                         ? data.map(item => item.score)
                         : [0],
 
-                borderColor: "#2563EB",
+                borderColor: "#3B82F6",
 
-                backgroundColor: "rgba(37,99,235,0.2)",
+                backgroundColor: "rgba(59,130,246,.12)",
 
-                tension: 0.4,
+                fill: true,
 
-                fill: true
+                tension: 0.45,
+
+                borderWidth: 3,
+
+                pointRadius: 5,
+
+                pointHoverRadius: 7,
+
+                pointBackgroundColor: "#3B82F6",
+
+                pointBorderColor: "#FFFFFF",
+
+                pointBorderWidth: 2,
             }
         ]
 
@@ -56,11 +71,71 @@ function PerformanceChart({ data = [] }) {
 
         responsive: true,
 
+        maintainAspectRatio: false,
+
         plugins: {
 
             legend: {
 
                 display: false
+
+            },
+
+            tooltip: {
+
+                backgroundColor: "#111827",
+
+                borderColor: "rgba(255,255,255,.08)",
+
+                borderWidth: 1,
+
+                titleColor: "#fff",
+
+                bodyColor: "#CBD5E1",
+
+                padding: 12,
+
+                displayColors: false,
+
+            }
+
+        },
+
+        scales: {
+
+            x: {
+
+                grid: {
+
+                    display: false,
+
+                },
+
+                ticks: {
+
+                    color: "#94A3B8",
+
+                }
+
+            },
+
+            y: {
+
+                beginAtZero: true,
+
+                grid: {
+
+                    color: "rgba(255,255,255,.06)",
+
+                },
+
+                ticks: {
+
+                    color: "#94A3B8",
+
+                    stepSize: 20,
+
+                }
 
             }
 
@@ -70,20 +145,49 @@ function PerformanceChart({ data = [] }) {
 
     return (
 
-        <div className="card border-0 shadow-sm rounded-4 mt-4">
+        <div
+            className="rounded-4 mt-4"
+            style={{
+                background: "#111827",
+                border: "1px solid rgba(255,255,255,.08)",
+                boxShadow: "0 10px 30px rgba(0,0,0,.18)",
+            }}
+        >
 
-            <div className="card-body">
+            <div className="p-4">
 
-                <h4 className="fw-bold mb-4">
+                <div className="mb-4">
 
-                    📈 Weekly Performance
+                    <h4
+                        className="fw-bold text-white mb-1"
+                    >
+                        📈 Weekly Performance
+                    </h4>
 
-                </h4>
+                    <p
+                        className="mb-0"
+                        style={{
+                            color: "#94A3B8",
+                            fontSize: ".95rem",
+                        }}
+                    >
+                        Monitor your scores and stay consistent throughout the week.
+                    </p>
 
-                <Line
-                    data={chartData}
-                    options={options}
-                />
+                </div>
+
+                <div
+                    style={{
+                        height: "300px",
+                    }}
+                >
+
+                    <Line
+                        data={chartData}
+                        options={options}
+                    />
+
+                </div>
 
             </div>
 
