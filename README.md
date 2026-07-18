@@ -1,139 +1,246 @@
 # 🚀 ExamBooster
 
-A modern **MERN Stack** platform for government exam preparation, featuring mock tests, performance analytics, and personalized learning.
+A modern **MERN Stack** platform for government exam preparation that helps students practice questions, attempt mock tests, analyze performance, and prepare smarter using AI-powered learning.
 
-> **Status:** 🚧 Active Development
+> **Status:** 🚧 Beta Development
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-- 🔐 JWT Authentication & Role-Based Access
-- 👤 User Profile Management
-- 📊 Student Dashboard
+## 👨‍🎓 Student Features
+
+- 🔐 JWT Authentication
+- 👤 User Profile
+- 🏠 Student Dashboard
+- 📚 Practice Questions
 - 📝 Mock Test System
-- 📈 Performance Analytics
-- 📚 Question Bank
-- 👨‍💼 Admin Dashboard
-- 📱 Responsive UI
+- 📄 Previous Year Papers
+- 📈 Performance Dashboard
+- 🤖 AI Tutor
+- 📱 Fully Responsive UI
 
 ---
 
-## 💻 Tech Stack
+## 👨‍💼 Admin Features
 
-### Frontend
+- Admin Dashboard
+- Question Management
+- Previous Year Papers Management
+- CSV Bulk Upload
+- User Management
+- Paper Management
+- Dashboard Analytics
+
+---
+
+# 💻 Tech Stack
+
+## Frontend
+
 - React
 - Vite
 - Bootstrap 5
 - Chart.js
 - Axios
 - React Router
+- Lucide React
 
-### Backend
+---
+
+## Backend
+
 - Node.js
 - Express.js
-- MongoDB
+- MongoDB Atlas
 - Mongoose
-- JWT
+- JWT Authentication
 - bcryptjs
+- Multer
+- Google Gemini API
 
 ---
 
-## 🏗 Architecture
-
-```
-React (Frontend)
-        │
-        ▼
-Express REST API
-        │
-        ▼
-MongoDB Atlas
-```
-
----
-
-## 📂 Project Structure
+# 🏗 System Architecture
 
 ```text
-ExamBooster
+                 React + Vite
+                      │
+                      │ Axios
+                      ▼
+             Express REST API
+                      │
+        ┌─────────────┼─────────────┐
+        ▼             ▼             ▼
+ MongoDB Atlas     Gemini AI     File Uploads
+```
+
+---
+
+# 📂 Project Structure
+
+```text
+ExamBoosters
 │
-├── backend/
-├── frontend/
-├── docs/
+├── backend
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   ├── uploads
+│   ├── utils
+│   ├── server.js
+│   └── package.json
+│
+├── frontend
+│   ├── public
+│   ├── src
+│   │   ├── assets
+│   │   ├── components
+│   │   ├── hooks
+│   │   ├── layouts
+│   │   ├── pages
+│   │   ├── services
+│   │   ├── utils
+│   │   └── App.jsx
+│   └── package.json
+│
+├── docs
 ├── README.md
 └── .gitignore
 ```
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
-### Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/Aditya99977/ExamBoosters.git
+
 cd ExamBoosters
 ```
 
-### Backend
+---
+
+## Backend
 
 ```bash
 cd backend
+
 npm install
+
 npm run dev
 ```
 
-### Frontend
+Backend runs on:
+
+```
+http://localhost:5000
+```
+
+---
+
+## Frontend
 
 ```bash
 cd frontend
+
 npm install
+
 npm run dev
+```
+
+Frontend runs on:
+
+```
+http://localhost:5173
 ```
 
 ---
 
-## 📚 Documentation
+# 📚 Major Modules
 
-Detailed project documentation is available in the **docs/** folder.
-
-- 📅 Daily Development Logs
-- 🏗 Architecture
-- 📖 API Documentation
-- 🗺 Project Roadmap
-
----
-
-## 🚀 Roadmap
-
-- ✅ Authentication
-- ✅ Dashboard
-- ✅ Profile Management
-- ✅ Mock Test Engine
-- 🚧 Practice Module
-- 🚧 Performance Module
-- ⏳ Email Verification
-- ⏳ Deployment
-- ⏳ AI-Powered Learning
+- Authentication
+- Dashboard
+- Practice Questions
+- Mock Test
+- Previous Year Papers
+- Performance Analytics
+- AI Tutor
+- Admin Panel
 
 ---
 
-## 👨‍💻 Developer
+# 📖 Documentation
 
-**Aditya Thakur**
+Project documentation is available inside the **docs/** folder.
+
+Contents include:
+
+- Daily Development Logs
+- API Documentation
+- Project Architecture
+- Feature Planning
+- Roadmap
+
+---
+
+# 🚀 Roadmap
+
+## ✅ Completed
+
+- Authentication
+- Student Dashboard
+- Admin Dashboard
+- Practice Questions
+- Mock Test Module
+- Previous Year Papers
+- Performance Dashboard
+- AI Tutor
+- Responsive UI
+
+---
+
+## 🚧 In Progress
+
+- AI Study Planner
+- AI Mock Analysis
+- UI Optimization
+
+---
+
+## ⏳ Planned
+
+- Email Verification
+- Notifications
+- Leaderboard
+- Deployment
+- Mobile Optimization
+
+---
+
+# 👨‍💻 Developer
+
+## Aditya Thakur
 
 MBA (AI & Data Science)
 
-- GitHub: https://github.com/Aditya99977
-- LinkedIn: https://www.linkedin.com/in/aditya-thakur-67745141a/
+### Connect with me
+
+- GitHub
+  - https://github.com/Aditya99977
+
+- LinkedIn
+  - https://www.linkedin.com/in/aditya-thakur-67745141a/
 
 ---
 
-## 📄 License
+# 📄 License
 
 This project is developed for learning, portfolio, and startup purposes.
 
 ---
 
-⭐ If you like this project, consider starring the repository.
+⭐ If you like this project, don't forget to **Star** the repository.

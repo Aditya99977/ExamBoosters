@@ -1,25 +1,27 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-    Trophy,
-    RotateCw,
-    LayoutDashboard,
-    CheckCircle2,
-    Target,
-} from "lucide-react";
 
-function ResultCard({
-    result,
-    onRetry,
+function ResultScreen({
+    score,
+    questions,
+    retryPractice,
 }) {
 
     const navigate = useNavigate();
 
-    if (!result) return null;
+    const totalQuestions = questions.length;
+
+    const accuracy = useMemo(() => {
+
+        if (totalQuestions === 0) return 0;
+
+        return Math.round(
+            (score / totalQuestions) * 100
+        );
+
+    }, [score, totalQuestions]);
 
     const performance = useMemo(() => {
-
-        const accuracy = result.accuracy;
 
         if (accuracy >= 90) {
 
@@ -53,7 +55,7 @@ function ResultCard({
             color: "#EF4444",
         };
 
-    }, [result.accuracy]);
+    }, [accuracy]);
 
     return (
 
@@ -65,7 +67,7 @@ function ResultCard({
             }}
         >
 
-            {/* Hero */}
+            {/* Header */}
 
             <div
                 className="text-center py-5 px-4"
@@ -78,96 +80,51 @@ function ResultCard({
                 <div
                     className="mx-auto rounded-circle d-flex align-items-center justify-content-center mb-4"
                     style={{
-                        width: 150,
-                        height: 150,
+                        width: 140,
+                        height: 140,
                         border: `8px solid ${performance.color}`,
+                        color: "#fff",
+                        fontWeight: 700,
+                        fontSize: "2rem",
                     }}
                 >
 
-                    <div>
-
-                        <h1
-                            className="fw-bold text-white mb-0"
-                        >
-                            {result.accuracy}%
-                        </h1>
-
-                        <small className="text-white-50">
-                            Accuracy
-                        </small>
-
-                    </div>
+                    {accuracy}%
 
                 </div>
 
                 <h2 className="text-white fw-bold">
-                    Mock Test Completed
+                    Practice Completed
                 </h2>
 
                 <p className="text-white-50 mb-0">
-                    {result.exam}
+                    Review your performance and continue improving.
                 </p>
 
             </div>
 
-            {/* Content */}
+            {/* Stats */}
 
             <div className="p-5">
 
                 <div className="row g-4">
 
-                    {/* Score */}
-
                     <div className="col-md-4">
 
                         <div
-                            className="rounded-4 p-4 text-center h-100"
+                            className="rounded-4 p-4 h-100 text-center"
                             style={{
                                 background: "#0F172A",
                             }}
                         >
-
-                            <Trophy
-                                size={32}
-                                color="#F59E0B"
-                            />
-
-                            <h2 className="text-white fw-bold mt-3">
-                                {result.score}
-                            </h2>
-
-                            <p className="text-secondary mb-0">
-                                Score
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    {/* Correct */}
-
-                    <div className="col-md-4">
-
-                        <div
-                            className="rounded-4 p-4 text-center h-100"
-                            style={{
-                                background: "#0F172A",
-                            }}
-                        >
-
-                            <CheckCircle2
-                                size={32}
-                                color="#22C55E"
-                            />
 
                             <h2
-                                className="fw-bold mt-3"
+                                className="fw-bold mb-2"
                                 style={{
-                                    color: "#22C55E",
+                                    color: performance.color,
                                 }}
                             >
-                                {result.score}/
-                                {result.totalQuestions}
+                                {score}
                             </h2>
 
                             <p className="text-secondary mb-0">
@@ -178,24 +135,38 @@ function ResultCard({
 
                     </div>
 
-                    {/* Performance */}
-
                     <div className="col-md-4">
 
                         <div
-                            className="rounded-4 p-4 text-center h-100"
+                            className="rounded-4 p-4 h-100 text-center"
                             style={{
                                 background: "#0F172A",
                             }}
                         >
 
-                            <Target
-                                size={32}
-                                color={performance.color}
-                            />
+                            <h2 className="text-white fw-bold mb-2">
+                                {totalQuestions}
+                            </h2>
+
+                            <p className="text-secondary mb-0">
+                                Total Questions
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div className="col-md-4">
+
+                        <div
+                            className="rounded-4 p-4 h-100 text-center"
+                            style={{
+                                background: "#0F172A",
+                            }}
+                        >
 
                             <h2
-                                className="fw-bold mt-3"
+                                className="fw-bold mb-2"
                                 style={{
                                     color: performance.color,
                                 }}
@@ -213,7 +184,7 @@ function ResultCard({
 
                 </div>
 
-                {/* Submitted */}
+                {/* Accuracy */}
 
                 <div
                     className="rounded-4 p-4 mt-5"
@@ -222,52 +193,63 @@ function ResultCard({
                     }}
                 >
 
-                    <small className="text-secondary">
-                        Submitted On
-                    </small>
+                    <div className="d-flex justify-content-between mb-3">
 
-                    <h5 className="text-white mt-2 mb-0">
+                        <span className="text-white">
 
-                        {new Date(
-                            result.submittedAt
-                        ).toLocaleString()}
+                            Accuracy
 
-                    </h5>
+                        </span>
+
+                        <strong
+                            style={{
+                                color: performance.color,
+                            }}
+                        >
+                            {accuracy}%
+                        </strong>
+
+                    </div>
+
+                    <div
+                        className="progress"
+                        style={{
+                            height: "12px",
+                            background: "#1E293B",
+                        }}
+                    >
+
+                        <div
+                            className="progress-bar"
+                            style={{
+                                width: `${accuracy}%`,
+                                background:
+                                    performance.color,
+                            }}
+                        />
+
+                    </div>
 
                 </div>
 
                 {/* Actions */}
 
-                <div className="d-flex gap-3 mt-5">
+                <div className="d-flex justify-content-center gap-3 mt-5 flex-wrap">
 
                     <button
-                        className="btn btn-primary flex-fill py-3"
-                        onClick={onRetry}
+                        className="btn btn-primary btn-lg px-5"
+                        onClick={retryPractice}
                     >
-
-                        <RotateCw
-                            size={18}
-                            className="me-2"
-                        />
-
-                        Retry Test
-
+                        Retry Practice
                     </button>
 
                     <button
-                        className="btn btn-outline-light flex-fill py-3"
+                        className="btn btn-outline-light btn-lg px-5"
                         onClick={() =>
                             navigate("/dashboard")
                         }
                     >
-
-                        <LayoutDashboard
-                            size={18}
-                            className="me-2"
-                        />
-
-                        Dashboard
-
+                        Back to Dashboard
                     </button>
 
                 </div>
@@ -280,4 +262,4 @@ function ResultCard({
 
 }
 
-export default ResultCard;
+export default ResultScreen;

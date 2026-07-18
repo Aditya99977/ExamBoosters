@@ -1,168 +1,255 @@
+import { ChevronLeft, ChevronRight, Circle } from "lucide-react";
+
 function QuestionCard({
-
     question,
-
     currentQuestion,
-
     totalQuestions,
-
     selectedAnswer,
-
     onAnswerSelect,
-
     onPrevious,
-
     onNext,
-
     isFirst,
-
-    isLast
-
+    isLast,
 }) {
-
     if (!question) {
-
         return (
-
-            <div className="alert alert-info">
-
-                No question available.
-
+            <div
+                className="rounded-4 p-5 text-center"
+                style={{
+                    background: "#131D31",
+                    border: "1px solid rgba(255,255,255,.08)",
+                }}
+            >
+                <h4 className="text-white mb-0">
+                    No question available.
+                </h4>
             </div>
-
         );
-
     }
 
+    const progress =
+        (currentQuestion / totalQuestions) * 100;
+
     return (
+        <div
+            className="rounded-4"
+            style={{
+                background: "#131D31",
+                border: "1px solid rgba(255,255,255,.08)",
+            }}
+        >
+            {/* Header */}
 
-        <div className="card shadow-sm border-0 rounded-4">
+            <div
+                className="p-4"
+                style={{
+                    borderBottom:
+                        "1px solid rgba(255,255,255,.08)",
+                }}
+            >
+                <div className="d-flex justify-content-between align-items-center">
 
-            <div className="card-body p-4">
+                    <div>
 
-                <h5 className="text-primary mb-3">
+                        <small className="text-secondary">
+                            Question
+                        </small>
 
-                    Question {currentQuestion} of {totalQuestions}
+                        <h3 className="text-white fw-bold mb-0">
+                            {currentQuestion}
+                        </h3>
 
-                </h5>
+                    </div>
 
-                <div className="progress mb-4">
+                    <div className="text-end">
 
-                    <div
+                        <small className="text-secondary">
+                            Total
+                        </small>
 
-                        className="progress-bar"
-
-                        role="progressbar"
-
-                        style={{
-
-                            width: `${(currentQuestion / totalQuestions) * 100}%`
-
-                        }}
-
-                    >
-
-                        {currentQuestion}/{totalQuestions}
+                        <h3 className="text-white fw-bold mb-0">
+                            {totalQuestions}
+                        </h3>
 
                     </div>
 
                 </div>
 
-                <h4 className="mb-4">
+                <div className="mt-4">
 
-                    {question.question}
+                    <div className="d-flex justify-content-between mb-2">
 
-                </h4>
+                        <small className="text-secondary">
+                            Progress
+                        </small>
 
-                {
+                        <small className="text-secondary">
+                            {Math.round(progress)}%
+                        </small>
 
-                    question.options.map((option, index) => (
+                    </div>
 
+                    <div
+                        className="progress"
+                        style={{
+                            height: 8,
+                            background: "#0F172A",
+                        }}
+                    >
                         <div
+                            className="progress-bar"
+                            style={{
+                                width: `${progress}%`,
+                            }}
+                        />
+                    </div>
 
-                            key={index}
+                </div>
 
-                            className="form-check border rounded p-3 mb-3"
+            </div>
 
-                        >
+            {/* Question */}
 
-                            <input
+            <div className="p-4">
 
-                                className="form-check-input"
+                <div
+                    className="rounded-4 p-4 mb-4"
+                    style={{
+                        background: "#0F172A",
+                    }}
+                >
+                    <small
+                        className="text-uppercase"
+                        style={{
+                            color: "#3B82F6",
+                            letterSpacing: 1,
+                        }}
+                    >
+                        Question
+                    </small>
 
-                                type="radio"
+                    <h4
+                        className="text-white mt-3 mb-0"
+                        style={{
+                            lineHeight: 1.8,
+                        }}
+                    >
+                        {question.question}
+                    </h4>
 
-                                name="answer"
+                </div>
 
-                                id={`option-${index}`}
+                {/* Options */}
 
-                                value={option}
+                <div className="d-grid gap-3">
 
-                                checked={selectedAnswer === option}
+                    {question.options.map(
+                        (option, index) => {
 
-                                onChange={(e) =>
+                            const active =
+                                selectedAnswer === option;
 
-                                    onAnswerSelect(
+                            return (
 
-                                        e.target.value
+                                <button
+                                    key={index}
+                                    type="button"
+                                    className="text-start rounded-4 p-4"
+                                    onClick={() =>
+                                        onAnswerSelect(option)
+                                    }
+                                    style={{
+                                        background: active
+                                            ? "rgba(37,99,235,.15)"
+                                            : "#182338",
 
-                                    )
+                                        border: active
+                                            ? "1px solid #2563EB"
+                                            : "1px solid rgba(255,255,255,.08)",
 
-                                }
+                                        color: "#fff",
 
-                            />
+                                        transition:
+                                            ".25s ease",
+                                    }}
+                                >
 
-                            <label
+                                    <div className="d-flex align-items-center">
 
-                                className="form-check-label ms-2"
+                                        <div
+                                            className="rounded-circle d-flex align-items-center justify-content-center me-3"
+                                            style={{
+                                                width: 42,
+                                                height: 42,
+                                                background: active
+                                                    ? "#2563EB"
+                                                    : "#0F172A",
+                                            }}
+                                        >
 
-                                htmlFor={`option-${index}`}
+                                            {String.fromCharCode(
+                                                65 + index
+                                            )}
 
-                            >
+                                        </div>
 
-                                {option}
+                                        <div className="flex-grow-1">
 
-                            </label>
+                                            {option}
 
-                        </div>
+                                        </div>
 
-                    ))
+                                        <Circle
+                                            size={18}
+                                            fill={
+                                                active
+                                                    ? "#2563EB"
+                                                    : "transparent"
+                                            }
+                                        />
 
-                }
+                                    </div>
 
-                <div className="d-flex justify-content-between mt-4">
+                                </button>
+
+                            );
+
+                        }
+
+                    )}
+
+                </div>
+
+                {/* Footer */}
+
+                <div className="d-flex gap-3 mt-5">
 
                     <button
-
-                        className="btn btn-outline-secondary"
-
-                        onClick={onPrevious}
-
+                        className="btn btn-outline-light flex-fill py-3"
                         disabled={isFirst}
-
+                        onClick={onPrevious}
                     >
+                        <ChevronLeft
+                            size={18}
+                            className="me-2"
+                        />
 
-                        ⬅ Previous
+                        Previous
 
                     </button>
 
                     <button
-
-                        className="btn btn-primary"
-
+                        className="btn btn-primary flex-fill py-3"
                         onClick={onNext}
-
                     >
+                        {isLast
+                            ? "Review Test"
+                            : "Next Question"}
 
-                        {
-
-                            isLast
-
-                                ? "Review Test"
-
-                                : "Next ➡"
-
-                        }
+                        <ChevronRight
+                            size={18}
+                            className="ms-2"
+                        />
 
                     </button>
 
@@ -171,9 +258,7 @@ function QuestionCard({
             </div>
 
         </div>
-
     );
-
 }
 
 export default QuestionCard;

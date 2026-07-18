@@ -1,12 +1,19 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import DashboardLayout from "../components/DashboardLayout";
+
+import PracticeHero from "../components/practice/PracticeHero";
+import PracticeFilters from "../components/practice/PracticeFilters";
+import QuestionCard from "../components/practice/QuestionCard";
+import ResultScreen from "../components/practice/ResultScreen";
+
 import { getPracticeQuestions } from "../services/practiceService";
 
 function Practice() {
 
-    const navigate = useNavigate();
+    /* ========================================
+       STATES
+    ======================================== */
 
     const [subject, setSubject] = useState("");
 
@@ -30,11 +37,9 @@ function Practice() {
 
     const [completed, setCompleted] = useState(false);
 
-    /*
-    ========================================
-    Start Practice
-    ========================================
-    */
+    /* ========================================
+       START PRACTICE
+    ======================================== */
 
     const startPractice = async () => {
 
@@ -84,11 +89,9 @@ function Practice() {
 
     };
 
-    /*
-    ========================================
-    Check Answer
-    ========================================
-    */
+    /* ========================================
+       CHECK ANSWER
+    ======================================== */
 
     const checkAnswer = () => {
 
@@ -114,17 +117,15 @@ function Practice() {
 
         if (correct) {
 
-            setScore(prev => prev + 1);
+            setScore((prev) => prev + 1);
 
         }
 
     };
 
-    /*
-    ========================================
-    Next Question
-    ========================================
-    */
+    /* ========================================
+       NEXT QUESTION
+    ======================================== */
 
     const nextQuestion = () => {
 
@@ -136,7 +137,7 @@ function Practice() {
 
         }
 
-        setCurrentIndex(prev => prev + 1);
+        setCurrentIndex((prev) => prev + 1);
 
         setSelectedAnswer("");
 
@@ -148,21 +149,15 @@ function Practice() {
 
     };
 
-    /*
-    ========================================
-    Previous Question
-    ========================================
-    */
+    /* ========================================
+       PREVIOUS QUESTION
+    ======================================== */
 
     const previousQuestion = () => {
 
-        if (currentIndex === 0) {
+        if (currentIndex === 0) return;
 
-            return;
-
-        }
-
-        setCurrentIndex(prev => prev - 1);
+        setCurrentIndex((prev) => prev - 1);
 
         setSelectedAnswer("");
 
@@ -174,11 +169,9 @@ function Practice() {
 
     };
 
-    /*
-    ========================================
-    Retry Practice
-    ========================================
-    */
+    /* ========================================
+       RETRY
+    ======================================== */
 
     const retryPractice = () => {
 
@@ -198,646 +191,152 @@ function Practice() {
 
     };
 
-    /*
-    ========================================
-    Current Question
-    ========================================
-    */
+    /* ========================================
+       CURRENT QUESTION
+    ======================================== */
 
     const currentQuestion =
 
         questions[currentIndex];
-            return (
 
-        <DashboardLayout>
+    /* ========================================
+       SESSION OBJECT
+    ======================================== */
 
-            <div className="container-fluid">
+    const session = {
 
-                <div className="d-flex justify-content-between align-items-center mb-4">
+        currentQuestion,
 
-                    <h2 className="fw-bold">
+        currentIndex,
 
-                        📚 Practice Questions
+        questions,
 
-                    </h2>
+        score,
 
-                    {
+        selectedAnswer,
 
-                        questions.length > 0 && !completed && (
+        answered,
 
-                            <div className="alert alert-primary mb-0">
+        showResult,
 
-                                <strong>
+        isCorrect,
 
-                                    Score:
+    };
 
-                                </strong>
+    /* ========================================
+       ACTIONS OBJECT
+    ======================================== */
 
-                                {" "}
+    const actions = {
 
-                                {score} / {questions.length}
+        setSelectedAnswer,
 
-                            </div>
+        checkAnswer,
 
-                        )
+        nextQuestion,
 
-                    }
+        previousQuestion,
 
-                </div>
+    };
+    return (
 
-                {
+    <DashboardLayout>
 
-                    completed ? (
+        <div className="container-fluid py-3">
 
-                        <div className="card shadow border-0 rounded-4">
+            {/* Hero */}
 
-                            <div className="card-body text-center py-5">
+            <PracticeHero
+                subject={subject}
+                setSubject={setSubject}
+            />
 
-                                <h2 className="text-success">
+            {/* Filters (only show before starting) */}
 
-                                    🎉 Practice Completed!
+            {questions.length === 0 && (
 
-                                </h2>
+                <PracticeFilters
+                    subject={subject}
+                    setSubject={setSubject}
+                    difficulty={difficulty}
+                    setDifficulty={setDifficulty}
+                    loading={loading}
+                    startPractice={startPractice}
+                />
 
-                                <h4 className="mt-4">
+            )}
 
-                                    Final Score
+            {/* Result Screen */}
 
-                                </h4>
+            {completed ? (
 
-                                <h1 className="display-3 text-primary">
+                <ResultScreen
+                    score={score}
+                    questions={questions}
+                    retryPractice={retryPractice}
+                />
 
-                                    {score}/{questions.length}
+            ) : (
 
-                                </h1>
+                <>
 
-                                <p className="lead">
+                    {/* Question */}
 
-                                    Accuracy: {
+                    {questions.length > 0 ? (
 
-                                        questions.length > 0
-
-                                            ? Math.round(
-
-                                                (score / questions.length) * 100
-
-                                            )
-
-                                            : 0
-
-                                    }%
-
-                                </p>
-
-                                <div className="mt-4">
-
-                                    <button
-
-                                        className="btn btn-primary me-3"
-
-                                        onClick={retryPractice}
-
-                                    >
-
-                                        🔄 Retry Practice
-
-                                    </button>
-
-                                    <button
-
-                                        className="btn btn-outline-secondary"
-
-                                        onClick={() =>
-
-                                            navigate("/dashboard")
-
-                                        }
-
-                                    >
-
-                                        🏠 Dashboard
-
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
+                        <QuestionCard
+                            session={session}
+                            actions={actions}
+                        />
 
                     ) : (
 
-                        <>
-
-                            <div className="card shadow-sm border-0 rounded-4 mb-4">
-
-                                <div className="card-body">
-
-                                    <div className="row g-3">
-
-                                        <div className="col-md-5">
-
-                                            <label className="form-label">
-
-                                                Subject
-
-                                            </label>
-
-                                            <select
-
-                                                className="form-select"
-
-                                                value={subject}
-
-                                                onChange={(e)=>
-
-                                                    setSubject(e.target.value)
-
-                                                }
-
-                                            >
-
-                                                <option value="">
-
-                                                    All Subjects
-
-                                                </option>
-
-                                                <option value="Reasoning">
-
-                                                    Reasoning
-
-                                                </option>
-
-                                                <option value="English">
-
-                                                    English
-
-                                                </option>
-
-                                                <option value="Quantitative Aptitude">
-
-                                                    Quantitative Aptitude
-
-                                                </option>
-
-                                                <option value="General Awareness">
-
-                                                    General Awareness
-
-                                                </option>
-
-                                            </select>
-
-                                        </div>
-
-                                        <div className="col-md-5">
-
-                                            <label className="form-label">
-
-                                                Difficulty
-
-                                            </label>
-
-                                            <select
-
-                                                className="form-select"
-
-                                                value={difficulty}
-
-                                                onChange={(e)=>
-
-                                                    setDifficulty(e.target.value)
-
-                                                }
-
-                                            >
-
-                                                <option value="">
-
-                                                    All Levels
-
-                                                </option>
-
-                                                <option value="Easy">
-
-                                                    Easy
-
-                                                </option>
-
-                                                <option value="Medium">
-
-                                                    Medium
-
-                                                </option>
-
-                                                <option value="Hard">
-
-                                                    Hard
-
-                                                </option>
-
-                                            </select>
-
-                                        </div>
-
-                                        <div className="col-md-2 d-flex align-items-end">
-
-                                            <button
-
-                                                className="btn btn-primary w-100"
-
-                                                onClick={startPractice}
-
-                                            >
-
-                                                {
-
-                                                    loading
-
-                                                        ? "Loading..."
-
-                                                        : "Start"
-
-                                                }
-
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
+                        <div
+                            className="rounded-4 p-5 text-center"
+                            style={{
+                                background: "#131D31",
+                                border:
+                                    "1px solid rgba(255,255,255,.08)",
+                            }}
+                        >
+
+                            <div
+                                style={{
+                                    fontSize: "4rem",
+                                }}
+                            >
+                                📚
                             </div>
 
-                            {
+                            <h2 className="text-white fw-bold mt-3">
+                                Ready to Practice?
+                            </h2>
 
-                                questions.length > 0 ? (
+                            <p
+                                className="text-secondary mx-auto mt-3"
+                                style={{
+                                    maxWidth: "650px",
+                                }}
+                            >
+                                Select your preferred subject and
+                                difficulty level above, then start
+                                solving practice questions designed
+                                for competitive examinations.
+                            </p>
 
-                                    <div className="card shadow border-0 rounded-4">
+                        </div>
 
-                                        <div className="card-body">
+                    )}
 
-                                            <div className="mb-3">
+                </>
 
-                                                <strong>
+            )}
 
-                                                    Question {currentIndex + 1}
+        </div>
 
-                                                    {" "}of{" "}
+    </DashboardLayout>
 
-                                                    {questions.length}
-
-                                                </strong>
-
-                                            </div>
-
-                                            <div className="progress mb-4">
-
-                                                <div
-
-                                                    className="progress-bar"
-
-                                                    style={{
-
-                                                        width: `${
-                                                            ((currentIndex + 1)
-
-                                                            / questions.length)
-
-                                                            * 100
-                                                        }%`
-
-                                                    }}
-
-                                                >
-
-                                                    {currentIndex + 1}/
-
-                                                    {questions.length}
-
-                                                </div>
-
-                                            </div>
-
-                                            <h4 className="mb-4">
-
-                                                {currentQuestion.question}
-
-                                            </h4>
-                                                                                        {
-
-                                                currentQuestion.options.map(
-
-                                                    (option, index) => {
-
-                                                        let background = "";
-
-                                                        if (answered) {
-
-                                                            if (
-
-                                                                option ===
-
-                                                                currentQuestion.correctAnswer
-
-                                                            ) {
-
-                                                                background =
-
-                                                                    "#d1e7dd";
-
-                                                            }
-
-                                                            else if (
-
-                                                                option ===
-
-                                                                selectedAnswer
-
-                                                            ) {
-
-                                                                background =
-
-                                                                    "#f8d7da";
-
-                                                            }
-
-                                                        }
-
-                                                        return (
-
-                                                            <div
-
-                                                                key={index}
-
-                                                                className="d-flex align-items-center border rounded p-3 mb-3"
-
-                                                                style={{
-
-                                                                    backgroundColor:
-
-                                                                        background
-
-                                                                }}
-
-                                                            >
-
-                                                                <input
-
-                                                                    type="radio"
-
-                                                                    name="answer"
-
-                                                                    value={option}
-
-                                                                    checked={
-
-                                                                        selectedAnswer === option
-
-                                                                    }
-
-                                                                    disabled={
-
-                                                                        answered
-
-                                                                    }
-
-                                                                    onChange={(e) =>
-
-                                                                        setSelectedAnswer(
-
-                                                                            e.target.value
-
-                                                                        )
-
-                                                                    }
-
-                                                                    style={{
-
-                                                                        appearance:
-
-                                                                            "auto",
-
-                                                                        WebkitAppearance:
-
-                                                                            "radio",
-
-                                                                        width: "20px",
-
-                                                                        height: "20px",
-
-                                                                        accentColor:
-
-                                                                            "#2563EB",
-
-                                                                        marginRight:
-
-                                                                            "12px",
-
-                                                                        cursor:
-
-                                                                            answered
-
-                                                                                ? "default"
-
-                                                                                : "pointer"
-
-                                                                    }}
-
-                                                                />
-
-                                                                <label
-
-                                                                    className="mb-0"
-
-                                                                    style={{
-
-                                                                        cursor:
-
-                                                                            answered
-
-                                                                                ? "default"
-
-                                                                                : "pointer"
-
-                                                                    }}
-
-                                                                >
-
-                                                                    {option}
-
-                                                                </label>
-
-                                                            </div>
-
-                                                        );
-
-                                                    }
-
-                                                )
-
-                                            }
-
-                                            <div className="mt-4">
-
-                                                {
-
-                                                    !answered ? (
-
-                                                        <button
-
-                                                            className="btn btn-success"
-
-                                                            onClick={
-
-                                                                checkAnswer
-
-                                                            }
-
-                                                        >
-
-                                                            ✅ Check Answer
-
-                                                        </button>
-
-                                                    ) : (
-
-                                                        <>
-
-                                                            {
-
-                                                                showResult && (
-
-                                                                    <div
-
-                                                                        className={`alert mt-3 ${
-                                                                            isCorrect
-
-                                                                                ? "alert-success"
-
-                                                                                : "alert-danger"
-
-                                                                        }`}
-
-                                                                    >
-
-                                                                        {
-
-                                                                            isCorrect
-
-                                                                                ? "🎉 Correct Answer!"
-
-                                                                                : `❌ Wrong Answer. Correct Answer: ${currentQuestion.correctAnswer}`
-
-                                                                        }
-
-                                                                    </div>
-
-                                                                )
-
-                                                            }
-
-                                                            <div className="d-flex justify-content-between mt-4">
-
-                                                                <button
-
-                                                                    className="btn btn-outline-secondary"
-
-                                                                    onClick={
-
-                                                                        previousQuestion
-
-                                                                    }
-
-                                                                    disabled={
-
-                                                                        currentIndex ===
-
-                                                                        0
-
-                                                                    }
-
-                                                                >
-
-                                                                    ⬅ Previous
-
-                                                                </button>
-
-                                                                <button
-
-                                                                    className="btn btn-primary"
-
-                                                                    onClick={
-
-                                                                        nextQuestion
-
-                                                                    }
-
-                                                                >
-
-                                                                    {
-
-                                                                        currentIndex ===
-
-                                                                        questions.length -
-
-                                                                            1
-
-                                                                            ? "Finish 🎉"
-
-                                                                            : "Next ➡"
-
-                                                                    }
-
-                                                                </button>
-
-                                                            </div>
-
-                                                        </>
-
-                                                    )
-
-                                                }
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                ) : (
-
-                                    <div className="alert alert-info">
-
-                                        Select filters and click
-
-                                        <strong>
-
-                                            {" "}Start
-
-                                        </strong>
-
-                                        {" "}to begin practicing.
-
-                                    </div>
-
-                                )
-
-                            }
-
-                        </>
-
-                    )
-
-                }
-
-            </div>
-
-        </DashboardLayout>
-
-    );
+);
 
 }
 

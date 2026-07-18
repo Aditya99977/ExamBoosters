@@ -1,90 +1,121 @@
+import {
+    ClipboardCheck,
+    Trophy,
+    Target,
+    TrendingUp,
+} from "lucide-react";
+
 function PerformanceStats({ stats }) {
 
     const cards = [
 
         {
-
             title: "Tests Attempted",
-
             value: stats?.mockTestsCompleted || 0,
-
-            color: "primary"
-
+            icon: ClipboardCheck,
+            color: "#2563EB",
         },
 
         {
-
             title: "Highest Score",
-
             value: stats?.highestScore || 0,
-
-            color: "success"
-
+            icon: Trophy,
+            color: "#22C55E",
         },
 
         {
-
             title: "Average Score",
-
             value: stats?.averageScore || 0,
-
-            color: "warning"
-
+            icon: TrendingUp,
+            color: "#F59E0B",
         },
 
         {
-
             title: "Accuracy",
-
             value: `${stats?.accuracy || 0}%`,
-
-            color: "info"
-
-        }
+            icon: Target,
+            color: "#8B5CF6",
+        },
 
     ];
 
     return (
 
-        <div className="row g-4 mb-4">
+        <div className="row g-4 mb-5">
 
-            {
+            {cards.map((card, index) => {
 
-                cards.map((card, index) => (
+                const Icon = card.icon;
+
+                return (
 
                     <div
-
                         className="col-lg-3 col-md-6"
-
                         key={index}
-
                     >
 
-                        <div className={`card border-0 shadow rounded-4 bg-${card.color} text-white`}>
+                        <div
+                            className="rounded-4 h-100 p-4"
+                            style={{
+                                background: "#131D31",
+                                border: "1px solid rgba(255,255,255,.08)",
+                            }}
+                        >
 
-                            <div className="card-body text-center">
+                            <div className="d-flex justify-content-between align-items-start mb-4">
 
-                                <h6>
+                                <div
+                                    className="rounded-circle d-flex align-items-center justify-content-center"
+                                    style={{
+                                        width: 60,
+                                        height: 60,
+                                        background: `${card.color}20`,
+                                    }}
+                                >
 
-                                    {card.title}
+                                    <Icon
+                                        size={28}
+                                        color={card.color}
+                                    />
 
-                                </h6>
+                                </div>
 
-                                <h2 className="fw-bold">
+                                <span
+                                    className="badge rounded-pill"
+                                    style={{
+                                        background: `${card.color}20`,
+                                        color: card.color,
+                                        border: `1px solid ${card.color}`,
+                                    }}
+                                >
 
-                                    {card.value}
+                                    Live
 
-                                </h2>
+                                </span>
 
                             </div>
+
+                            <small className="text-secondary">
+
+                                {card.title}
+
+                            </small>
+
+                            <h2
+                                className="fw-bold text-white mt-2 mb-0"
+                            >
+
+                                {card.value}
+
+                            </h2>
 
                         </div>
 
                     </div>
 
-                ))
+                );
 
-            }
+            })}
 
         </div>
 

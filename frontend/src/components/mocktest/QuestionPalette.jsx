@@ -1,129 +1,215 @@
+import {
+    CheckCircle2,
+    Circle,
+    CircleDot,
+} from "lucide-react";
+
 function QuestionPalette({
-
     totalQuestions,
-
     currentQuestion,
-
     answers,
-
-    onQuestionSelect
-
+    onQuestionSelect,
 }) {
-
     return (
+        <div
+            className="rounded-4"
+            style={{
+                background: "#131D31",
+                border: "1px solid rgba(255,255,255,.08)",
+            }}
+        >
+            <div className="p-4">
 
-        <div className="card shadow-sm border-0 rounded-4">
+                {/* Header */}
 
-            <div className="card-body">
+                <h4 className="text-white fw-bold mb-4">
+                    Question Palette
+                </h4>
 
-                <h5 className="fw-bold mb-4">
+                {/* Legend */}
 
-                    📌 Question Palette
+                <div className="mb-4">
 
-                </h5>
+                    <div className="d-flex align-items-center mb-3">
 
-                <div className="d-flex flex-wrap gap-2">
+                        <CircleDot
+                            size={18}
+                            color="#2563EB"
+                        />
 
-                    {
+                        <small className="text-secondary ms-2">
+                            Current Question
+                        </small>
 
-                        Array.from(
+                    </div>
 
-                            {
+                    <div className="d-flex align-items-center mb-3">
 
-                                length: totalQuestions
+                        <CheckCircle2
+                            size={18}
+                            color="#22C55E"
+                        />
 
-                            }
+                        <small className="text-secondary ms-2">
+                            Answered
+                        </small>
 
-                        ).map((_, index) => {
+                    </div>
 
-                            const answered =
+                    <div className="d-flex align-items-center">
 
-                                answers[index];
+                        <Circle
+                            size={18}
+                            color="#94A3B8"
+                        />
 
-                            return (
+                        <small className="text-secondary ms-2">
+                            Not Answered
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <hr
+                    style={{
+                        borderColor:
+                            "rgba(255,255,255,.08)",
+                    }}
+                />
+
+                {/* Question Numbers */}
+
+                <div className="row g-2 mt-2">
+
+                    {Array.from({
+                        length: totalQuestions,
+                    }).map((_, index) => {
+
+                        const isCurrent =
+                            currentQuestion === index;
+
+                        const isAnswered =
+                            answers[index];
+
+                        let background = "#182338";
+
+                        let border =
+                            "1px solid rgba(255,255,255,.08)";
+
+                        let color = "#fff";
+
+                        if (isAnswered) {
+
+                            background =
+                                "rgba(34,197,94,.15)";
+
+                            border =
+                                "1px solid #22C55E";
+
+                            color = "#22C55E";
+
+                        }
+
+                        if (isCurrent) {
+
+                            background =
+                                "rgba(37,99,235,.18)";
+
+                            border =
+                                "1px solid #2563EB";
+
+                            color = "#3B82F6";
+
+                        }
+
+                        return (
+
+                            <div
+                                key={index}
+                                className="col-3"
+                            >
 
                                 <button
-
-                                    key={index}
-
-                                    className={`btn ${
-                                        currentQuestion === index
-                                            ? "btn-primary"
-                                            : answered
-                                            ? "btn-success"
-                                            : "btn-outline-secondary"
-                                    }`}
-
-                                    style={{
-
-                                        width: "45px",
-
-                                        height: "45px"
-
-                                    }}
-
                                     onClick={() =>
-
                                         onQuestionSelect(index)
-
                                     }
-
+                                    className="w-100 rounded-3 fw-semibold"
+                                    style={{
+                                        height: 48,
+                                        background,
+                                        border,
+                                        color,
+                                        transition:
+                                            ".25s ease",
+                                    }}
                                 >
 
                                     {index + 1}
 
                                 </button>
 
-                            );
+                            </div>
 
-                        })
+                        );
 
-                    }
+                    })}
 
                 </div>
 
-                <hr />
+                {/* Footer */}
 
-                <div className="mt-3">
+                <div
+                    className="rounded-4 mt-4 p-3"
+                    style={{
+                        background: "#0F172A",
+                    }}
+                >
 
-                    <p className="mb-2">
+                    <div className="d-flex justify-content-between">
 
-                        <span className="badge bg-primary">
-
-                            Current
-
-                        </span>
-
-                    </p>
-
-                    <p className="mb-2">
-
-                        <span className="badge bg-success">
+                        <small className="text-secondary">
 
                             Answered
 
-                        </span>
+                        </small>
 
-                    </p>
+                        <strong
+                            style={{
+                                color: "#22C55E",
+                            }}
+                        >
 
-                    <p className="mb-0">
+                            {Object.keys(answers).length}
 
-                        <span className="badge bg-secondary">
+                        </strong>
 
-                            Not Answered
+                    </div>
 
-                        </span>
+                    <div className="d-flex justify-content-between mt-2">
 
-                    </p>
+                        <small className="text-secondary">
+
+                            Remaining
+
+                        </small>
+
+                        <strong className="text-white">
+
+                            {totalQuestions -
+                                Object.keys(answers)
+                                    .length}
+
+                        </strong>
+
+                    </div>
 
                 </div>
 
             </div>
 
         </div>
-
     );
-
 }
 
 export default QuestionPalette;
