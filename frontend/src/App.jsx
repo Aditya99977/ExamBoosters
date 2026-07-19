@@ -22,6 +22,7 @@ import Performance from "./pages/Performance";
 import NotFound from "./pages/NotFound";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
 
@@ -50,6 +51,10 @@ function App() {
                         <StudentDashboard />
                     </ProtectedRoute>
                 }
+            />
+            <Route
+                  path="/verify-email/:token"
+                  element={<VerifyEmail />}
             />
 
             <Route

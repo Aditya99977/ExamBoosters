@@ -191,7 +191,13 @@ exports.getDashboard = async (req, res) => {
 
                 email: user.email,
 
-                examTarget: user.examTarget
+                examTarget: user.examTarget,
+
+                studyStreak: user.studyStreak || 0,
+
+                 longestStudyStreak: user.longestStudyStreak || 0,
+
+                 lastStudyDate: user.lastStudyDate,
 
             },
 

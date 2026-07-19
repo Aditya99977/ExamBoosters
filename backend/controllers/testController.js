@@ -1,5 +1,6 @@
 const Test = require("../models/Test");
 const Question = require("../models/Question");
+const User = require("../models/User");
 
 
 /*
@@ -107,7 +108,6 @@ exports.submitTest = async (req, res) => {
             if (!question) continue;
 
             const isCorrect =
-
                 question.correctAnswer === answer.selectedAnswer;
 
             if (isCorrect) {
@@ -135,17 +135,11 @@ exports.submitTest = async (req, res) => {
         }
 
         const accuracy = test.totalQuestions > 0
-
             ? Number(
-
                 (
-
                     (score / test.totalQuestions) * 100
-
                 ).toFixed(2)
-
             )
-
             : 0;
 
         test.answers = submittedAnswers;
@@ -160,8 +154,64 @@ exports.submitTest = async (req, res) => {
 
         await test.save();
 
-        
-                res.json({
+        // ===================================
+        // Update Study Streak
+        // ===================================
+
+        const user = await User.findById(req.user.id);
+
+        if (user) {
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            if (!user.lastStudyDate) {
+
+                user.studyStreak = 1;
+
+            } else {
+
+                const lastDate = new Date(user.lastStudyDate);
+                lastDate.setHours(0, 0, 0, 0);
+
+                const diffDays = Math.floor(
+                    (today - lastDate) / (1000 * 60 * 60 * 24)
+                );
+
+                if (diffDays === 0) {
+
+                    // Already studied today
+                    // Do nothing
+
+                } else if (diffDays === 1) {
+
+                    user.studyStreak += 1;
+
+                } else {
+
+                    user.studyStreak = 1;
+
+                }
+
+            }
+
+            user.lastStudyDate = new Date();
+
+            user.longestStudyStreak = Math.max(
+                user.longestStudyStreak,
+                user.studyStreak
+            );
+
+            // Optional: Update study statistics
+            user.studyStats.questionsSolved += test.totalQuestions;
+            user.studyStats.accuracy = accuracy;
+            user.lastActive = new Date();
+
+            await user.save();
+
+        }
+
+        res.json({
 
             message: "Test Submitted Successfully",
 

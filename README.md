@@ -1,6 +1,10 @@
-# 🚀 ExamBooster
+# 🚀 VNAverse
 
-A modern **MERN Stack** platform for government exam preparation that helps students practice questions, attempt mock tests, analyze performance, and prepare smarter using AI-powered learning.
+> **Vision Nexus Academy**
+
+**VNAverse** is an AI-powered learning ecosystem where **vision meets knowledge**, helping learners unlock their full potential through intelligent learning tools, personalized education, and AI-driven experiences.
+
+The first flagship product of VNAverse focuses on **government exam preparation**, enabling students to practice smarter, analyze performance, and accelerate their learning journey.
 
 > **Status:** 🚧 Beta Development
 
@@ -16,7 +20,7 @@ A modern **MERN Stack** platform for government exam preparation that helps stud
 - 📚 Practice Questions
 - 📝 Mock Test System
 - 📄 Previous Year Papers
-- 📈 Performance Dashboard
+- 📈 Performance Analytics
 - 🤖 AI Tutor
 - 📱 Fully Responsive UI
 
@@ -24,13 +28,12 @@ A modern **MERN Stack** platform for government exam preparation that helps stud
 
 ## 👨‍💼 Admin Features
 
-- Admin Dashboard
-- Question Management
-- Previous Year Papers Management
-- CSV Bulk Upload
-- User Management
-- Paper Management
-- Dashboard Analytics
+- 👥 User Management
+- 📊 Admin Dashboard
+- ❓ Question Management
+- 📄 Previous Year Papers Management
+- 📂 CSV Bulk Upload
+- 📈 Dashboard Analytics
 
 ---
 
@@ -41,9 +44,9 @@ A modern **MERN Stack** platform for government exam preparation that helps stud
 - React
 - Vite
 - Bootstrap 5
-- Chart.js
 - Axios
 - React Router
+- Chart.js
 - Lucide React
 
 ---
@@ -64,15 +67,15 @@ A modern **MERN Stack** platform for government exam preparation that helps stud
 # 🏗 System Architecture
 
 ```text
-                 React + Vite
-                      │
-                      │ Axios
-                      ▼
-             Express REST API
-                      │
-        ┌─────────────┼─────────────┐
-        ▼             ▼             ▼
- MongoDB Atlas     Gemini AI     File Uploads
+                  React + Vite
+                       │
+                       │ Axios
+                       ▼
+              Express REST API
+                       │
+       ┌───────────────┼───────────────┐
+       ▼               ▼               ▼
+ MongoDB Atlas     Gemini AI      File Uploads
 ```
 
 ---
@@ -80,7 +83,7 @@ A modern **MERN Stack** platform for government exam preparation that helps stud
 # 📂 Project Structure
 
 ```text
-ExamBoosters
+VNAverse
 │
 ├── backend
 │   ├── controllers
@@ -117,9 +120,9 @@ ExamBoosters
 ## Clone Repository
 
 ```bash
-git clone https://github.com/Aditya99977/ExamBoosters.git
+git clone https://github.com/Aditya99977/VNAverse.git
 
-cd ExamBoosters
+cd VNAverse
 ```
 
 ---
@@ -160,30 +163,46 @@ http://localhost:5173
 
 ---
 
-# 📚 Major Modules
+# 📚 Current Modules
 
-- Authentication
+### Authentication
+
+- User Registration
+- User Login
+- JWT Authentication
+- Protected Routes
+
+### Student
+
 - Dashboard
 - Practice Questions
-- Mock Test
+- Mock Tests
 - Previous Year Papers
 - Performance Analytics
 - AI Tutor
-- Admin Panel
+
+### Admin
+
+- Admin Dashboard
+- Question Management
+- Previous Year Papers
+- User Management
+- CSV Bulk Upload
+- Analytics
 
 ---
 
 # 📖 Documentation
 
-Project documentation is available inside the **docs/** folder.
+Documentation is available inside the **docs/** folder.
 
-Contents include:
+Includes:
 
 - Daily Development Logs
 - API Documentation
 - Project Architecture
 - Feature Planning
-- Roadmap
+- Development Roadmap
 
 ---
 
@@ -191,15 +210,16 @@ Contents include:
 
 ## ✅ Completed
 
-- Authentication
+- JWT Authentication
 - Student Dashboard
 - Admin Dashboard
 - Practice Questions
 - Mock Test Module
 - Previous Year Papers
-- Performance Dashboard
+- Performance Analytics
 - AI Tutor
 - Responsive UI
+- Beta Authentication Flow
 
 ---
 
@@ -207,17 +227,28 @@ Contents include:
 
 - AI Study Planner
 - AI Mock Analysis
-- UI Optimization
+- UI/UX Improvements
+- Pricing Page
 
 ---
 
 ## ⏳ Planned
 
-- Email Verification
+- Premium Membership
+- AI Resume Builder
+- AI Interview Preparation
+- Smart Learning Recommendations
 - Notifications
-- Leaderboard
-- Deployment
+- Leaderboards
 - Mobile Optimization
+- Production Email Verification
+- Public Beta Launch
+
+---
+
+# 🌟 Vision
+
+**VNAverse (Vision Nexus Academy)** aims to become an AI-powered learning ecosystem where students don't just prepare for exams—they build skills, improve consistently, and unlock their full potential through intelligent education.
 
 ---
 
@@ -225,22 +256,24 @@ Contents include:
 
 ## Aditya Thakur
 
-MBA (AI & Data Science)
+Building **VNAverse** one day at a time.
 
 ### Connect with me
 
-- GitHub
-  - https://github.com/Aditya99977
+**GitHub**
 
-- LinkedIn
-  - https://www.linkedin.com/in/aditya-thakur-67745141a/
+https://github.com/Aditya99977
+
+**LinkedIn**
+
+https://www.linkedin.com/in/aditya-thakur-67745141a/
 
 ---
 
 # 📄 License
 
-This project is developed for learning, portfolio, and startup purposes.
+This project is developed for educational purposes, portfolio showcase, and startup development.
 
 ---
 
-⭐ If you like this project, don't forget to **Star** the repository.
+⭐ **If you like VNAverse, don't forget to star the repository!**

@@ -65,6 +65,24 @@ const userSchema = new mongoose.Schema(
             default: "",
         },
 
+        // ==========================
+        // Email Verification
+        // ==========================
+        isVerified: {
+            type: Boolean,
+            default: false,
+        },
+
+        verificationToken: {
+            type: String,
+            default: null,
+        },
+
+        verificationTokenExpires: {
+            type: Date,
+            default: null,
+        },
+
         studyStats: {
             questionsSolved: {
                 type: Number,
@@ -82,6 +100,26 @@ const userSchema = new mongoose.Schema(
                 min: 0,
                 max: 100,
             },
+        },
+
+        // ==========================
+        // Study Streak
+        // ==========================
+        studyStreak: {
+            type: Number,
+            default: 0,
+            min: 0,
+        },
+
+        longestStudyStreak: {
+            type: Number,
+            default: 0,
+            min: 0,
+        },
+
+        lastStudyDate: {
+            type: Date,
+            default: null,
         },
 
         lastActive: {

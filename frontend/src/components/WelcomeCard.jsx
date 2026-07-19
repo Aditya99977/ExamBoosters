@@ -1,4 +1,4 @@
-import { FaFire, FaBullseye, FaArrowRight } from "react-icons/fa";
+import { FaFire, FaArrowRight, FaTrophy } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function WelcomeCard({ user }) {
@@ -13,6 +13,19 @@ function WelcomeCard({ user }) {
         if (hour < 17) return "Good Afternoon";
 
         return "Good Evening";
+
+    };
+
+    const getStreakMessage = () => {
+
+        const streak = user?.studyStreak || 0;
+
+        if (streak === 0) return "Start your streak today 🚀";
+        if (streak <= 3) return "Great start! Keep going 🔥";
+        if (streak <= 7) return "Consistency is building 💪";
+        if (streak <= 29) return "Amazing dedication 🚀";
+
+        return "You're unstoppable 👑";
 
     };
 
@@ -33,7 +46,7 @@ function WelcomeCard({ user }) {
                 style={{
                     position: "absolute",
                     width: "260px",
-                    height: "260px",
+                    height: "240px",
                     borderRadius: "50%",
                     background: "rgba(255,255,255,.08)",
                     top: "-120px",
@@ -93,65 +106,72 @@ function WelcomeCard({ user }) {
                         >
                             Continue your preparation for{" "}
                             <strong>{user?.examTarget}</strong>.
-                            Stay consistent, complete today's goals,
-                            and move one step closer to your dream job.
+                            Every study session brings you one step closer to your dream job.
                         </p>
 
                         <div className="d-flex flex-wrap gap-3">
 
+                            {/* Study Streak */}
                             <div
                                 className="px-4 py-3 rounded-4"
                                 style={{
                                     background: "rgba(255,255,255,.12)",
                                     backdropFilter: "blur(14px)",
-                                    minWidth: "170px",
+                                    minWidth: "280px",
                                 }}
                             >
+
                                 <div
                                     className="d-flex align-items-center gap-2 mb-2"
-                                    style={{ color: "#FACC15" }}
+                                    style={{
+                                        color: "#FACC15",
+                                    }}
                                 >
                                     <FaFire />
 
                                     <span className="fw-semibold">
                                         Study Streak
                                     </span>
+
                                 </div>
+
+                                <h3
+                                    className="text-white fw-bold mb-1"
+                                >
+                                    🔥 {user?.studyStreak || 0} Day{(user?.studyStreak || 0) !== 1 ? "s" : ""}
+                                </h3>
 
                                 <div
                                     style={{
-                                        color: "rgba(255,255,255,.9)",
+                                        color: "rgba(255,255,255,.85)",
+                                        fontSize: "15px",
                                     }}
                                 >
-                                    🔥 Coming Soon
-                                </div>
-                            </div>
-
-                            <div
-                                className="px-4 py-3 rounded-4"
-                                style={{
-                                    background: "rgba(255,255,255,.12)",
-                                    backdropFilter: "blur(14px)",
-                                    minWidth: "220px",
-                                }}
-                            >
-                                <div
-                                    className="d-flex align-items-center gap-2 mb-2"
-                                >
-                                    <FaBullseye />
-
-                                    <span className="fw-semibold">
-                                        Today's Goal
-                                    </span>
+                                    {getStreakMessage()}
                                 </div>
 
-                                <div
+                                <hr
                                     style={{
-                                        color: "rgba(255,255,255,.9)",
+                                        borderColor: "rgba(255,255,255,.15)",
+                                    }}
+                                />
+
+                                <div
+                                    className="d-flex align-items-center gap-2"
+                                    style={{
+                                        color: "#FFD166",
+                                        fontSize: "14px",
                                     }}
                                 >
-                                    Complete 2 Mock Tests
+                                    <FaTrophy />
+
+                                    Longest Streak:
+                                    <strong className="text-white">
+                                        {user?.longestStudyStreak || 0} Days
+                                    </strong>
+
                                 </div>
+
                             </div>
 
                         </div>

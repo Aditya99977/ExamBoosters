@@ -1,10 +1,12 @@
 const bcrypt = require("bcryptjs");
-const generateToken = require("../utils/generateToken");
 
+const generateToken = require("../utils/generateToken");
 const User = require("../models/User");
 
 /*
+=================================================
 User Registration
+=================================================
 */
 
 exports.signup = async (req, res) => {
@@ -13,40 +15,90 @@ exports.signup = async (req, res) => {
 
         const { name, email, password, examTarget } = req.body;
 
-        const existingUser = await User.findOne({ email });
+        if (!name || !email || !password) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message: "Please fill all required fields."
+
+            });
+
+        }
+
+        const existingUser = await User.findOne({
+
+            email: email.toLowerCase(),
+
+        });
 
         if (existingUser) {
 
             return res.status(400).json({
-                message: "User already exists"
+
+                success: false,
+
+                message: "User already exists."
+
             });
 
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = new User({
+        const user = await User.create({
 
             name,
-            email,
+
+            email: email.toLowerCase(),
+
             password: hashedPassword,
-            examTarget
+
+            examTarget,
+
+            // Email verification disabled for Beta
+            isVerified: true,
 
         });
 
-        await user.save();
+        const token = generateToken(user._id);
 
-        res.status(201).json({
+        return res.status(201).json({
 
-            message: "User registered successfully"
+            success: true,
+
+            message: "User registered successfully.",
+
+            token,
+
+            user: {
+
+                id: user._id,
+
+                name: user.name,
+
+                email: user.email,
+
+                role: user.role,
+
+                examTarget: user.examTarget,
+
+                profileImage: user.profileImage,
+
+            },
 
         });
 
     } catch (error) {
 
-        res.status(500).json({
+        console.error(error);
 
-            message: error.message
+        return res.status(500).json({
+
+            success: false,
+
+            message: "Internal Server Error",
 
         });
 
@@ -55,7 +107,9 @@ exports.signup = async (req, res) => {
 };
 
 /*
+=================================================
 User Login
+=================================================
 */
 
 exports.login = async (req, res) => {
@@ -64,44 +118,93 @@ exports.login = async (req, res) => {
 
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        if (!email || !password) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message: "Email and password are required."
+
+            });
+
+        }
+
+        const user = await User.findOne({
+
+            email: email.toLowerCase(),
+
+        });
 
         if (!user) {
 
             return res.status(400).json({
-                message: "User not found"
+
+                success: false,
+
+                message: "User not found."
+
             });
 
         }
 
         const isMatch = await bcrypt.compare(
+
             password,
+
             user.password
+
         );
 
         if (!isMatch) {
 
             return res.status(400).json({
-                message: "Invalid password"
+
+                success: false,
+
+                message: "Invalid password."
+
             });
 
         }
 
         const token = generateToken(user._id);
 
-        res.json({
+        return res.status(200).json({
 
-            message: "Login successful",
+            success: true,
 
-            token
+            message: "Login successful.",
+
+            token,
+
+            user: {
+
+                id: user._id,
+
+                name: user.name,
+
+                email: user.email,
+
+                role: user.role,
+
+                examTarget: user.examTarget,
+
+                profileImage: user.profileImage,
+
+            },
 
         });
 
     } catch (error) {
 
-        res.status(500).json({
+        console.error(error);
 
-            message: error.message
+        return res.status(500).json({
+
+            success: false,
+
+            message: "Internal Server Error",
 
         });
 
