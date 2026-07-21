@@ -53,7 +53,7 @@ function Topbar() {
                         color: "#94A3B8",
                     }}
                 >
-                    Welcome back! Continue your preparation today.
+                    Welcome back to <strong>VNAverse</strong>! Continue your learning journey today.
                 </p>
 
             </div>
@@ -70,7 +70,7 @@ function Topbar() {
                         border: "1px solid rgba(34,197,94,.25)",
                     }}
                 >
-                    ● Active Student
+                    ● Learning Active
                 </span>
 
             </div>

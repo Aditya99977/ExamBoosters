@@ -11,27 +11,27 @@ function WhyChooseUs() {
     const reasons = [
         {
             icon: ShieldCheck,
-            title: "Trusted Platform",
+            title: "Trusted Learning Platform",
             description:
-                "Curated exam-focused questions reviewed for quality and relevance.",
+                "Built with a focus on quality, reliability, and an exceptional learning experience for every learner.",
         },
         {
             icon: Bot,
             title: "AI-Powered Learning",
             description:
-                "Get instant explanations and personalized guidance while studying.",
+                "Receive personalized guidance, intelligent recommendations, and AI-assisted learning throughout your journey.",
         },
         {
             icon: BarChart3,
-            title: "Performance Analytics",
+            title: "Smart Performance Analytics",
             description:
-                "Track your strengths, weak areas and overall improvement in one place.",
+                "Monitor your progress with detailed insights, accuracy tracking, and personalized improvement reports.",
         },
         {
             icon: Clock3,
-            title: "Study Anytime",
+            title: "Learn Anytime, Anywhere",
             description:
-                "Practice whenever you want with a seamless experience across devices.",
+                "Study seamlessly across devices with a flexible learning experience that adapts to your schedule.",
         },
     ];
 
@@ -59,7 +59,7 @@ function WhyChooseUs() {
                                 fontSize: ".95rem",
                             }}
                         >
-                            Why Choose Us
+                            WHY VNAVERSE
                         </span>
 
                         <h2
@@ -70,9 +70,9 @@ function WhyChooseUs() {
                                 lineHeight: 1.2,
                             }}
                         >
-                            Prepare Smarter.
+                            Learn Smarter.
                             <br />
-                            Achieve Faster.
+                            Achieve More.
                         </h2>
 
                         <p
@@ -84,10 +84,15 @@ function WhyChooseUs() {
                                 maxWidth: "500px",
                             }}
                         >
-                            ExamBooster combines quality practice questions,
-                            AI-powered learning, mock tests, and detailed
-                            analytics into one modern platform built for
-                            ambitious government exam aspirants.
+                            <strong style={{ color: "#FFFFFF" }}>
+                                VNAverse
+                            </strong>{" "}
+                            is an AI-powered learning ecosystem that combines
+                            intelligent practice, personalized learning,
+                            realistic mock tests, performance analytics, and
+                            AI-driven assistance to help learners unlock their
+                            full potential and achieve their academic and career
+                            goals.
                         </p>
 
                     </div>

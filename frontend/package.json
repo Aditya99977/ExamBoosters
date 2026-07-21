@@ -1,7 +1,8 @@
 {
-  "name": "frontend",
+  "name": "vnaverse-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "VNAverse (Vision Nexus Academy) Frontend - AI-powered learning ecosystem",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +10,20 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "keywords": [
+    "vnaverse",
+    "vision-nexus-academy",
+    "education",
+    "ai",
+    "learning",
+    "react",
+    "vite",
+    "frontend",
+    "mock-test",
+    "dashboard"
+  ],
+  "author": "Aditya Thakur",
+  "license": "ISC",
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
     "@tailwindcss/vite": "^4.3.2",

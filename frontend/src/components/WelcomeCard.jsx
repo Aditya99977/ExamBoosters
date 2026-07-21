@@ -20,10 +20,10 @@ function WelcomeCard({ user }) {
 
         const streak = user?.studyStreak || 0;
 
-        if (streak === 0) return "Start your streak today 🚀";
-        if (streak <= 3) return "Great start! Keep going 🔥";
-        if (streak <= 7) return "Consistency is building 💪";
-        if (streak <= 29) return "Amazing dedication 🚀";
+        if (streak === 0) return "Start your learning streak today 🚀";
+        if (streak <= 3) return "Great start! Keep learning 🔥";
+        if (streak <= 7) return "Consistency is your superpower 💪";
+        if (streak <= 29) return "Amazing dedication! Keep it up 🚀";
 
         return "You're unstoppable 👑";
 
@@ -42,6 +42,7 @@ function WelcomeCard({ user }) {
         >
 
             {/* Decorative Blur */}
+
             <div
                 style={{
                     position: "absolute",
@@ -83,7 +84,7 @@ function WelcomeCard({ user }) {
                                 backdropFilter: "blur(12px)",
                             }}
                         >
-                            Student Dashboard
+                            VNAverse Student Dashboard
                         </span>
 
                         <h2
@@ -104,14 +105,23 @@ function WelcomeCard({ user }) {
                                 maxWidth: "620px",
                             }}
                         >
-                            Continue your preparation for{" "}
-                            <strong>{user?.examTarget}</strong>.
-                            Every study session brings you one step closer to your dream job.
+                            Continue your learning journey
+
+                            {user?.examTarget && (
+                                <>
+                                    {" "}towards{" "}
+                                    <strong>{user.examTarget}</strong>
+                                </>
+                            )}
+
+                            . Every learning session helps you build
+                            stronger skills and move closer to your goals.
                         </p>
 
                         <div className="d-flex flex-wrap gap-3">
 
                             {/* Study Streak */}
+
                             <div
                                 className="px-4 py-3 rounded-4"
                                 style={{
@@ -127,10 +137,11 @@ function WelcomeCard({ user }) {
                                         color: "#FACC15",
                                     }}
                                 >
+
                                     <FaFire />
 
                                     <span className="fw-semibold">
-                                        Study Streak
+                                        Learning Streak
                                     </span>
 
                                 </div>
@@ -163,9 +174,11 @@ function WelcomeCard({ user }) {
                                         fontSize: "14px",
                                     }}
                                 >
+
                                     <FaTrophy />
 
                                     Longest Streak:
+
                                     <strong className="text-white">
                                         {user?.longestStudyStreak || 0} Days
                                     </strong>
@@ -187,9 +200,10 @@ function WelcomeCard({ user }) {
                             }}
                             onClick={() => navigate("/practice")}
                         >
-                            Start Practice
+                            Continue Learning
 
                             <FaArrowRight className="ms-2" />
+
                         </button>
 
                     </div>

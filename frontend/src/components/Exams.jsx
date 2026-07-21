@@ -33,7 +33,7 @@ function Exams() {
                         fontSize: ".95rem",
                     }}
                 >
-                    Supported Exams
+                    LEARNING PATHS
                 </span>
 
                 <h2
@@ -43,22 +43,25 @@ function Exams() {
                         fontSize: "clamp(2.2rem,4vw,3rem)",
                     }}
                 >
-                    Prepare for India's Most Popular
+                    Government Exam Preparation
                     <br />
-                    Government Exams
+                    Starts Here
                 </h2>
 
                 <p
                     className="mx-auto mt-3 mb-5"
                     style={{
                         color: "#CBD5E1",
-                        maxWidth: "650px",
+                        maxWidth: "700px",
                         fontSize: "1.05rem",
                         lineHeight: 1.8,
                     }}
                 >
-                    Practice exam-specific questions, AI-powered explanations,
-                    and full-length mock tests tailored for your target exam.
+                    VNAverse currently provides AI-powered preparation for
+                    India's most popular government examinations with
+                    intelligent practice, realistic mock tests, personalized
+                    learning, and detailed performance analytics. More learning
+                    categories will be introduced in future updates.
                 </p>
 
                 <div className="d-flex justify-content-center flex-wrap gap-3">
@@ -80,18 +83,23 @@ function Exams() {
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.borderColor =
                                     "rgba(96,165,250,.35)";
-                                e.currentTarget.style.background = "#18233D";
+                                e.currentTarget.style.background =
+                                    "#18233D";
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.borderColor =
                                     "rgba(255,255,255,.05)";
-                                e.currentTarget.style.background = "#151F36";
+                                e.currentTarget.style.background =
+                                    "#151F36";
                             }}
                         >
+
                             <Landmark
                                 size={16}
                                 color="#60A5FA"
-                                style={{ marginRight: "10px" }}
+                                style={{
+                                    marginRight: "10px",
+                                }}
                             />
 
                             <span
@@ -115,7 +123,8 @@ function Exams() {
                         fontSize: ".95rem",
                     }}
                 >
-                    More government exams will be added regularly.
+                    More exams, certifications, placement preparation, coding,
+                    and AI-powered learning modules are coming soon.
                 </p>
 
             </div>

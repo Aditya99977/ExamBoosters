@@ -36,7 +36,7 @@ function PerformanceChart({ data = [] }) {
 
         datasets: [
             {
-                label: "Weekly Score",
+                label: "Learning Progress",
 
                 data:
                     data.length > 0
@@ -161,7 +161,7 @@ function PerformanceChart({ data = [] }) {
                     <h4
                         className="fw-bold text-white mb-1"
                     >
-                        📈 Weekly Performance
+                        📈 Learning Progress
                     </h4>
 
                     <p
@@ -171,7 +171,7 @@ function PerformanceChart({ data = [] }) {
                             fontSize: ".95rem",
                         }}
                     >
-                        Monitor your scores and stay consistent throughout the week.
+                        Visualize your progress, monitor your performance, and stay consistent throughout your learning journey.
                     </p>
 
                 </div>

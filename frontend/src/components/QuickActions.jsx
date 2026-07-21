@@ -21,14 +21,14 @@ function QuickActions() {
         },
 
         {
-            title: "Mock Test",
+            title: "Mock Tests",
             icon: <FaClipboardList />,
             path: "/mock-tests",
             disabled: false
         },
 
         {
-            title: "Performance",
+            title: "Analytics",
             icon: <FaChartLine />,
             path: "/performance",
             disabled: false
@@ -71,7 +71,7 @@ function QuickActions() {
                         }}
                     >
 
-                        Quickly access the most frequently used features.
+                        Jump directly to your most-used learning tools.
 
                     </p>
 

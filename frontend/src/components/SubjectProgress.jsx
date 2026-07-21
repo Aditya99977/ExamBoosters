@@ -32,7 +32,7 @@ function SubjectProgress({ data = [] }) {
                         <h4
                             className="fw-bold text-white mb-1"
                         >
-                            📚 Subject Progress
+                            📚 Learning Progress
                         </h4>
 
                         <p
@@ -42,7 +42,7 @@ function SubjectProgress({ data = [] }) {
                                 fontSize: ".95rem",
                             }}
                         >
-                            Track your performance across all subjects.
+                            Monitor your progress and performance across different learning areas.
                         </p>
 
                     </div>
@@ -58,7 +58,7 @@ function SubjectProgress({ data = [] }) {
                             <h6
                                 className="text-white mb-2"
                             >
-                                No progress available
+                                No learning progress available
                             </h6>
 
                             <p
@@ -67,7 +67,7 @@ function SubjectProgress({ data = [] }) {
                                     color: "#94A3B8",
                                 }}
                             >
-                                Complete a mock test to start tracking your performance.
+                                Complete practice sessions or mock tests to start tracking your learning progress.
                             </p>
 
                         </div>

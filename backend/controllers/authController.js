@@ -120,8 +120,10 @@ exports.login = async (req, res) => {
     try {
         let { email, password } = req.body;
 
+        // Trim Input
         email = email?.trim().toLowerCase();
 
+        // Required Fields
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
@@ -129,8 +131,8 @@ exports.login = async (req, res) => {
             });
         }
 
-        // Find User
-        const user = await User.findOne({ email });
+        // Find User (Include Password)
+        const user = await User.findOne({ email }).select("+password");
 
         // Generic Error (Prevents Email Enumeration)
         if (!user) {
@@ -140,7 +142,17 @@ exports.login = async (req, res) => {
             });
         }
 
-        // Password Match
+        // Ensure Password Exists
+        if (!user.password) {
+            console.error(`Password not found for user: ${email}`);
+
+            return res.status(500).json({
+                success: false,
+                message: "Account data is invalid. Please contact support.",
+            });
+        }
+
+        // Compare Password
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
@@ -154,7 +166,7 @@ exports.login = async (req, res) => {
         user.lastActive = new Date();
         await user.save();
 
-        // Generate Token
+        // Generate JWT
         const token = generateToken(user._id);
 
         return res.status(200).json({

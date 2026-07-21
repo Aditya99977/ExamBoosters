@@ -64,7 +64,7 @@ function Hero() {
                                 fontWeight: 500,
                             }}
                         >
-                            🇮🇳 India's Smart Government Exam Platform
+                            🚀 AI-Powered Learning Ecosystem
                         </span>
 
                         <h1
@@ -76,10 +76,10 @@ function Hero() {
                                 letterSpacing: "-2px",
                             }}
                         >
-                            Crack Your Dream
+                            Learn Smarter.
                             <br />
 
-                            Government Job
+                            Grow Faster.
 
                             <span
                                 style={{
@@ -91,7 +91,7 @@ function Hero() {
                                     WebkitTextFillColor: "transparent",
                                 }}
                             >
-                                With Confidence
+                                Unlock Your Full Potential
                             </span>
                         </h1>
 
@@ -103,11 +103,16 @@ function Hero() {
                                 maxWidth: "650px",
                             }}
                         >
-                            Practice thousands of exam-quality questions,
-                            attempt realistic mock tests, monitor your
-                            performance, and prepare smarter with AI-powered
-                            learning built for ambitious government exam
-                            aspirants.
+                            <strong style={{ color: "#FFFFFF" }}>
+                                VNAverse
+                            </strong>{" "}
+                            (Vision Nexus Academy) is an AI-powered learning
+                            ecosystem that empowers students, professionals,
+                            and competitive exam aspirants through intelligent
+                            practice, personalized learning, realistic mock
+                            tests, performance analytics, and AI-driven
+                            educational experiences designed to unlock every
+                            learner's full potential.
                         </p>
 
                         <div className="d-flex gap-3 flex-wrap mt-5">
@@ -125,7 +130,7 @@ function Hero() {
                                         "0 18px 45px rgba(59,130,246,.35)",
                                 }}
                             >
-                                Get Started
+                                Start Learning
                             </Link>
 
                             <Link
@@ -162,7 +167,7 @@ function Hero() {
                         >
                             <img
                                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400"
-                                alt="Students studying together"
+                                alt="Students learning with VNAverse"
                                 className="img-fluid w-100"
                                 style={{
                                     borderRadius: "22px",

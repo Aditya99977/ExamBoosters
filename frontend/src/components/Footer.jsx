@@ -15,13 +15,47 @@ function Footer() {
             <div className="container">
                 <div className="row gy-5">
 
+                    {/* Brand */}
+
                     <div className="col-lg-5">
-                        <h2
-                            className="fw-bold mb-3"
-                            style={{ color: "#3B82F6" }}
-                        >
-                            🚀 ExamBooster
-                        </h2>
+
+                        <div className="d-flex align-items-center mb-3">
+
+                            <img
+                                src="/logo.png"
+                                alt="VNAverse Logo"
+                                style={{
+                                    width: "52px",
+                                    height: "52px",
+                                    objectFit: "contain",
+                                    marginRight: "14px",
+                                    background: "#fff",
+                                    borderRadius: "12px",
+                                    padding: "4px",
+                                }}
+                            />
+
+                            <div>
+
+                                <h2
+                                    className="fw-bold mb-0"
+                                    style={{ color: "#3B82F6" }}
+                                >
+                                    VNAverse
+                                </h2>
+
+                                <small
+                                    style={{
+                                        color: "#94A3B8",
+                                        letterSpacing: ".3px",
+                                    }}
+                                >
+                                    Vision Nexus Academy
+                                </small>
+
+                            </div>
+
+                        </div>
 
                         <p
                             style={{
@@ -30,15 +64,24 @@ function Footer() {
                                 maxWidth: "430px",
                             }}
                         >
-                            AI-powered Government Exam Preparation Platform
-                            helping aspirants prepare smarter with AI learning,
-                            realistic mock tests, detailed analytics and
-                            thousands of quality practice questions.
+                            VNAverse is an AI-powered learning ecosystem
+                            helping students, professionals, and competitive
+                            exam aspirants unlock their full potential through
+                            intelligent learning, personalized education,
+                            realistic mock tests, performance analytics,
+                            and AI-driven experiences.
                         </p>
+
                     </div>
 
+                    {/* Quick Links */}
+
                     <div className="col-lg-3">
-                        <h5 className="fw-bold mb-3" style={{ color: "#F8FAFC" }}>
+
+                        <h5
+                            className="fw-bold mb-3"
+                            style={{ color: "#F8FAFC" }}
+                        >
                             Quick Links
                         </h5>
 
@@ -53,22 +96,43 @@ function Footer() {
                         />
 
                         <div className="d-flex flex-column gap-3">
-                            <Link to="/" className="text-decoration-none" style={{ color: "#CBD5E1" }}>
+
+                            <Link
+                                to="/"
+                                className="text-decoration-none"
+                                style={{ color: "#CBD5E1" }}
+                            >
                                 Home
                             </Link>
 
-                            <Link to="/login" className="text-decoration-none" style={{ color: "#CBD5E1" }}>
+                            <Link
+                                to="/login"
+                                className="text-decoration-none"
+                                style={{ color: "#CBD5E1" }}
+                            >
                                 Login
                             </Link>
 
-                            <Link to="/register" className="text-decoration-none" style={{ color: "#CBD5E1" }}>
+                            <Link
+                                to="/register"
+                                className="text-decoration-none"
+                                style={{ color: "#CBD5E1" }}
+                            >
                                 Register
                             </Link>
+
                         </div>
+
                     </div>
 
+                    {/* Connect */}
+
                     <div className="col-lg-4">
-                        <h5 className="fw-bold mb-3" style={{ color: "#F8FAFC" }}>
+
+                        <h5
+                            className="fw-bold mb-3"
+                            style={{ color: "#F8FAFC" }}
+                        >
                             Connect
                         </h5>
 
@@ -86,10 +150,20 @@ function Footer() {
                             className="d-flex align-items-center mb-4"
                             style={{ color: "#CBD5E1" }}
                         >
-                            <Mail size={18} color="#60A5FA" />
-                            <span style={{ marginLeft: "12px" }}>
-                                support@exambooster.in
+
+                            <Mail
+                                size={18}
+                                color="#60A5FA"
+                            />
+
+                            <span
+                                style={{
+                                    marginLeft: "12px",
+                                }}
+                            >
+                                support@vnaverse.com
                             </span>
+
                         </div>
 
                         <div className="d-flex gap-3">
@@ -137,6 +211,7 @@ function Footer() {
                             </a>
 
                         </div>
+
                     </div>
 
                 </div>
@@ -156,15 +231,23 @@ function Footer() {
                         fontSize: ".95rem",
                     }}
                 >
+
                     <p className="mb-2 mb-md-0">
-                        © 2026 ExamBooster. All rights reserved.
+                        © 2026 VNAverse. All rights reserved.
                     </p>
 
                     <p className="mb-0 d-flex align-items-center">
                         Built with ❤️ by Aditya Thakur
-                        <ArrowUpRight size={16} style={{ marginLeft: "6px" }} />
+                        <ArrowUpRight
+                            size={16}
+                            style={{
+                                marginLeft: "6px",
+                            }}
+                        />
                     </p>
+
                 </div>
+
             </div>
         </footer>
     );

@@ -98,7 +98,7 @@ app.use(
 
 /*
 ====================================
-Routes
+API Routes
 ====================================
 */
 
@@ -113,12 +113,34 @@ app.use("/api/papers", paperRoutes);
 
 /*
 ====================================
-Default Route
+Root Route
 ====================================
 */
 
 app.get("/", (req, res) => {
-    res.send("🚀 VNAverse Backend Running");
+    res.status(200).json({
+        success: true,
+        application: "VNAverse",
+        company: "Vision Nexus Academy",
+        message: "Welcome to the VNAverse Backend API.",
+        version: "1.0.0",
+        status: "Running",
+    });
+});
+
+/*
+====================================
+Health Check
+====================================
+*/
+
+app.get("/health", (req, res) => {
+    res.status(200).json({
+        success: true,
+        status: "OK",
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString(),
+    });
 });
 
 /*
@@ -144,6 +166,7 @@ mongoose
     .connect(process.env.MONGO_URI)
     .then(() => {
         console.log("✅ MongoDB Connected Successfully");
+        console.log("🎓 VNAverse Database Ready");
     })
     .catch((error) => {
         console.error("❌ MongoDB Connection Failed");
@@ -160,7 +183,11 @@ Server
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(
-        `🚀 VNAverse Backend running on port ${PORT}`
-    );
+    console.log("========================================");
+    console.log("🚀 VNAverse Backend Started Successfully");
+    console.log("🏢 Vision Nexus Academy");
+    console.log(`🌐 Server URL : http://localhost:${PORT}`);
+    console.log(`📡 API Base   : http://localhost:${PORT}/api`);
+    console.log(`❤️ Health     : http://localhost:${PORT}/health`);
+    console.log("========================================");
 });

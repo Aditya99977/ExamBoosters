@@ -90,7 +90,7 @@ function AuthButton({
                             role="status"
                         />
 
-                        Please wait...
+                        Processing...
 
                     </>
 

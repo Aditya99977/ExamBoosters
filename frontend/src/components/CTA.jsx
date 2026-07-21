@@ -2,16 +2,13 @@ import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 function CTA() {
-
     return (
-
         <section
             style={{
                 background: "#0B1020",
                 padding: "10px 0",
             }}
         >
-
             <div className="container">
 
                 <div
@@ -68,7 +65,7 @@ function CTA() {
                                 letterSpacing: ".5px",
                             }}
                         >
-                            🚀 START YOUR JOURNEY
+                            🚀 START YOUR LEARNING JOURNEY
                         </span>
 
                         <h2
@@ -80,9 +77,9 @@ function CTA() {
                                 marginBottom: "20px",
                             }}
                         >
-                            Ready to Crack Your
+                            Ready to Unlock
                             <br />
-                            Dream Government Job?
+                            Your Full Potential?
                         </h2>
 
                         <p
@@ -95,9 +92,11 @@ function CTA() {
                                 marginBottom: "42px",
                             }}
                         >
-                            Join thousands of aspirants using ExamBooster to
-                            practice smarter, improve faster, and achieve their
-                            dream government career.
+                            Join <strong>VNAverse</strong> and experience
+                            AI-powered learning, personalized education,
+                            realistic mock tests, performance analytics,
+                            and intelligent study tools designed to help
+                            you achieve your academic and career goals.
                         </p>
 
                         <Link
@@ -114,7 +113,7 @@ function CTA() {
                                     "0 15px 40px rgba(0,0,0,.18)",
                             }}
                         >
-                            Create Free Account
+                            Join VNAverse
 
                             <ArrowRight
                                 size={20}
@@ -144,7 +143,7 @@ function CTA() {
                                         marginRight: "8px",
                                     }}
                                 />
-                                Free Forever
+                                Free to Get Started
                             </div>
 
                             <div
@@ -159,7 +158,7 @@ function CTA() {
                                         marginRight: "8px",
                                     }}
                                 />
-                                Instant Access
+                                Personalized Learning
                             </div>
 
                             <div
@@ -186,9 +185,7 @@ function CTA() {
             </div>
 
         </section>
-
     );
-
 }
 
 export default CTA;

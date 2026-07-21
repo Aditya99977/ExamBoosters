@@ -11,14 +11,11 @@ import {
 } from "react-icons/fa";
 
 function Sidebar() {
-
     const navigate = useNavigate();
 
     const handleLogout = () => {
-
         localStorage.removeItem("token");
         navigate("/");
-
     };
 
     const menuItems = [
@@ -70,66 +67,61 @@ function Sidebar() {
                 padding: "28px 20px",
             }}
         >
-            {/* Logo */}
+            {/* Brand */}
 
             <div className="mb-5">
-
                 <div
                     className="d-flex align-items-center"
-                    style={{ gap: "12px" }}
+                    style={{ gap: "14px" }}
                 >
-
-                    <div
+                    <img
+                        src="/logo.png"
+                        alt="VNAverse Logo"
                         style={{
-                            width: "46px",
-                            height: "46px",
+                            width: "52px",
+                            height: "52px",
+                            objectFit: "contain",
                             borderRadius: "14px",
-                            background:
-                                "linear-gradient(135deg,#2563EB,#3B82F6)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: "20px",
+                            background: "#ffffff",
+                            padding: "4px",
                         }}
-                    >
-                        🚀
-                    </div>
+                    />
 
                     <div>
-
                         <h4
                             className="text-white fw-bold mb-0"
-                            style={{ letterSpacing: ".3px" }}
+                            style={{
+                                letterSpacing: ".4px",
+                                fontSize: "1.35rem",
+                            }}
                         >
-                            ExamBooster
+                            VNAverse
                         </h4>
 
                         <small
                             style={{
                                 color: "#94A3B8",
                                 fontSize: "12px",
+                                letterSpacing: ".5px",
                             }}
                         >
-                            Student Portal
+                            Vision Nexus Academy
                         </small>
-
                     </div>
-
                 </div>
-
             </div>
 
             {/* Navigation */}
 
             <div
                 className="d-flex flex-column"
-                style={{ gap: "8px", flex: 1 }}
+                style={{
+                    gap: "8px",
+                    flex: 1,
+                }}
             >
-
                 {menuItems.map((item) =>
-
                     item.disabled ? (
-
                         <div
                             key={item.name}
                             style={{
@@ -140,12 +132,12 @@ function Sidebar() {
                                 padding: "14px 16px",
                                 borderRadius: "16px",
                                 background: "rgba(255,255,255,0.03)",
-                                border: "1px solid rgba(255,255,255,0.05)",
+                                border:
+                                    "1px solid rgba(255,255,255,0.05)",
                                 cursor: "not-allowed",
                                 position: "relative",
                             }}
                         >
-
                             <span
                                 style={{
                                     fontSize: "16px",
@@ -172,17 +164,16 @@ function Sidebar() {
                             >
                                 Soon
                             </span>
-
                         </div>
-
                     ) : (
-
                         <NavLink
                             key={item.path}
                             to={item.path}
                             style={({ isActive }) => ({
                                 textDecoration: "none",
-                                color: isActive ? "#ffffff" : "#CBD5E1",
+                                color: isActive
+                                    ? "#ffffff"
+                                    : "#CBD5E1",
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "14px",
@@ -198,7 +189,6 @@ function Sidebar() {
                                 transition: "all .25s ease",
                             })}
                         >
-
                             <span
                                 style={{
                                     fontSize: "16px",
@@ -211,13 +201,9 @@ function Sidebar() {
                             </span>
 
                             <span>{item.name}</span>
-
                         </NavLink>
-
                     )
-
                 )}
-
             </div>
 
             {/* Logout */}
@@ -228,25 +214,22 @@ function Sidebar() {
                 style={{
                     borderRadius: "16px",
                     padding: "14px",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    border: "1px solid rgba(255,255,255,0.08)",
                     background: "rgba(255,255,255,0.03)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "10px",
                     fontWeight: "600",
+                    transition: ".25s",
                 }}
             >
-
                 <FaSignOutAlt />
 
                 Logout
-
             </button>
-
         </aside>
     );
-
 }
 
 export default Sidebar;

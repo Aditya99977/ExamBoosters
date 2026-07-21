@@ -12,23 +12,27 @@ function Features() {
     const features = [
         {
             icon: BookOpen,
-            title: "Question Bank",
-            description: "Practice thousands of exam-oriented questions.",
+            title: "Smart Learning",
+            description:
+                "Access structured learning resources designed to help you master concepts faster.",
         },
         {
             icon: ClipboardCheck,
-            title: "Mock Tests",
-            description: "Attempt realistic mock tests anytime.",
+            title: "Practice & Mock Tests",
+            description:
+                "Challenge yourself with realistic mock tests and thousands of high-quality practice questions.",
         },
         {
             icon: BarChart3,
             title: "Performance Analytics",
-            description: "Track your improvement after every test.",
+            description:
+                "Track your progress with detailed insights, accuracy reports, and personalized recommendations.",
         },
         {
             icon: Bot,
-            title: "AI Assistant",
-            description: "Personalized learning recommendations.",
+            title: "AI Learning Assistant",
+            description:
+                "Learn smarter with AI-powered guidance, personalized recommendations, and intelligent support.",
         },
     ];
 
@@ -53,7 +57,7 @@ function Features() {
                             fontSize: ".95rem",
                         }}
                     >
-                        Features
+                        FEATURES
                     </span>
 
                     <h2
@@ -63,18 +67,23 @@ function Features() {
                             fontSize: "clamp(2.2rem,4vw,3rem)",
                         }}
                     >
-                        Why Students Love ExamBooster
+                        Everything You Need to Learn Smarter
                     </h2>
 
                     <p
                         className="mx-auto mb-0"
                         style={{
                             color: "#CBD5E1",
-                            maxWidth: "620px",
+                            maxWidth: "680px",
                             fontSize: "1.05rem",
+                            lineHeight: 1.8,
                         }}
                     >
-                        Everything you need to crack government examinations.
+                        VNAverse combines AI-powered learning, intelligent
+                        practice, personalized education, performance
+                        analytics, and mock tests into one modern learning
+                        ecosystem designed to help you unlock your full
+                        potential.
                     </p>
 
                 </div>

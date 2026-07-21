@@ -18,7 +18,7 @@ function RecentTests({ tests = [] }) {
                     <h4
                         className="fw-bold text-white mb-1"
                     >
-                        📋 Recent Mock Tests
+                        📋 Recent Assessments
                     </h4>
 
                     <p
@@ -28,7 +28,7 @@ function RecentTests({ tests = [] }) {
                             fontSize: ".95rem",
                         }}
                     >
-                        Your latest completed mock tests.
+                        Review your latest assessments and track your learning progress.
                     </p>
 
                 </div>
@@ -52,7 +52,7 @@ function RecentTests({ tests = [] }) {
                             <h6
                                 className="text-white mt-3"
                             >
-                                No mock tests completed
+                                No assessments completed yet
                             </h6>
 
                             <p
@@ -61,7 +61,7 @@ function RecentTests({ tests = [] }) {
                                     color: "#94A3B8",
                                 }}
                             >
-                                Complete your first mock test to see your activity here.
+                                Complete your first practice session or mock test to see your learning history here.
                             </p>
 
                         </div>

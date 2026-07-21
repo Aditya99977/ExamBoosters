@@ -18,19 +18,16 @@ import { loginUser } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 
 const loginSchema = z.object({
-
     email: z
         .string()
         .email("Please enter a valid email"),
 
     password: z
         .string()
-        .min(6, "Password must be at least 6 characters")
-
+        .min(6, "Password must be at least 6 characters"),
 });
 
 function Login() {
-
     const navigate = useNavigate();
 
     const { login } = useAuth();
@@ -38,123 +35,77 @@ function Login() {
     const [loading, setLoading] = useState(false);
 
     const {
-
         register,
-
         handleSubmit,
-
-        formState: { errors }
-
+        formState: { errors },
     } = useForm({
-
-        resolver: zodResolver(loginSchema)
-
+        resolver: zodResolver(loginSchema),
     });
 
     const onSubmit = async (data) => {
-
         try {
-
             setLoading(true);
 
             const response = await loginUser(data);
 
             login(response.token);
 
-            toast.success("Login Successful!");
+            toast.success("Welcome back to VNAverse!");
 
             setTimeout(() => {
-
                 navigate("/dashboard");
-
             }, 1200);
-
-        }
-
-        catch (error) {
-
+        } catch (error) {
             toast.error(
-
                 error.response?.data?.message ||
-
                 "Login Failed"
-
             );
-
-        }
-
-        finally {
-
+        } finally {
             setLoading(false);
-
         }
-
     };
 
     return (
-
         <AuthLayout>
 
             <ToastContainer position="top-right" />
 
             <AuthCard
-
                 title="Welcome Back 👋"
-
-                subtitle="Login to continue your ExamBooster journey"
-
+                subtitle="Sign in to continue your VNAverse learning journey."
             >
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <FormInput
-
-                        label="Email"
-
+                        label="Email Address"
                         type="email"
-
-                        placeholder="Enter your email"
-
+                        placeholder="Enter your email address"
                         error={errors.email?.message}
-
                         {...register("email")}
-
                     />
 
                     <PasswordInput
-
                         label="Password"
-
                         placeholder="Enter your password"
-
                         error={errors.password?.message}
-
                         {...register("password")}
-
                     />
 
                     <div className="text-end mb-3">
 
                         <Link
-
                             to="/forgot-password"
-
                             className="text-decoration-none"
-
                         >
-
                             Forgot Password?
-
                         </Link>
 
                     </div>
 
                     <AuthButton
-
-                        text="Login"
-
+                        text="Sign In"
                         loading={loading}
-
                     />
 
                 </form>
@@ -163,18 +114,13 @@ function Login() {
 
                 <p className="text-center mb-0">
 
-                    Don't have an account?
+                    New to VNAverse?
 
                     <Link
-
                         to="/register"
-
                         className="ms-2"
-
                     >
-
-                        Register
-
+                        Create Account
                     </Link>
 
                 </p>
@@ -182,9 +128,7 @@ function Login() {
             </AuthCard>
 
         </AuthLayout>
-
     );
-
 }
 
 export default Login;

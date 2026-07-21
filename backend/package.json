@@ -1,14 +1,24 @@
 {
-  "name": "exambooster",
+  "name": "vnaverse",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "VNAverse (Vision Nexus Academy) - AI-powered learning ecosystem",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "vnaverse",
+    "vision-nexus-academy",
+    "ai",
+    "education",
+    "learning",
+    "mern",
+    "mock-test",
+    "competitive-exams",
+    "analytics"
+  ],
+  "author": "Aditya Thakur",
   "license": "ISC",
   "dependencies": {
     "@google/genai": "^2.11.0",

@@ -17,29 +17,47 @@ function FeatureCard({ icon: Icon, title, description }) {
                 onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = "rgba(96,165,250,.22)";
                     e.currentTarget.style.background = "#18233d";
-                    e.currentTarget.querySelector(".accent").style.width = "58px";
-                    e.currentTarget.querySelector(".learn").style.opacity = "1";
-                    e.currentTarget.querySelector(".learn").style.transform = "translateY(0)";
+
+                    e.currentTarget.querySelector(".accent").style.width =
+                        "58px";
+
+                    e.currentTarget.querySelector(".learn").style.opacity =
+                        "1";
+
+                    e.currentTarget.querySelector(".learn").style.transform =
+                        "translateY(0)";
+
                     e.currentTarget.querySelector(".icon-wrap").style.boxShadow =
                         "0 0 24px rgba(59,130,246,.30)";
                 }}
                 onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,.05)";
+                    e.currentTarget.style.borderColor =
+                        "rgba(255,255,255,.05)";
+
                     e.currentTarget.style.background = "#151F36";
-                    e.currentTarget.querySelector(".accent").style.width = "36px";
-                    e.currentTarget.querySelector(".learn").style.opacity = "0";
-                    e.currentTarget.querySelector(".learn").style.transform = "translateY(8px)";
+
+                    e.currentTarget.querySelector(".accent").style.width =
+                        "36px";
+
+                    e.currentTarget.querySelector(".learn").style.opacity =
+                        "0";
+
+                    e.currentTarget.querySelector(".learn").style.transform =
+                        "translateY(8px)";
+
                     e.currentTarget.querySelector(".icon-wrap").style.boxShadow =
                         "0 0 15px rgba(59,130,246,.12)";
                 }}
             >
+
                 <div
                     className="accent mb-4"
                     style={{
                         width: "36px",
                         height: "3px",
                         borderRadius: "999px",
-                        background: "linear-gradient(90deg,#60A5FA,#3B82F6)",
+                        background:
+                            "linear-gradient(90deg,#60A5FA,#3B82F6)",
                         transition: ".3s",
                     }}
                 />
@@ -51,12 +69,19 @@ function FeatureCard({ icon: Icon, title, description }) {
                         height: "58px",
                         borderRadius: "50%",
                         background: "rgba(59,130,246,.10)",
-                        border: "1px solid rgba(96,165,250,.15)",
-                        boxShadow: "0 0 15px rgba(59,130,246,.12)",
+                        border:
+                            "1px solid rgba(96,165,250,.15)",
+                        boxShadow:
+                            "0 0 15px rgba(59,130,246,.12)",
                         transition: ".3s",
                     }}
                 >
-                    <Icon size={26} color="#60A5FA" />
+
+                    <Icon
+                        size={26}
+                        color="#60A5FA"
+                    />
+
                 </div>
 
                 <h4
@@ -89,7 +114,7 @@ function FeatureCard({ icon: Icon, title, description }) {
                         transition: ".3s",
                     }}
                 >
-                    Learn More →
+                    Explore Feature →
                 </div>
 
             </div>

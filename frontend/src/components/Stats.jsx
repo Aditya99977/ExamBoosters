@@ -1,17 +1,33 @@
 import {
     BookOpen,
     ClipboardCheck,
-    Landmark,
+    Brain,
     Users,
 } from "lucide-react";
 
 function Stats() {
 
     const stats = [
-        { number: "10,000+", title: "Practice Questions", icon: BookOpen },
-        { number: "500+", title: "Mock Tests", icon: ClipboardCheck },
-        { number: "20+", title: "Government Exams", icon: Landmark },
-        { number: "50,000+", title: "Future Aspirants", icon: Users },
+        {
+            number: "10,000+",
+            title: "Learning Resources",
+            icon: BookOpen,
+        },
+        {
+            number: "500+",
+            title: "Practice Tests",
+            icon: ClipboardCheck,
+        },
+        {
+            number: "AI",
+            title: "Powered Learning",
+            icon: Brain,
+        },
+        {
+            number: "50,000+",
+            title: "Future Learners",
+            icon: Users,
+        },
     ];
 
     return (
@@ -24,6 +40,7 @@ function Stats() {
             <div className="container">
 
                 <div className="text-center mb-5">
+
                     <span
                         style={{
                             color: "#60A5FA",
@@ -33,8 +50,9 @@ function Stats() {
                             fontWeight: 600,
                         }}
                     >
-                        Trusted by Thousands of Aspirants
+                        Trusted by Future Learners
                     </span>
+
                 </div>
 
                 <div
@@ -45,11 +63,20 @@ function Stats() {
                         overflow: "hidden",
                     }}
                 >
+
                     <div className="row g-0">
+
                         {stats.map((item, index) => {
+
                             const Icon = item.icon;
+
                             return (
-                                <div className="col-lg-3 col-md-6" key={index}>
+
+                                <div
+                                    className="col-lg-3 col-md-6"
+                                    key={index}
+                                >
+
                                     <div
                                         className="stat-item text-center h-100"
                                         style={{
@@ -64,34 +91,59 @@ function Stats() {
                                         onMouseEnter={(e) => {
                                             e.currentTarget.style.background =
                                                 "rgba(59,130,246,.035)";
-                                            const accent = e.currentTarget.querySelector(".accent");
-                                            const num = e.currentTarget.querySelector(".stat-number");
-                                            const iconWrap = e.currentTarget.querySelector(".icon-wrap");
-                                            if (accent) accent.style.width = "56px";
-                                            if (num) num.style.transform = "scale(1.04)";
+
+                                            const accent =
+                                                e.currentTarget.querySelector(".accent");
+
+                                            const num =
+                                                e.currentTarget.querySelector(".stat-number");
+
+                                            const iconWrap =
+                                                e.currentTarget.querySelector(".icon-wrap");
+
+                                            if (accent)
+                                                accent.style.width = "56px";
+
+                                            if (num)
+                                                num.style.transform = "scale(1.04)";
+
                                             if (iconWrap)
                                                 iconWrap.style.boxShadow =
                                                     "0 0 25px rgba(59,130,246,.30)";
                                         }}
                                         onMouseLeave={(e) => {
-                                            e.currentTarget.style.background = "transparent";
-                                            const accent = e.currentTarget.querySelector(".accent");
-                                            const num = e.currentTarget.querySelector(".stat-number");
-                                            const iconWrap = e.currentTarget.querySelector(".icon-wrap");
-                                            if (accent) accent.style.width = "34px";
-                                            if (num) num.style.transform = "scale(1)";
+                                            e.currentTarget.style.background =
+                                                "transparent";
+
+                                            const accent =
+                                                e.currentTarget.querySelector(".accent");
+
+                                            const num =
+                                                e.currentTarget.querySelector(".stat-number");
+
+                                            const iconWrap =
+                                                e.currentTarget.querySelector(".icon-wrap");
+
+                                            if (accent)
+                                                accent.style.width = "34px";
+
+                                            if (num)
+                                                num.style.transform = "scale(1)";
+
                                             if (iconWrap)
                                                 iconWrap.style.boxShadow =
                                                     "0 0 15px rgba(59,130,246,.12)";
                                         }}
                                     >
+
                                         <div
                                             className="accent mx-auto mb-4"
                                             style={{
                                                 width: "34px",
                                                 height: "3px",
                                                 borderRadius: "999px",
-                                                background: "linear-gradient(90deg,#60A5FA,#3B82F6)",
+                                                background:
+                                                    "linear-gradient(90deg,#60A5FA,#3B82F6)",
                                                 transition: ".3s",
                                             }}
                                         />
@@ -116,13 +168,21 @@ function Stats() {
                                                 width: "56px",
                                                 height: "56px",
                                                 borderRadius: "50%",
-                                                background: "rgba(59,130,246,.10)",
-                                                border: "1px solid rgba(96,165,250,.15)",
-                                                boxShadow: "0 0 15px rgba(59,130,246,.12)",
+                                                background:
+                                                    "rgba(59,130,246,.10)",
+                                                border:
+                                                    "1px solid rgba(96,165,250,.15)",
+                                                boxShadow:
+                                                    "0 0 15px rgba(59,130,246,.12)",
                                                 transition: ".3s",
                                             }}
                                         >
-                                            <Icon size={24} color="#60A5FA" />
+
+                                            <Icon
+                                                size={24}
+                                                color="#60A5FA"
+                                            />
+
                                         </div>
 
                                         <p
@@ -136,13 +196,21 @@ function Stats() {
                                         >
                                             {item.title}
                                         </p>
+
                                     </div>
+
                                 </div>
+
                             );
+
                         })}
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
     );
 }
