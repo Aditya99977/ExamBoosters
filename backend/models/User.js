@@ -29,27 +29,33 @@ const userSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true,
+            required: [true, "Name is required."],
             trim: true,
+            minlength: 3,
+            maxlength: 50,
         },
 
         email: {
             type: String,
-            required: true,
+            required: [true, "Email is required."],
             unique: true,
             lowercase: true,
             trim: true,
+            index: true,
         },
 
         password: {
             type: String,
-            required: true,
+            required: [true, "Password is required."],
+            minlength: 8,
+            select: false,
         },
 
         role: {
             type: String,
             enum: ["student", "admin"],
             default: "student",
+            index: true,
         },
 
         examTarget: {
@@ -58,16 +64,31 @@ const userSchema = new mongoose.Schema(
             trim: true,
         },
 
-        aiPreferences: aiPreferenceSchema,
-
         profileImage: {
             type: String,
             default: "",
         },
 
+        aiPreferences: {
+            type: aiPreferenceSchema,
+            default: () => ({}),
+        },
+
+        // ==========================
+        // Account Status
+        // ==========================
+
+        status: {
+            type: String,
+            enum: ["active", "blocked"],
+            default: "active",
+            index: true,
+        },
+
         // ==========================
         // Email Verification
         // ==========================
+
         isVerified: {
             type: Boolean,
             default: false,
@@ -76,22 +97,30 @@ const userSchema = new mongoose.Schema(
         verificationToken: {
             type: String,
             default: null,
+            select: false,
         },
 
         verificationTokenExpires: {
             type: Date,
             default: null,
+            select: false,
         },
+
+        // ==========================
+        // Study Statistics
+        // ==========================
 
         studyStats: {
             questionsSolved: {
                 type: Number,
                 default: 0,
+                min: 0,
             },
 
             aiChats: {
                 type: Number,
                 default: 0,
+                min: 0,
             },
 
             accuracy: {
@@ -105,6 +134,7 @@ const userSchema = new mongoose.Schema(
         // ==========================
         // Study Streak
         // ==========================
+
         studyStreak: {
             type: Number,
             default: 0,
@@ -122,13 +152,25 @@ const userSchema = new mongoose.Schema(
             default: null,
         },
 
+        // ==========================
+        // Activity
+        // ==========================
+
         lastActive: {
             type: Date,
             default: Date.now,
+            index: true,
+        },
+
+        passwordChangedAt: {
+            type: Date,
+            default: null,
+            select: false,
         },
     },
     {
         timestamps: true,
+        versionKey: false,
     }
 );
 
