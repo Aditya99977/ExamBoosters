@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -11,14 +11,25 @@ export function AuthProvider({ children }) {
     useEffect(() => {
 
         const token = localStorage.getItem("token");
+        const userData = localStorage.getItem("user");
 
-        if (token) {
+        if (token && userData) {
 
-            setUser({
+            try {
 
-                token
+                setUser({
+                    token,
+                    ...JSON.parse(userData),
+                });
 
-            });
+            } catch (error) {
+
+                console.error("Failed to restore user session:", error);
+
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+
+            }
 
         }
 
@@ -26,29 +37,76 @@ export function AuthProvider({ children }) {
 
     }, []);
 
-    const login = (token) => {
+    /*
+    ============================================
+    Login
+    ============================================
+    */
+
+    const login = (token, userData) => {
+
+        localStorage.setItem("token", token);
 
         localStorage.setItem(
-
-            "token",
-
-            token
-
+            "user",
+            JSON.stringify(userData)
         );
 
         setUser({
-
-            token
-
+            token,
+            ...userData,
         });
 
     };
 
+    /*
+    ============================================
+    Logout
+    ============================================
+    */
+
     const logout = () => {
 
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
 
         setUser(null);
+
+    };
+
+    /*
+    ============================================
+    Update User
+    ============================================
+    */
+
+    const updateUser = (updatedData) => {
+
+        setUser((prev) => {
+
+            const updatedUser = {
+
+                ...prev,
+
+                ...updatedData,
+
+            };
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify({
+                    id: updatedUser.id,
+                    name: updatedUser.name,
+                    email: updatedUser.email,
+                    role: updatedUser.role,
+                    examTarget: updatedUser.examTarget,
+                    profileImage: updatedUser.profileImage,
+                })
+            );
+
+            return updatedUser;
+
+        });
 
     };
 
@@ -60,11 +118,13 @@ export function AuthProvider({ children }) {
 
                 user,
 
+                loading,
+
                 login,
 
                 logout,
 
-                loading
+                updateUser,
 
             }}
 

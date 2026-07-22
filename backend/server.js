@@ -28,7 +28,13 @@ Security Middleware
 */
 
 // Secure HTTP Headers
-app.use(helmet());
+app.use(
+    helmet({
+        crossOriginResourcePolicy: {
+            policy: "cross-origin",
+        },
+    })
+);
 
 // Prevent HTTP Parameter Pollution
 app.use(hpp());
@@ -188,6 +194,7 @@ app.listen(PORT, () => {
     console.log("🏢 Vision Nexus Academy");
     console.log(`🌐 Server URL : http://localhost:${PORT}`);
     console.log(`📡 API Base   : http://localhost:${PORT}/api`);
+    console.log(`📂 Uploads    : http://localhost:${PORT}/uploads`);
     console.log(`❤️ Health     : http://localhost:${PORT}/health`);
     console.log("========================================");
 });

@@ -3,11 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 const {
-
     signup,
-
-    login
-
+    login,
+    adminLogin,
 } = require("../controllers/authController");
 
 /*
@@ -20,10 +18,18 @@ router.post("/signup", signup);
 
 /*
 =================================================
-User Login
+Student Login
 =================================================
 */
 
 router.post("/login", login);
+
+/*
+=================================================
+Admin Login
+=================================================
+*/
+
+router.post("/admin/login", adminLogin);
 
 module.exports = router;

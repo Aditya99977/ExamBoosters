@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import VerifyEmail from "./pages/VerifyEmail";
 
 import StudentDashboard from "./pages/StudentDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -21,8 +22,22 @@ import Performance from "./pages/Performance";
 
 import NotFound from "./pages/NotFound";
 
+/*
+====================================
+Authentication
+====================================
+*/
+
 import ProtectedRoute from "./components/ProtectedRoute";
-import VerifyEmail from "./pages/VerifyEmail";
+import AdminRoute from "./components/AdminRoute";
+
+/*
+====================================
+Admin Pages
+====================================
+*/
+
+import AdminLogin from "./pages/AdminLogin";
 
 function App() {
 
@@ -30,125 +45,228 @@ function App() {
 
         <Routes>
 
-            {/* ==============================
+            {/* =====================================
                 Public Routes
-            ============================== */}
-
-            <Route path="/" element={<Home />} />
-
-            <Route path="/login" element={<Login />} />
-
-            <Route path="/register" element={<Register />} />
-
-            {/* ==============================
-                Protected Student Routes
-            ============================== */}
+            ===================================== */}
 
             <Route
+
+                path="/"
+
+                element={<Home />}
+
+            />
+
+            <Route
+
+                path="/login"
+
+                element={<Login />}
+
+            />
+
+            <Route
+
+                path="/register"
+
+                element={<Register />}
+
+            />
+
+            <Route
+
+                path="/admin/login"
+
+                element={<AdminLogin />}
+
+            />
+
+            <Route
+
+                path="/verify-email/:token"
+
+                element={<VerifyEmail />}
+
+            />
+
+            {/* =====================================
+                Student Routes
+            ===================================== */}
+
+            <Route
+
                 path="/dashboard"
+
                 element={
+
                     <ProtectedRoute>
+
                         <StudentDashboard />
+
                     </ProtectedRoute>
+
                 }
-            />
-            <Route
-                  path="/verify-email/:token"
-                  element={<VerifyEmail />}
+
             />
 
             <Route
+
                 path="/practice"
+
                 element={
+
                     <ProtectedRoute>
+
                         <Practice />
+
                     </ProtectedRoute>
+
                 }
+
             />
 
             <Route
+
                 path="/mock-tests"
+
                 element={
+
                     <ProtectedRoute>
+
                         <MockTest />
+
                     </ProtectedRoute>
+
                 }
+
             />
 
             <Route
+
                 path="/previous-year-papers"
+
                 element={
+
                     <ProtectedRoute>
+
                         <PreviousYearPapers />
+
                     </ProtectedRoute>
+
                 }
+
             />
 
             <Route
+
                 path="/performance"
+
                 element={
+
                     <ProtectedRoute>
+
                         <Performance />
+
                     </ProtectedRoute>
+
                 }
+
             />
 
             <Route
+
                 path="/profile"
+
                 element={
+
                     <ProtectedRoute>
+
                         <Profile />
+
                     </ProtectedRoute>
+
                 }
+
             />
 
             <Route
+
                 path="/edit-profile"
+
                 element={
+
                     <ProtectedRoute>
+
                         <EditProfile />
+
                     </ProtectedRoute>
+
                 }
+
             />
 
-            {/* ==============================
-                Protected Admin Routes
-            ============================== */}
+            {/* =====================================
+                Admin Routes
+            ===================================== */}
 
             <Route
+
                 path="/admin"
+
                 element={
-                    <ProtectedRoute>
+
+                    <AdminRoute>
+
                         <AdminDashboard />
-                    </ProtectedRoute>
+
+                    </AdminRoute>
+
                 }
+
             />
 
             <Route
+
                 path="/admin/mock-tests"
+
                 element={
-                    <ProtectedRoute>
+
+                    <AdminRoute>
+
                         <MockTestManagement />
-                    </ProtectedRoute>
+
+                    </AdminRoute>
+
                 }
+
             />
 
             <Route
+
                 path="/admin/papers"
+
                 element={
-                    <ProtectedRoute>
+
+                    <AdminRoute>
+
                         <PaperManagement />
-                    </ProtectedRoute>
+
+                    </AdminRoute>
+
                 }
+
             />
 
-            {/* ==============================
-                404 Route
-            ============================== */}
+            {/* =====================================
+                404
+            ===================================== */}
 
             <Route
+
                 path="*"
+
                 element={<NotFound />}
+
             />
 
         </Routes>

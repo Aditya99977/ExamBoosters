@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -27,7 +27,7 @@ const loginSchema = z.object({
         .min(6, "Password must be at least 6 characters"),
 });
 
-function Login() {
+function AdminLogin() {
 
     const navigate = useNavigate();
 
@@ -36,17 +36,11 @@ function Login() {
     const [loading, setLoading] = useState(false);
 
     const {
-
         register,
-
         handleSubmit,
-
         formState: { errors },
-
     } = useForm({
-
         resolver: zodResolver(loginSchema),
-
     });
 
     const onSubmit = async (data) => {
@@ -55,44 +49,28 @@ function Login() {
 
             setLoading(true);
 
-            const response = await loginUser(data);
+            const response = await loginUser(data, true);
 
             login(
-
                 response.token,
-
                 response.user
-
             );
 
-            toast.success("Welcome back to VNAverse!");
+            toast.success("Welcome Administrator!");
 
             setTimeout(() => {
 
-                if (response.user.role === "admin") {
+                navigate("/admin");
 
-                    navigate("/admin");
-
-                }
-
-                else {
-
-                    navigate("/dashboard");
-
-                }
-
-            }, 1200);
+            }, 1000);
 
         }
 
         catch (error) {
 
             toast.error(
-
                 error.response?.data?.message ||
-
                 "Login Failed"
-
             );
 
         }
@@ -112,86 +90,33 @@ function Login() {
             <ToastContainer position="top-right" />
 
             <AuthCard
-
-                title="Welcome Back 👋"
-
-                subtitle="Sign in to continue your VNAverse learning journey."
-
+                title="VNAverse Admin Portal"
+                subtitle="Secure access for authorized administrators only."
             >
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <FormInput
-
-                        label="Email Address"
-
+                        label="Admin Email"
                         type="email"
-
-                        placeholder="Enter your email address"
-
+                        placeholder="Enter your admin email"
                         error={errors.email?.message}
-
                         {...register("email")}
-
                     />
 
                     <PasswordInput
-
                         label="Password"
-
                         placeholder="Enter your password"
-
                         error={errors.password?.message}
-
                         {...register("password")}
-
                     />
 
-                    <div className="text-end mb-3">
-
-                        <Link
-
-                            to="/forgot-password"
-
-                            className="text-decoration-none"
-
-                        >
-
-                            Forgot Password?
-
-                        </Link>
-
-                    </div>
-
                     <AuthButton
-
-                        text="Sign In"
-
+                        text="Admin Login"
                         loading={loading}
-
                     />
 
                 </form>
-
-                <hr />
-
-                <p className="text-center mb-0">
-
-                    New to VNAverse?
-
-                    <Link
-
-                        to="/register"
-
-                        className="ms-2"
-
-                    >
-
-                        Create Account
-
-                    </Link>
-
-                </p>
 
             </AuthCard>
 
@@ -201,4 +126,4 @@ function Login() {
 
 }
 
-export default Login;
+export default AdminLogin;
