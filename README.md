@@ -1,22 +1,65 @@
-# 🚀 VNAverse
+<p align="center">
+  <img src="frontend/public/logo.png" alt="VNAverse Logo" width="250">
+</p>
 
-> **Vision Nexus Academy**
+<h1 align="center">VNAverse</h1>
 
-**VNAverse** is an AI-powered learning ecosystem where **vision meets knowledge**, helping learners unlock their full potential through intelligent learning tools, personalized education, and AI-driven experiences.
+<p align="center">
+  <strong>Vision Nexus Academy</strong>
+</p>
 
-The first flagship product of VNAverse focuses on **government exam preparation**, enabling students to practice smarter, analyze performance, and accelerate their learning journey.
+<p align="center">
+  <i>Where Vision Meets Knowledge</i>
+</p>
 
-> **Status:** 🚧 Beta Development
+<p align="center">
+
+AI-Powered Learning Ecosystem for Personalized Education
+
+</p>
+
+<p align="center">
+<img src="https://img.shields.io/badge/Status-Beta%20Development-blue?style=for-the-badge">
+<img src="https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB?style=for-the-badge">
+<img src="https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933?style=for-the-badge">
+<img src="https://img.shields.io/badge/Database-MongoDB-47A248?style=for-the-badge">
+</p>
 
 ---
 
-# ✨ Features
+# 🚀 About VNAverse
 
-## 👨‍🎓 Student Features
+**VNAverse (Vision Nexus Academy)** is an AI-powered learning ecosystem built to transform how students prepare for competitive examinations and develop real-world skills.
 
-- 🔐 JWT Authentication
-- 👤 User Profile
-- 🏠 Student Dashboard
+Rather than being just another question practice platform, VNAverse focuses on creating a personalized learning experience through intelligent recommendations, performance analytics, adaptive learning, and AI-powered education.
+
+The first flagship product of VNAverse is designed for **Government Exam Preparation**, helping students practice smarter, monitor progress, and continuously improve.
+
+---
+
+# ✨ Vision
+
+> **Where Vision Meets Knowledge**
+
+Our mission is to build an intelligent education platform that empowers every learner to unlock their full potential through technology, data, and artificial intelligence.
+
+We believe education should be:
+
+- Personalized
+- Intelligent
+- Accessible
+- Scalable
+- Affordable
+
+---
+
+# 🌟 Current Features
+
+## 👨‍🎓 Student Module
+
+- 🔐 Secure JWT Authentication
+- 👤 User Profile Management
+- 🏠 Personalized Dashboard
 - 📚 Practice Questions
 - 📝 Mock Test System
 - 📄 Previous Year Papers
@@ -26,26 +69,27 @@ The first flagship product of VNAverse focuses on **government exam preparation*
 
 ---
 
-## 👨‍💼 Admin Features
+## 👨‍💼 Admin Module
 
 - 👥 User Management
 - 📊 Admin Dashboard
 - ❓ Question Management
-- 📄 Previous Year Papers Management
+- 📄 Previous Year Paper Management
+- 📝 Mock Test Management
 - 📂 CSV Bulk Upload
-- 📈 Dashboard Analytics
+- 📈 Analytics Dashboard
 
 ---
 
-# 💻 Tech Stack
+# 💻 Technology Stack
 
 ## Frontend
 
 - React
 - Vite
 - Bootstrap 5
-- Axios
 - React Router
+- Axios
 - Chart.js
 - Lucide React
 
@@ -67,15 +111,15 @@ The first flagship product of VNAverse focuses on **government exam preparation*
 # 🏗 System Architecture
 
 ```text
-                  React + Vite
-                       │
-                       │ Axios
-                       ▼
-              Express REST API
-                       │
-       ┌───────────────┼───────────────┐
-       ▼               ▼               ▼
- MongoDB Atlas     Gemini AI      File Uploads
+                   React + Vite
+                        │
+                        │ Axios
+                        ▼
+                 Express REST API
+                        │
+        ┌───────────────┼───────────────┐
+        ▼               ▼               ▼
+ MongoDB Atlas     Gemini AI      File Storage
 ```
 
 ---
@@ -104,6 +148,7 @@ VNAverse
 │   │   ├── layouts
 │   │   ├── pages
 │   │   ├── services
+│   │   ├── styles
 │   │   ├── utils
 │   │   └── App.jsx
 │   └── package.json
@@ -112,6 +157,19 @@ VNAverse
 ├── README.md
 └── .gitignore
 ```
+
+---
+
+# 📸 Screenshots
+
+> Screenshots will be added after the Beta launch.
+
+- Landing Page
+- Student Dashboard
+- Admin Dashboard
+- Mock Tests
+- Previous Year Papers
+- Analytics
 
 ---
 
@@ -137,7 +195,7 @@ npm install
 npm run dev
 ```
 
-Backend runs on:
+Runs on
 
 ```
 http://localhost:5000
@@ -155,7 +213,7 @@ npm install
 npm run dev
 ```
 
-Frontend runs on:
+Runs on
 
 ```
 http://localhost:5173
@@ -163,16 +221,36 @@ http://localhost:5173
 
 ---
 
+# 🌐 Live Demo
+
+🚧 Coming Soon
+
+Frontend
+
+```
+Coming Soon
+```
+
+Backend
+
+```
+Coming Soon
+```
+
+---
+
 # 📚 Current Modules
 
-### Authentication
+## Authentication
 
 - User Registration
-- User Login
+- Login
 - JWT Authentication
 - Protected Routes
 
-### Student
+---
+
+## Student
 
 - Dashboard
 - Practice Questions
@@ -181,74 +259,105 @@ http://localhost:5173
 - Performance Analytics
 - AI Tutor
 
-### Admin
+---
+
+## Admin
 
 - Admin Dashboard
-- Question Management
-- Previous Year Papers
 - User Management
-- CSV Bulk Upload
+- Question Management
+- Mock Tests
+- Previous Year Papers
+- CSV Upload
 - Analytics
 
 ---
 
-# 📖 Documentation
-
-Documentation is available inside the **docs/** folder.
-
-Includes:
-
-- Daily Development Logs
-- API Documentation
-- Project Architecture
-- Feature Planning
-- Development Roadmap
-
----
-
-# 🚀 Roadmap
+# 🚀 Development Progress
 
 ## ✅ Completed
 
-- JWT Authentication
+- Project Setup
+- Authentication System
 - Student Dashboard
 - Admin Dashboard
-- Practice Questions
+- Practice Module
 - Mock Test Module
 - Previous Year Papers
 - Performance Analytics
 - AI Tutor
 - Responsive UI
-- Beta Authentication Flow
+- Security Improvements
+- Architecture Improvements
 
 ---
 
-## 🚧 In Progress
+## 🚧 Currently Building
+
+- Personalized Learning System
+- Exam-based Recommendations
+- Personalized Dashboard
+- Exam Analytics
+
+---
+
+## 🔮 Future Roadmap
 
 - AI Study Planner
-- AI Mock Analysis
-- UI/UX Improvements
-- Pricing Page
-
----
-
-## ⏳ Planned
-
-- Premium Membership
-- AI Resume Builder
-- AI Interview Preparation
-- Smart Learning Recommendations
+- AI Performance Insights
+- Smart Subject Recommendations
+- Personalized Learning Paths
+- Daily Goals
 - Notifications
 - Leaderboards
-- Mobile Optimization
-- Production Email Verification
+- Premium Membership
+- Resume Builder
+- Interview Preparation
+- Mobile Application
+- Subscription Platform
+- Multi-language Support
 - Public Beta Launch
 
 ---
 
-# 🌟 Vision
+# 💡 Why VNAverse?
 
-**VNAverse (Vision Nexus Academy)** aims to become an AI-powered learning ecosystem where students don't just prepare for exams—they build skills, improve consistently, and unlock their full potential through intelligent education.
+Unlike traditional learning platforms that only provide study material, VNAverse aims to become an intelligent education ecosystem.
+
+Future capabilities include:
+
+- Personalized Learning
+- AI Recommendations
+- Adaptive Mock Tests
+- Exam-specific Analytics
+- Smart Performance Tracking
+- Intelligent Study Planning
+
+---
+
+# 📖 Documentation
+
+The **docs/** directory contains:
+
+- Daily Development Logs
+- Architecture Notes
+- Roadmaps
+- Feature Planning
+- Technical Documentation
+
+---
+
+# 🤝 Contributing
+
+Contributions, ideas, and feedback are always welcome.
+
+If you'd like to contribute:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to your branch
+5. Open a Pull Request
 
 ---
 
@@ -258,7 +367,7 @@ Includes:
 
 Building **VNAverse** one day at a time.
 
-### Connect with me
+### Connect With Me
 
 **GitHub**
 
@@ -272,8 +381,20 @@ https://www.linkedin.com/in/aditya-thakur-67745141a/
 
 # 📄 License
 
-This project is developed for educational purposes, portfolio showcase, and startup development.
+This project is currently under development as a startup and portfolio project.
+
+Future licensing details will be updated as the platform evolves.
 
 ---
 
-⭐ **If you like VNAverse, don't forget to star the repository!**
+<p align="center">
+
+⭐ If you like VNAverse, don't forget to star this repository!
+
+</p>
+
+<p align="center">
+
+<b>Learn • Grow • Succeed</b>
+
+</p>
