@@ -1,33 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+
+const createFormData = (selectedTest) => ({
+  title: selectedTest?.title || "",
+  description: selectedTest?.description || "",
+  exam: selectedTest?.exam || "",
+  subject: selectedTest?.subject || "",
+  duration: selectedTest?.duration ?? "",
+  totalMarks: selectedTest?.totalMarks ?? "",
+  passingMarks: selectedTest?.passingMarks ?? "",
+  negativeMarking: selectedTest?.negativeMarking ?? "",
+  status: selectedTest?.status || "Draft",
+});
 
 const MockTestForm = ({ onSubmit, selectedTest, onCancel }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    exam: "",
-    subject: "",
-    duration: "",
-    totalMarks: "",
-    passingMarks: "",
-    negativeMarking: "",
-    status: "Draft",
-  });
-
-  useEffect(() => {
-    if (selectedTest) {
-      setFormData({
-        title: selectedTest.title || "",
-        description: selectedTest.description || "",
-        exam: selectedTest.exam || "",
-        subject: selectedTest.subject || "",
-        duration: selectedTest.duration || "",
-        totalMarks: selectedTest.totalMarks || "",
-        passingMarks: selectedTest.passingMarks || "",
-        negativeMarking: selectedTest.negativeMarking || "",
-        status: selectedTest.status || "Draft",
-      });
-    }
-  }, [selectedTest]);
+  const [formData, setFormData] = useState(() => createFormData(selectedTest));
 
   const handleChange = (e) => {
     setFormData({
@@ -41,17 +27,7 @@ const MockTestForm = ({ onSubmit, selectedTest, onCancel }) => {
 
     onSubmit(formData);
 
-    setFormData({
-      title: "",
-      description: "",
-      exam: "",
-      subject: "",
-      duration: "",
-      totalMarks: "",
-      passingMarks: "",
-      negativeMarking: "",
-      status: "Draft",
-    });
+    setFormData(createFormData());
   };
 
   return (

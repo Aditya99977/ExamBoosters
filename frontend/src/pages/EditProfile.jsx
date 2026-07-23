@@ -31,11 +31,7 @@ function EditProfile() {
 
     useEffect(() => {
 
-        fetchProfile();
-
-    }, []);
-
-    const fetchProfile = async () => {
+        const fetchProfile = async () => {
 
         try {
 
@@ -61,7 +57,11 @@ function EditProfile() {
 
         }
 
-    };
+        };
+
+        fetchProfile();
+
+    }, []);
 
     const handleChange = (e) => {
 

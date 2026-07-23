@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 import Loader from "./Loader";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 function AdminRoute({ children }) {
 

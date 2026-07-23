@@ -9,23 +9,23 @@ function Stats() {
 
     const stats = [
         {
-            number: "10,000+",
-            title: "Learning Resources",
+            number: "Focused",
+            title: "Topic-wise practice",
             icon: BookOpen,
         },
         {
-            number: "500+",
-            title: "Practice Tests",
+            number: "Realistic",
+            title: "Mock-test experiences",
             icon: ClipboardCheck,
         },
         {
-            number: "AI",
-            title: "Powered Learning",
+            number: "Insight-led",
+            title: "Progress you can act on",
             icon: Brain,
         },
         {
-            number: "50,000+",
-            title: "Future Learners",
+            number: "Beta-first",
+            title: "Shaped with early learners",
             icon: Users,
         },
     ];
@@ -50,7 +50,7 @@ function Stats() {
                             fontWeight: 600,
                         }}
                     >
-                        Trusted by Future Learners
+                        Built for confident preparation
                     </span>
 
                 </div>

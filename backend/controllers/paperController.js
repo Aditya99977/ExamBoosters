@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const Paper = require("../models/Paper");
+const Paper = require("../models/paper");
 
 
 // ==========================================

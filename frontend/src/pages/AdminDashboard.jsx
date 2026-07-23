@@ -117,7 +117,7 @@ function AdminDashboard() {
     =====================================
     */
 
-    const loadDashboard = async () => {
+    async function loadDashboard() {
 
         try {
 
@@ -171,7 +171,7 @@ function AdminDashboard() {
 
         }
 
-    };
+    }
 
     /*
     =====================================
@@ -645,6 +645,8 @@ function AdminDashboard() {
                                 <div className="modal-body">
 
                                     <QuestionForm
+
+                                        key={editingQuestion?._id || "new-question"}
 
                                         initialData={
 

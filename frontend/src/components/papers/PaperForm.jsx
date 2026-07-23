@@ -1,33 +1,21 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+
+const createFormData = (editingPaper) => ({
+  title: editingPaper?.title || "",
+  exam: editingPaper?.exam || "",
+  subject: editingPaper?.subject || "",
+  year: editingPaper?.year ?? "",
+  description: editingPaper?.description || "",
+  status: editingPaper?.status || "Draft",
+  pdf: null,
+});
 
 const PaperForm = ({
   onSubmit,
   editingPaper,
   onCancel,
 }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    exam: "",
-    subject: "",
-    year: "",
-    description: "",
-    status: "Draft",
-    pdf: null,
-  });
-
-  useEffect(() => {
-    if (editingPaper) {
-      setFormData({
-        title: editingPaper.title || "",
-        exam: editingPaper.exam || "",
-        subject: editingPaper.subject || "",
-        year: editingPaper.year || "",
-        description: editingPaper.description || "",
-        status: editingPaper.status || "Draft",
-        pdf: null,
-      });
-    }
-  }, [editingPaper]);
+  const [formData, setFormData] = useState(() => createFormData(editingPaper));
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -64,15 +52,7 @@ const PaperForm = ({
     onSubmit(data);
 
     if (!editingPaper) {
-      setFormData({
-        title: "",
-        exam: "",
-        subject: "",
-        year: "",
-        description: "",
-        status: "Draft",
-        pdf: null,
-      });
+      setFormData(createFormData());
     }
   };
 

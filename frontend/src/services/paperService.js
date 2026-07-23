@@ -1,61 +1,39 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/papers";
-
-// Get JWT Token
-const getToken = () => {
-  return localStorage.getItem("token");
-};
-
-// Axios Config
-const authConfig = () => ({
-  headers: {
-    Authorization: `Bearer ${getToken()}`,
-    "Content-Type": "multipart/form-data",
-  },
-});
+import api from "./api";
 
 // Upload Paper
 export const uploadPaper = async (paperData) => {
-  const response = await axios.post(API_URL, paperData, authConfig());
+  const response = await api.post("/papers", paperData);
   return response.data;
 };
 
 // Get All Papers
 export const getAllPapers = async () => {
-  const response = await axios.get(API_URL);
+  const response = await api.get("/papers");
   return response.data;
 };
 
 // Get Single Paper
 export const getPaperById = async (id) => {
-  const response = await axios.get(`${API_URL}/${id}`);
+  const response = await api.get(`/papers/${id}`);
   return response.data;
 };
 
 // Update Paper
 export const updatePaper = async (id, paperData) => {
-  const response = await axios.put(
-    `${API_URL}/${id}`,
-    paperData,
-    authConfig()
-  );
+  const response = await api.put(`/papers/${id}`, paperData);
   return response.data;
 };
 
 // Delete Paper
 export const deletePaper = async (id) => {
-  const response = await axios.delete(
-    `${API_URL}/${id}`,
-    authConfig()
-  );
+  const response = await api.delete(`/papers/${id}`);
   return response.data;
 };
 
 // Download Paper
 export const downloadPaper = async (id) => {
-  const response = await axios.get(
-    `${API_URL}/download/${id}`,
+  const response = await api.get(
+    `/papers/download/${id}`,
     {
       responseType: "blob",
     }
@@ -66,10 +44,7 @@ export const downloadPaper = async (id) => {
 
 // Paper Statistics
 export const getPaperStatistics = async () => {
-  const response = await axios.get(
-    `${API_URL}/statistics`,
-    authConfig()
-  );
+  const response = await api.get("/papers/statistics");
 
   return response.data;
 };

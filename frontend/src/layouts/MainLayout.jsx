@@ -9,7 +9,7 @@ function MainLayout({ children }) {
 
             <Navbar />
 
-            <main className="container mt-4">
+            <main>
 
                 {children}
 

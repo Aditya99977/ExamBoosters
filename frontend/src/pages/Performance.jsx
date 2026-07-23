@@ -17,11 +17,7 @@ function Performance() {
 
     useEffect(() => {
 
-        fetchPerformance();
-
-    }, []);
-
-    const fetchPerformance = async () => {
+        const fetchPerformance = async () => {
 
         try {
 
@@ -51,7 +47,11 @@ function Performance() {
 
         }
 
-    };
+        };
+
+        fetchPerformance();
+
+    }, []);
 
     if (loading) {
 

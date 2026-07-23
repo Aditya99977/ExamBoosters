@@ -38,6 +38,7 @@ function Features() {
 
     return (
         <section
+            id="features"
             style={{
                 background: "#0B1020",
                 paddingTop: "10px",

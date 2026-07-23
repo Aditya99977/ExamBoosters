@@ -68,7 +68,7 @@ function PaperManagement() {
     =====================================
     */
 
-    const loadPapers = async () => {
+    async function loadPapers() {
 
         try {
 
@@ -102,7 +102,7 @@ function PaperManagement() {
 
         }
 
-    };
+    }
 
     /*
     =====================================
@@ -563,6 +563,8 @@ function PaperManagement() {
                                     <div className="modal-body">
 
                                         <PaperForm
+
+                                            key={editingPaper?._id || "new-paper"}
 
                                             editingPaper={editingPaper}
 

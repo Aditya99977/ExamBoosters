@@ -9,7 +9,7 @@ const {
   deleteMockTest,
   toggleMockTestStatus,
   getMockTestStatistics,
-} = require("../controllers/mockTestController");
+} = require("../controllers/MockTestController");
 
 const protect = require("../middleware/authMiddleware");
 const admin = require("../middleware/adminMiddleware");

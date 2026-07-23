@@ -16,6 +16,7 @@ function Exams() {
     return (
 
         <section
+            id="exams"
             style={{
                 background: "#0B1020",
                 padding: "10px 0",

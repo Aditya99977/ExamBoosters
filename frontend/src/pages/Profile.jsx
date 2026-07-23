@@ -8,6 +8,7 @@ import {
     getProfile,
     uploadProfileImage,
 } from "../services/profileService";
+import { API_ORIGIN } from "../services/api";
 
 function Profile() {
 
@@ -59,7 +60,7 @@ function Profile() {
         .toUpperCase();
 
     const imageUrl = profile?.profileImage
-        ? `http://localhost:5000/uploads/${profile.profileImage}`
+        ? `${API_ORIGIN}/uploads/${profile.profileImage}`
         : null;
 
     const handleImageUpload = async (e) => {

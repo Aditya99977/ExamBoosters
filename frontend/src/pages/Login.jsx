@@ -15,7 +15,7 @@ import PasswordInput from "../components/PasswordInput";
 import AuthButton from "../components/AuthButton";
 
 import { loginUser } from "../services/authService";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 const loginSchema = z.object({
     email: z

@@ -31,7 +31,7 @@ function MockTest() {
 
     const [testId, setTestId] = useState("");
 
-    const [exam, setExam] = useState("General Mock Test");
+    const exam = "General Mock Test";
 
     const [questions, setQuestions] = useState([]);
 

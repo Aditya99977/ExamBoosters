@@ -24,11 +24,7 @@ function StudentDashboard() {
 
     useEffect(() => {
 
-        fetchDashboard();
-
-    }, []);
-
-    const fetchDashboard = async () => {
+        const fetchDashboard = async () => {
 
         try {
 
@@ -46,7 +42,11 @@ function StudentDashboard() {
 
         }
 
-    };
+        };
+
+        fetchDashboard();
+
+    }, []);
 
     if (loading) {
 

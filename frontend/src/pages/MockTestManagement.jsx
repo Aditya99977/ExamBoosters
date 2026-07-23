@@ -61,7 +61,7 @@ function MockTestManagement() {
     =====================================
     */
 
-    const loadMockTests = async () => {
+    async function loadMockTests() {
 
         try {
 
@@ -95,7 +95,7 @@ function MockTestManagement() {
 
         }
 
-    };
+    }
 
     /*
     =====================================
@@ -547,6 +547,8 @@ function MockTestManagement() {
                                     <div className="modal-body">
 
                                         <MockTestForm
+
+                                            key={editingTest?._id || "new-mock-test"}
 
                                             selectedTest={editingTest}
 

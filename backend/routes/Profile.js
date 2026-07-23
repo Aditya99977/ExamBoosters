@@ -13,7 +13,7 @@ const {
 
     uploadProfileImage
 
-} = require("../controllers/profileController");
+} = require("../controllers/ProfileController");
 
 /*
 ====================================

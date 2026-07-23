@@ -41,7 +41,7 @@ Hello ${name} 👋
 </h2>
 
 <p style="color:#555;font-size:16px;line-height:1.8;">
-Welcome to <strong>ExamBooster</strong> by <strong>VNAverse</strong>.
+Welcome to <strong>VNAverse</strong>.
 Please verify your email address to activate your account.
 </p>
 

@@ -1,4 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+const createFormData = (initialData = {}) => ({
+    question: initialData.question || "",
+    options: initialData.options || ["", "", "", ""],
+    correctAnswer: initialData.correctAnswer || "",
+    subject: initialData.subject || "",
+    difficulty: initialData.difficulty || "Easy",
+});
 
 function QuestionForm({
 
@@ -10,73 +18,7 @@ function QuestionForm({
 
 }) {
 
-    const [formData, setFormData] = useState({
-
-        question: "",
-
-        options: [
-
-            "",
-
-            "",
-
-            "",
-
-            ""
-
-        ],
-
-        correctAnswer: "",
-
-        subject: "",
-
-        difficulty: "Easy"
-
-    });
-
-    /*
-    =====================================
-    Populate Form
-    =====================================
-    */
-
-    useEffect(() => {
-
-        setFormData({
-
-            question:
-
-                initialData.question || "",
-
-            options:
-
-                initialData.options || [
-
-                    "",
-
-                    "",
-
-                    "",
-
-                    ""
-
-                ],
-
-            correctAnswer:
-
-                initialData.correctAnswer || "",
-
-            subject:
-
-                initialData.subject || "",
-
-            difficulty:
-
-                initialData.difficulty || "Easy"
-
-        });
-
-    }, [initialData]);
+    const [formData, setFormData] = useState(() => createFormData(initialData));
 
     /*
     =====================================

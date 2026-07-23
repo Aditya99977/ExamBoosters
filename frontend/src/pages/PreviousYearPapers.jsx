@@ -47,17 +47,7 @@ function PreviousYearPapers() {
 
     useEffect(() => {
 
-        loadPapers();
-
-    }, []);
-
-    /*
-    =====================================
-    Load Papers
-    =====================================
-    */
-
-    const loadPapers = async () => {
+        const loadPapers = async () => {
 
         try {
 
@@ -89,7 +79,11 @@ function PreviousYearPapers() {
 
         }
 
-    };
+        };
+
+        loadPapers();
+
+    }, []);
 
     /*
     =====================================

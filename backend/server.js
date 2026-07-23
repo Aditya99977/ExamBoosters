@@ -9,10 +9,23 @@ const rateLimit = require("express-rate-limit");
 const hpp = require("hpp");
 const morgan = require("morgan");
 
+const requiredEnvironmentVariables = ["MONGO_URI", "JWT_SECRET"];
+const missingEnvironmentVariables = requiredEnvironmentVariables.filter(
+    (name) => !process.env[name]
+);
+
+if (missingEnvironmentVariables.length > 0) {
+    throw new Error(
+        `Missing required environment variables: ${missingEnvironmentVariables.join(
+            ", "
+        )}`
+    );
+}
+
 // Routes
 const authRoutes = require("./routes/auth");
 const dashboardRoutes = require("./routes/dashboard");
-const profileRoutes = require("./routes/profile");
+const profileRoutes = require("./routes/Profile");
 const questionRoutes = require("./routes/question");
 const testRoutes = require("./routes/test");
 const adminRoutes = require("./routes/admin");
@@ -20,14 +33,22 @@ const mockTestRoutes = require("./routes/MockTestRoute");
 const paperRoutes = require("./routes/paperRoutes");
 
 const app = express();
+const PORT = process.env.PORT || 5000;
+const isProduction = process.env.NODE_ENV === "production";
+const allowedOrigins = (process.env.FRONTEND_URL || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 
-/*
-====================================
-Security Middleware
-====================================
-*/
+if (isProduction && allowedOrigins.length === 0) {
+    throw new Error("FRONTEND_URL is required in production.");
+}
 
-// Secure HTTP Headers
+if (isProduction) {
+    app.set("trust proxy", 1);
+}
+
+// Security middleware
 app.use(
     helmet({
         crossOriginResourcePolicy: {
@@ -35,79 +56,45 @@ app.use(
         },
     })
 );
-
-// Prevent HTTP Parameter Pollution
 app.use(hpp());
 
-// Rate Limiter
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    standardHeaders: true,
-    legacyHeaders: false,
-    message: {
-        success: false,
-        message:
-            "Too many requests. Please try again after 15 minutes.",
-    },
-});
-
-app.use("/api", limiter);
-
-/*
-====================================
-CORS
-====================================
-*/
+app.use(
+    "/api",
+    rateLimit({
+        windowMs: 15 * 60 * 1000,
+        max: 100,
+        standardHeaders: true,
+        legacyHeaders: false,
+        message: {
+            success: false,
+            message: "Too many requests. Please try again after 15 minutes.",
+        },
+    })
+);
 
 app.use(
     cors({
-        origin: process.env.FRONTEND_URL,
+        origin(origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+
+            return callback(new Error("Origin is not allowed by CORS."));
+        },
         credentials: true,
     })
 );
 
-/*
-====================================
-Body Parsers
-====================================
-*/
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.json());
-
-app.use(
-    express.urlencoded({
-        extended: true,
-    })
-);
-
-/*
-====================================
-Request Logger
-====================================
-*/
-
-if (process.env.NODE_ENV !== "production") {
+if (!isProduction) {
     app.use(morgan("dev"));
 }
 
-/*
-====================================
-Static Files
-====================================
-*/
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use(
-    "/uploads",
-    express.static(path.join(__dirname, "uploads"))
-);
-
-/*
-====================================
-API Routes
-====================================
-*/
-
+// API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/dashboard", dashboardRoutes);
@@ -116,12 +103,6 @@ app.use("/api/test", testRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/mocktests", mockTestRoutes);
 app.use("/api/papers", paperRoutes);
-
-/*
-====================================
-Root Route
-====================================
-*/
 
 app.get("/", (req, res) => {
     res.status(200).json({
@@ -134,26 +115,17 @@ app.get("/", (req, res) => {
     });
 });
 
-/*
-====================================
-Health Check
-====================================
-*/
-
 app.get("/health", (req, res) => {
-    res.status(200).json({
-        success: true,
-        status: "OK",
+    const databaseConnected = mongoose.connection.readyState === 1;
+
+    res.status(databaseConnected ? 200 : 503).json({
+        success: databaseConnected,
+        status: databaseConnected ? "OK" : "DEGRADED",
+        database: databaseConnected ? "connected" : "disconnected",
         uptime: process.uptime(),
         timestamp: new Date().toISOString(),
     });
 });
-
-/*
-====================================
-404 Handler
-====================================
-*/
 
 app.use((req, res) => {
     res.status(404).json({
@@ -162,39 +134,42 @@ app.use((req, res) => {
     });
 });
 
-/*
-====================================
-MongoDB Connection
-====================================
-*/
+app.use((error, req, res, next) => {
+    console.error("Request failed:", error.message);
 
-mongoose
-    .connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log("✅ MongoDB Connected Successfully");
-        console.log("🎓 VNAverse Database Ready");
-    })
-    .catch((error) => {
-        console.error("❌ MongoDB Connection Failed");
-        console.error(error.message);
-        process.exit(1);
+    const statusCode = error.statusCode || error.status || 500;
+    const isClientError = statusCode >= 400 && statusCode < 500;
+
+    res.status(statusCode).json({
+        success: false,
+        message: isClientError
+            ? error.message
+            : "Something went wrong. Please try again later.",
     });
-
-/*
-====================================
-Server
-====================================
-*/
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-    console.log("========================================");
-    console.log("🚀 VNAverse Backend Started Successfully");
-    console.log("🏢 Vision Nexus Academy");
-    console.log(`🌐 Server URL : http://localhost:${PORT}`);
-    console.log(`📡 API Base   : http://localhost:${PORT}/api`);
-    console.log(`📂 Uploads    : http://localhost:${PORT}/uploads`);
-    console.log(`❤️ Health     : http://localhost:${PORT}/health`);
-    console.log("========================================");
 });
+
+async function startServer() {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+
+        const server = app.listen(PORT, () => {
+            console.log(`VNAverse API is running on port ${PORT}`);
+        });
+
+        const shutDown = (signal) => {
+            console.log(`${signal} received. Closing VNAverse API...`);
+
+            server.close(() => {
+                mongoose.connection.close(false).finally(() => process.exit(0));
+            });
+        };
+
+        process.once("SIGINT", () => shutDown("SIGINT"));
+        process.once("SIGTERM", () => shutDown("SIGTERM"));
+    } catch (error) {
+        console.error("MongoDB connection failed:", error.message);
+        process.exit(1);
+    }
+}
+
+startServer();

@@ -1,23 +1,10 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/mocktests";
-
-// Helper function to get auth headers
-const getAuthConfig = () => {
-  const token = localStorage.getItem("token");
-
-  return {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-};
+import api from "./api";
 
 // ===============================
 // Get All Mock Tests
 // ===============================
 export const getMockTests = async () => {
-  const response = await axios.get(API_URL, getAuthConfig());
+  const response = await api.get("/mocktests");
   return response.data;
 };
 
@@ -25,10 +12,7 @@ export const getMockTests = async () => {
 // Get Single Mock Test
 // ===============================
 export const getMockTestById = async (id) => {
-  const response = await axios.get(
-    `${API_URL}/${id}`,
-    getAuthConfig()
-  );
+  const response = await api.get(`/mocktests/${id}`);
 
   return response.data;
 };
@@ -37,11 +21,7 @@ export const getMockTestById = async (id) => {
 // Create Mock Test
 // ===============================
 export const createMockTest = async (mockTestData) => {
-  const response = await axios.post(
-    API_URL,
-    mockTestData,
-    getAuthConfig()
-  );
+  const response = await api.post("/mocktests", mockTestData);
 
   return response.data;
 };
@@ -50,11 +30,7 @@ export const createMockTest = async (mockTestData) => {
 // Update Mock Test
 // ===============================
 export const updateMockTest = async (id, mockTestData) => {
-  const response = await axios.put(
-    `${API_URL}/${id}`,
-    mockTestData,
-    getAuthConfig()
-  );
+  const response = await api.put(`/mocktests/${id}`, mockTestData);
 
   return response.data;
 };
@@ -63,10 +39,7 @@ export const updateMockTest = async (id, mockTestData) => {
 // Delete Mock Test
 // ===============================
 export const deleteMockTest = async (id) => {
-  const response = await axios.delete(
-    `${API_URL}/${id}`,
-    getAuthConfig()
-  );
+  const response = await api.delete(`/mocktests/${id}`);
 
   return response.data;
 };
@@ -75,11 +48,7 @@ export const deleteMockTest = async (id) => {
 // Publish / Unpublish Mock Test
 // ===============================
 export const toggleMockTestStatus = async (id) => {
-  const response = await axios.patch(
-    `${API_URL}/${id}/status`,
-    {},
-    getAuthConfig()
-  );
+  const response = await api.patch(`/mocktests/${id}/status`, {});
 
   return response.data;
 };
@@ -88,10 +57,7 @@ export const toggleMockTestStatus = async (id) => {
 // Get Mock Test Statistics
 // ===============================
 export const getMockTestStatistics = async () => {
-  const response = await axios.get(
-    `${API_URL}/statistics`,
-    getAuthConfig()
-  );
+  const response = await api.get("/mocktests/statistics");
 
   return response.data;
 };

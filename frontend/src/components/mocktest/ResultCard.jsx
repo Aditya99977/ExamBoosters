@@ -15,11 +15,9 @@ function ResultCard({
 
     const navigate = useNavigate();
 
-    if (!result) return null;
-
     const performance = useMemo(() => {
 
-        const accuracy = result.accuracy;
+        const accuracy = result?.accuracy ?? 0;
 
         if (accuracy >= 90) {
 
@@ -53,7 +51,9 @@ function ResultCard({
             color: "#EF4444",
         };
 
-    }, [result.accuracy]);
+    }, [result?.accuracy]);
+
+    if (!result) return null;
 
     return (
 

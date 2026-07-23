@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 function Navbar() {
     const { user, logout } = useAuth();
@@ -12,7 +12,7 @@ function Navbar() {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg bg-white shadow-sm sticky-top border-bottom">
+        <nav className="navbar navbar-expand-lg bg-white sticky-top border-bottom site-navbar">
             <div className="container">
 
                 {/* Logo */}
@@ -74,21 +74,21 @@ function Navbar() {
                         </li>
 
                         <li className="nav-item">
-                            <Link
+                            <a
                                 className="nav-link"
-                                to="/"
+                                href="/#features"
                             >
                                 Features
-                            </Link>
+                            </a>
                         </li>
 
                         <li className="nav-item">
-                            <Link
+                            <a
                                 className="nav-link"
-                                to="/"
+                                href="/#exams"
                             >
                                 Exams
-                            </Link>
+                            </a>
                         </li>
 
                         {!user ? (
