@@ -9,29 +9,50 @@ const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const VerifyEmail = lazy(() => import("./pages/VerifyEmail"));
+
+// Student Pages
+const SelectExam = lazy(() => import("./pages/student/SelectExam"));
 const StudentDashboard = lazy(() => import("./pages/StudentDashboard"));
-const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
-const MockTestManagement = lazy(() => import("./pages/MockTestManagement"));
-const PaperManagement = lazy(() => import("./pages/PaperManagement"));
 const PreviousYearPapers = lazy(() => import("./pages/PreviousYearPapers"));
 const Profile = lazy(() => import("./pages/Profile"));
 const EditProfile = lazy(() => import("./pages/EditProfile"));
 const Practice = lazy(() => import("./pages/Practice"));
 const MockTest = lazy(() => import("./pages/MockTest"));
 const Performance = lazy(() => import("./pages/Performance"));
+
+// Admin Pages
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const MockTestManagement = lazy(() => import("./pages/MockTestManagement"));
+const PaperManagement = lazy(() => import("./pages/PaperManagement"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function App() {
     return (
         <Suspense fallback={<Loader />}>
             <Routes>
+                {/* Public Routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/verify-email/:token" element={<VerifyEmail />} />
+                <Route
+                    path="/verify-email/:token"
+                    element={<VerifyEmail />}
+                />
 
+                {/* Student Onboarding */}
+                <Route
+                    path="/select-exam"
+                    element={
+                        <ProtectedRoute>
+                            <SelectExam />
+                        </ProtectedRoute>
+                    }
+                />
+
+                {/* Student Routes */}
                 <Route
                     path="/dashboard"
                     element={
@@ -40,6 +61,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/practice"
                     element={
@@ -48,6 +70,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/mock-tests"
                     element={
@@ -56,6 +79,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/previous-year-papers"
                     element={
@@ -64,6 +88,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/performance"
                     element={
@@ -72,6 +97,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/profile"
                     element={
@@ -80,6 +106,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/edit-profile"
                     element={
@@ -89,6 +116,7 @@ function App() {
                     }
                 />
 
+                {/* Admin Routes */}
                 <Route
                     path="/admin"
                     element={
@@ -97,6 +125,7 @@ function App() {
                         </AdminRoute>
                     }
                 />
+
                 <Route
                     path="/admin/mock-tests"
                     element={
@@ -105,6 +134,7 @@ function App() {
                         </AdminRoute>
                     }
                 />
+
                 <Route
                     path="/admin/papers"
                     element={
@@ -114,6 +144,7 @@ function App() {
                     }
                 />
 
+                {/* 404 */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Suspense>

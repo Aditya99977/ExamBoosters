@@ -31,10 +31,6 @@ const registerSchema = z
             .min(6, "Password must be at least 6 characters"),
 
         confirmPassword: z.string(),
-
-        examTarget: z
-            .string()
-            .min(1, "Please select your target exam"),
     })
     .refine(
         (data) => data.password === data.confirmPassword,
@@ -65,7 +61,6 @@ function Register() {
                 name: data.name,
                 email: data.email,
                 password: data.password,
-                examTarget: data.examTarget,
             });
 
             toast.success(
@@ -78,7 +73,7 @@ function Register() {
         } catch (error) {
             toast.error(
                 error.response?.data?.message ||
-                    "Registration Failed"
+                "Registration Failed"
             );
         } finally {
             setLoading(false);
@@ -87,16 +82,13 @@ function Register() {
 
     return (
         <AuthLayout>
-
             <ToastContainer position="top-right" />
 
             <AuthCard
                 title="Create Your Account"
                 subtitle="Start your AI-powered learning journey with VNAverse."
             >
-
                 <form onSubmit={handleSubmit(onSubmit)}>
-
                     <FormInput
                         label="Full Name"
                         placeholder="Enter your full name"
@@ -126,51 +118,15 @@ function Register() {
                         {...register("confirmPassword")}
                     />
 
-                    <div className="mb-4">
-
-                        <label className="form-label fw-semibold">
-                            Target Exam
-                        </label>
-
-                        <select
-                            className="form-select form-select-lg"
-                            {...register("examTarget")}
-                        >
-
-                            <option value="">
-                                Select Your Target Exam
-                            </option>
-
-                            <option>IBPS Clerk</option>
-                            <option>IBPS PO</option>
-                            <option>SBI Clerk</option>
-                            <option>SBI PO</option>
-                            <option>SSC CGL</option>
-                            <option>SSC CHSL</option>
-                            <option>RRB NTPC</option>
-                            <option>RRB Group D</option>
-
-                        </select>
-
-                        {errors.examTarget && (
-                            <div className="text-danger mt-1">
-                                {errors.examTarget.message}
-                            </div>
-                        )}
-
-                    </div>
-
                     <AuthButton
                         text="Create Account"
                         loading={loading}
                     />
-
                 </form>
 
                 <hr />
 
                 <p className="text-center mb-0">
-
                     Already a member of VNAverse?
 
                     <Link
@@ -179,11 +135,8 @@ function Register() {
                     >
                         Sign In
                     </Link>
-
                 </p>
-
             </AuthCard>
-
         </AuthLayout>
     );
 }

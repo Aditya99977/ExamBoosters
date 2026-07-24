@@ -58,28 +58,28 @@ function Login() {
             const response = await loginUser(data);
 
             login(
-
                 response.token,
-
                 response.user
-
             );
 
             toast.success("Welcome back to VNAverse!");
 
             setTimeout(() => {
 
+                // Admin Login
                 if (response.user.role === "admin") {
-
                     navigate("/admin");
-
+                    return;
                 }
 
-                else {
-
-                    navigate("/dashboard");
-
+                // Student Onboarding
+                if (!response.user.preferredExam) {
+                    navigate("/select-exam");
+                    return;
                 }
+
+                // Existing Student
+                navigate("/dashboard");
 
             }, 1200);
 
@@ -88,11 +88,8 @@ function Login() {
         catch (error) {
 
             toast.error(
-
                 error.response?.data?.message ||
-
                 "Login Failed"
-
             );
 
         }

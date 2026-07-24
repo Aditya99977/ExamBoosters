@@ -55,7 +55,7 @@ export function AuthProvider({ children }) {
                     name: updatedUser.name,
                     email: updatedUser.email,
                     role: updatedUser.role,
-                    examTarget: updatedUser.examTarget,
+                    preferredExam: updatedUser.preferredExam,
                     profileImage: updatedUser.profileImage,
                 })
             );

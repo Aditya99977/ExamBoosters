@@ -58,10 +58,15 @@ const userSchema = new mongoose.Schema(
             index: true,
         },
 
-        examTarget: {
-            type: String,
-            default: "",
-            trim: true,
+        // ==========================
+        // Preferred Exam
+        // ==========================
+
+        preferredExam: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Exam",
+            default: null,
+            index: true,
         },
 
         profileImage: {

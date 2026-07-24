@@ -11,13 +11,17 @@ exports.getProfile = async (req, res) => {
 
     try {
 
-        const user = await User.findById(req.user.id).select("-password");
+        const user = await User.findById(req.user.id)
+            .populate("preferredExam", "name slug category")
+            .select("-password");
 
         if (!user) {
 
             return res.status(404).json({
 
-                message: "User not found"
+                success: false,
+
+                message: "User not found."
 
             });
 
@@ -40,12 +44,12 @@ exports.getProfile = async (req, res) => {
         const testsAttempted = tests.length;
 
         const highestScore = tests.length > 0
-
             ? Math.max(...tests.map(test => test.score))
-
             : 0;
 
-        res.json({
+        return res.status(200).json({
+
+            success: true,
 
             _id: user._id,
 
@@ -55,15 +59,23 @@ exports.getProfile = async (req, res) => {
 
             role: user.role,
 
-            examTarget: user.examTarget,
+            preferredExam: user.preferredExam,
 
             profileImage: user.profileImage,
+
+            studyStats: user.studyStats,
+
+            studyStreak: user.studyStreak,
+
+            longestStudyStreak: user.longestStudyStreak,
 
             createdAt: user.createdAt,
 
             testsAttempted,
 
-            highestScore
+            highestScore,
+
+            status: user.status,
 
         });
 
@@ -71,11 +83,13 @@ exports.getProfile = async (req, res) => {
 
     catch (err) {
 
-        console.error(err);
+        console.error("Get Profile Error:", err);
 
-        res.status(500).json({
+        return res.status(500).json({
 
-            message: err.message
+            success: false,
+
+            message: "Failed to fetch profile."
 
         });
 
@@ -99,8 +113,6 @@ exports.updateProfile = async (req, res) => {
 
             email,
 
-            examTarget
-
         } = req.body;
 
         const user = await User.findById(req.user.id);
@@ -109,25 +121,27 @@ exports.updateProfile = async (req, res) => {
 
             return res.status(404).json({
 
-                message: "User not found"
+                success: false,
+
+                message: "User not found."
 
             });
 
         }
 
-        user.name = name;
+        user.name = name?.trim() || user.name;
 
-        user.email = email;
-
-        user.examTarget = examTarget;
+        user.email = email?.trim().toLowerCase() || user.email;
 
         await user.save();
 
-        res.json({
+        return res.status(200).json({
 
-            message: "Profile Updated Successfully",
+            success: true,
 
-            user
+            message: "Profile updated successfully.",
+
+            user,
 
         });
 
@@ -135,11 +149,13 @@ exports.updateProfile = async (req, res) => {
 
     catch (err) {
 
-        console.error(err);
+        console.error("Update Profile Error:", err);
 
-        res.status(500).json({
+        return res.status(500).json({
 
-            message: err.message
+            success: false,
+
+            message: "Failed to update profile."
 
         });
 
@@ -163,7 +179,9 @@ exports.uploadProfileImage = async (req, res) => {
 
             return res.status(404).json({
 
-                message: "User not found"
+                success: false,
+
+                message: "User not found."
 
             });
 
@@ -172,6 +190,8 @@ exports.uploadProfileImage = async (req, res) => {
         if (!req.file) {
 
             return res.status(400).json({
+
+                success: false,
 
                 message: "Please upload an image."
 
@@ -183,11 +203,13 @@ exports.uploadProfileImage = async (req, res) => {
 
         await user.save();
 
-        res.json({
+        return res.status(200).json({
+
+            success: true,
 
             message: "Profile image updated successfully.",
 
-            profileImage: user.profileImage
+            profileImage: user.profileImage,
 
         });
 
@@ -195,11 +217,13 @@ exports.uploadProfileImage = async (req, res) => {
 
     catch (err) {
 
-        console.error(err);
+        console.error("Upload Profile Image Error:", err);
 
-        res.status(500).json({
+        return res.status(500).json({
 
-            message: err.message
+            success: false,
+
+            message: "Failed to upload profile image."
 
         });
 

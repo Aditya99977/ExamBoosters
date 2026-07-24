@@ -41,7 +41,9 @@ const authenticateUser = async (
         };
     }
 
-    const user = await User.findOne({ email }).select("+password");
+    const user = await User.findOne({ email })
+        .select("+password")
+        .populate("preferredExam", "name slug category");
 
     if (!user) {
         return {
@@ -112,7 +114,7 @@ const authenticateUser = async (
                 name: user.name,
                 email: user.email,
                 role: user.role,
-                examTarget: user.examTarget,
+                preferredExam: user.preferredExam,
                 profileImage: user.profileImage,
             },
         },
@@ -133,9 +135,7 @@ exports.signup = async (req, res) => {
 
             email,
 
-            password,
-
-            examTarget
+            password
 
         } = req.body;
 
@@ -190,9 +190,7 @@ exports.signup = async (req, res) => {
 
             });
 
-        }
-
-        const existingUser = await User.findOne({
+        }        const existingUser = await User.findOne({
 
             email
 
@@ -226,11 +224,14 @@ exports.signup = async (req, res) => {
 
             password: hashedPassword,
 
-            examTarget,
-
             isVerified: true,
 
         });
+
+        await user.populate(
+            "preferredExam",
+            "name slug category"
+        );
 
         const token = generateToken(
 
@@ -256,7 +257,7 @@ exports.signup = async (req, res) => {
 
                 role: user.role,
 
-                examTarget: user.examTarget,
+                preferredExam: user.preferredExam,
 
                 profileImage: user.profileImage,
 
@@ -286,7 +287,9 @@ exports.signup = async (req, res) => {
 
     }
 
-};// =============================================
+};
+
+// =============================================
 // Student Login
 // =============================================
 
@@ -334,9 +337,7 @@ exports.login = async (req, res) => {
 
     }
 
-};
-
-// =============================================
+};// =============================================
 // Admin Login
 // =============================================
 

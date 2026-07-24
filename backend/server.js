@@ -31,10 +31,13 @@ const testRoutes = require("./routes/test");
 const adminRoutes = require("./routes/admin");
 const mockTestRoutes = require("./routes/MockTestRoute");
 const paperRoutes = require("./routes/paperRoutes");
+const examRoutes = require("./routes/examRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 const isProduction = process.env.NODE_ENV === "production";
+
 const allowedOrigins = (process.env.FRONTEND_URL || "")
     .split(",")
     .map((origin) => origin.trim())
@@ -48,7 +51,10 @@ if (isProduction) {
     app.set("trust proxy", 1);
 }
 
-// Security middleware
+// =============================================
+// Security Middleware
+// =============================================
+
 app.use(
     helmet({
         crossOriginResourcePolicy: {
@@ -56,6 +62,7 @@ app.use(
         },
     })
 );
+
 app.use(hpp());
 
 app.use(
@@ -67,7 +74,8 @@ app.use(
         legacyHeaders: false,
         message: {
             success: false,
-            message: "Too many requests. Please try again after 15 minutes.",
+            message:
+                "Too many requests. Please try again after 15 minutes.",
         },
     })
 );
@@ -79,22 +87,43 @@ app.use(
                 return callback(null, true);
             }
 
-            return callback(new Error("Origin is not allowed by CORS."));
+            return callback(
+                new Error("Origin is not allowed by CORS.")
+            );
         },
         credentials: true,
     })
 );
 
+// =============================================
+// Body Parser Middleware
+// IMPORTANT: Must come BEFORE routes
+// =============================================
+
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true }));
+
+// =============================================
+// Logger
+// =============================================
 
 if (!isProduction) {
     app.use(morgan("dev"));
 }
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// =============================================
+// Static Files
+// =============================================
 
-// API routes
+app.use(
+    "/uploads",
+    express.static(path.join(__dirname, "uploads"))
+);
+
+// =============================================
+// API Routes
+// =============================================
+
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/dashboard", dashboardRoutes);
@@ -103,6 +132,11 @@ app.use("/api/test", testRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/mocktests", mockTestRoutes);
 app.use("/api/papers", paperRoutes);
+app.use("/api/exams", examRoutes);
+
+// =============================================
+// Root Route
+// =============================================
 
 app.get("/", (req, res) => {
     res.status(200).json({
@@ -115,17 +149,28 @@ app.get("/", (req, res) => {
     });
 });
 
+// =============================================
+// Health Check
+// =============================================
+
 app.get("/health", (req, res) => {
-    const databaseConnected = mongoose.connection.readyState === 1;
+    const databaseConnected =
+        mongoose.connection.readyState === 1;
 
     res.status(databaseConnected ? 200 : 503).json({
         success: databaseConnected,
         status: databaseConnected ? "OK" : "DEGRADED",
-        database: databaseConnected ? "connected" : "disconnected",
+        database: databaseConnected
+            ? "connected"
+            : "disconnected",
         uptime: process.uptime(),
         timestamp: new Date().toISOString(),
     });
 });
+
+// =============================================
+// 404 Handler
+// =============================================
 
 app.use((req, res) => {
     res.status(404).json({
@@ -134,11 +179,18 @@ app.use((req, res) => {
     });
 });
 
+// =============================================
+// Global Error Handler
+// =============================================
+
 app.use((error, req, res, next) => {
     console.error("Request failed:", error.message);
 
-    const statusCode = error.statusCode || error.status || 500;
-    const isClientError = statusCode >= 400 && statusCode < 500;
+    const statusCode =
+        error.statusCode || error.status || 500;
+
+    const isClientError =
+        statusCode >= 400 && statusCode < 500;
 
     res.status(statusCode).json({
         success: false,
@@ -148,26 +200,39 @@ app.use((error, req, res, next) => {
     });
 });
 
+// =============================================
+// Start Server
+// =============================================
+
 async function startServer() {
     try {
         await mongoose.connect(process.env.MONGO_URI);
 
         const server = app.listen(PORT, () => {
-            console.log(`VNAverse API is running on port ${PORT}`);
+            console.log(
+                `VNAverse API is running on port ${PORT}`
+            );
         });
 
         const shutDown = (signal) => {
-            console.log(`${signal} received. Closing VNAverse API...`);
+            console.log(
+                `${signal} received. Closing VNAverse API...`
+            );
 
             server.close(() => {
-                mongoose.connection.close(false).finally(() => process.exit(0));
+                mongoose.connection
+                    .close(false)
+                    .finally(() => process.exit(0));
             });
         };
 
         process.once("SIGINT", () => shutDown("SIGINT"));
         process.once("SIGTERM", () => shutDown("SIGTERM"));
     } catch (error) {
-        console.error("MongoDB connection failed:", error.message);
+        console.error(
+            "MongoDB connection failed:",
+            error.message
+        );
         process.exit(1);
     }
 }
